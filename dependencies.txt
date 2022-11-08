@@ -52,3 +52,7 @@ kde-apps/kdenlive
 app-shells/zsh
 app-shells/dash
 net-vpn/openvpn
+sys-boot/grub
+app-admin/sysklogd
+sys-apps/mlocate
+net-misc/chrony

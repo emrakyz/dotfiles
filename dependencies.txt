@@ -51,3 +51,4 @@ mail-client/mutt-wizard
 kde-apps/kdenlive
 app-shells/zsh
 app-shells/dash
+net-vpn/openvpn

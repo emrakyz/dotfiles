@@ -1,0 +1,4 @@
+--sponsorblock-mark all
+--sponsorblock-remove all
+--ignore-errors
+--no-abort-on-error

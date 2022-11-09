@@ -25,8 +25,8 @@ media-sound/ncmpcpp
 media-sound/pulsemixer
 sys-fs/ntfs3g
 app-editors/neovim
-app-text/texlive
-dev-tex/biblatex
+app-office/libreoffice
+www-client/librewolf
 app-text/zathura
 app-text/zathura-pdf-mupdf
 app-text/poppler

@@ -4,6 +4,7 @@ x11-base/xorg-drivers
 x11-apps/xinit
 x11-misc/unclutter
 x11-misc/xclip
+x11-misc/setxkbmap
 media-libs/libplacebo
 media-video/wireplumber
 media-video/pipewire

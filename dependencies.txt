@@ -2,8 +2,6 @@ x11-drivers/nvidia-drivers
 x11-base/xorg-server
 x11-base/xorg-drivers
 x11-apps/xinit
-x11-apps/xrandr
-x11-misc/dunst
 x11-misc/unclutter
 x11-misc/xclip
 media-libs/libplacebo
@@ -26,7 +24,7 @@ media-sound/pulsemixer
 sys-fs/ntfs3g
 app-editors/neovim
 app-office/libreoffice
-www-client/librewolf
+www-client/firefox
 app-text/zathura
 app-text/zathura-pdf-mupdf
 app-text/poppler
@@ -48,11 +46,7 @@ net-mail/isync
 mail-mta/msmtp
 app-admin/pass
 mail-client/mutt-wizard
-kde-apps/kdenlive
 app-shells/zsh
 app-shells/dash
-net-vpn/openvpn
-sys-boot/grub
-app-admin/sysklogd
 sys-apps/mlocate
-net-misc/chrony
+net-p2p/qbittorrent

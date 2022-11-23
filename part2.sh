@@ -35,7 +35,7 @@ eselect ruby set 2
 
 emerge --autounmask-continue --quiet-build dev-lang/rust
 
-emerge --autounmask-continue sys-config/ltoize
+emerge sys-config/ltoize
 
 cd /etc/portage
 rm -rf make.conf package.accept_keywords package.use package.mask

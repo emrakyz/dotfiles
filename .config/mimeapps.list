@@ -13,7 +13,3 @@ application/rss+xml=rss.desktop
 video/x-matroska=video.desktop
 x-scheme-handler/lbry=lbry.desktop
 inode/directory=file.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-TAT5V1.desktop
-
-[Added Associations]
-x-scheme-handler/tg=userapp-Telegram Desktop-NCXMV1.desktop;userapp-Telegram Desktop-TAT5V1.desktop;

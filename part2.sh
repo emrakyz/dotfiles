@@ -21,6 +21,7 @@ echo CPU_FLAGS_X86=\"aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse 
 
 emerge --quiet-build sys-devel/gcc
 eselect gcc set 2
+source /etc/profile
 
 emerge --autounmask-continue --quiet-build --update --complete-graph --deep --newuse -e @world
 

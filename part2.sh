@@ -8,9 +8,9 @@ mount /dev/nvme0n1p3 /boot
 emerge-webrsync
 emerge --sync --quiet
 
-emerge --autounmask-continue dev-vcs/git
+emerge --autounmask-continue --quiet-build dev-vcs/git
 
-emerge --autounmask-continue app-eselect/eselect-repository
+emerge --autounmask-continue --quiet-build app-eselect/eselect-repository
 eselect repository enable mv
 eselect repository enable lto-overlay
 emaint sync -a
@@ -19,22 +19,22 @@ echo ACCEPT_KEYWORDS=\"~amd64\" >> /etc/portage/make.conf
 echo ACCEPT_LICENSE=\"*\" >> /etc/portage/make.conf
 echo CPU_FLAGS_X86=\"aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse sse2 sse3 sse4_1 sse4_2 ssse3\" >> /etc/portage/make.conf
 
-emerge --autounmask-continue sys-config/ltoize
-
-emerge sys-devel/gcc
+emerge --quiet-build sys-devel/gcc
 eselect gcc set 2
 
-emerge dev-lang/python
+emerge --autounmask-continue --quiet-build --update --complete-graph --deep --newuse -e @world
 
-emerge --autounmask-continue app-eselect/eselect-python
+emerge --autounmask-continue --quiet-build app-eselect/eselect-python
 eselect python set python3.11
 
-emerge --autounmask-continue dev-lang/ruby
+emerge --autounmask-continue --quiet-build dev-lang/ruby
 
-emerge --autounmask-continue app-eselect/eselect-ruby
+emerge --autounmask-continue --quiet-build app-eselect/eselect-ruby
 eselect ruby set 2
 
-emerge --autounmask-continue dev-lang/rust
+emerge --autounmask-continue --quiet-build dev-lang/rust
+
+emerge --autounmask-continue sys-config/ltoize
 
 cd /etc/portage
 rm -rf make.conf package.accept_keywords package.use package.mask
@@ -45,14 +45,15 @@ curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.mask
 cd
 
-env-update
-USE="-harfbuzz" emerge media-libs/freetype
+sed -i "s/harfbuzz/-harfbuzz/g" /etc/portage/package.use
 env-update
 emerge --autounmask-continue --update --complete-graph --deep --newuse -e @world
 
-MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/gcc sys-devel/clang
+MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/gcc 
+MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/clang
 
-emerge --autounmask-continue --update --complete-graph --deep --newuse -e @world --exclude sys-devel/gcc --exclude sys-devel/clang
+sed -i "s/-harfbuzz/harfbuzz/g" /etc/portage/package.use
+emerge --autounmask-continue --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc sys-devel/clang' -e @world 
 
 echo "Europe/Istanbul" > /etc/timezone
 emerge --config sys-libs/timezone-data

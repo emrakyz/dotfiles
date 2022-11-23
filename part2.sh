@@ -35,15 +35,15 @@ eselect ruby set 2
 
 emerge --autounmask-continue --quiet-build dev-lang/rust
 
-emerge sys-config/ltoize
-
 cd /etc/portage
-rm -rf make.conf package.accept_keywords package.use package.mask
+rm -rf package.accept_keywords package.use package.mask
 emerge --autounmask-continue net-misc/curl
-curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.accept_keywords
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.use
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.mask
+emerge sys-config/ltoize
+rm -rf make.conf
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
 cd
 
 sed -i "s/harfbuzz/-harfbuzz/g" /etc/portage/package.use

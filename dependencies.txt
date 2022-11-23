@@ -33,13 +33,12 @@ media-fonts/libertine
 media-fonts/fontawesome
 media-fonts/noto
 media-fonts/noto-emoji
-media-gfx/ueberzug
+media-fonts/corefonts
 media-gfx/flameshot
 net-news/newsboat
 app-arch/unzip
 app-arch/unrar
 app-arch/p7zip
-net-misc/yt-dlp
 app-shells/fzf
 sys-apps/bat
 mail-client/neomutt

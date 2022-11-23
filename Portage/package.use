@@ -16,3 +16,4 @@ sys-kernel/linux-firmware savedconfig
 www-client/firefox X openh264 gmp-autoupdate hwaccel pulseaudio system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-python-libs -geckodriver
 sys-devel/clang static-analyzer extra pie python_single_target_3_11 -python_single_target_3_10 
 app-eselect/eselect-repository python_single_target_3_11 -python_single_target_3_10
+net-p2p/qbittorrent gui

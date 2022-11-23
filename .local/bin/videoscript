@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mpv "$(locate "*.mp4" "*.mkv" "*.webm" "*.m4v" "*.mov" "*.flv" "*.avi" | shuf -n 1)"

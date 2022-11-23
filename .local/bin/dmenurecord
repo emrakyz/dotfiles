@@ -9,11 +9,6 @@
 #
 # If there is already a running instance, user will be prompted to end it.
 
-updateicon() { \
-	echo "$1" > /tmp/recordingicon
-	pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}"
-	}
-
 killrecording() {
 	recpid="$(cat /tmp/recordingpid)"
 	# kill with SIGTERM, allowing finishing touches.
@@ -33,12 +28,11 @@ screencast() { \
 	-framerate 60 \
 	-s "$(xdpyinfo | awk '/dimensions/ {print $2;}')" \
 	-i "$DISPLAY" \
-	-f alsa -i default \
-	-r 30 \
- 	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
+	-f pulse -i default \
+	-r 60 \
+ 	-c:v libx264 -crf 0 -preset ultrafast -c:a aac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
 	echo $! > /tmp/recordingpid
-	updateicon "⏺️🎙️"
        	}
 
 video() { ffmpeg \

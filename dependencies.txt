@@ -49,3 +49,4 @@ mail-client/mutt-wizard
 app-shells/zsh
 app-shells/dash
 sys-apps/mlocate
+net-p2p/qbittorrent

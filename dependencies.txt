@@ -24,7 +24,6 @@ media-sound/ncmpcpp
 media-sound/pulsemixer
 sys-fs/ntfs3g
 app-editors/neovim
-app-office/libreoffice
 www-client/firefox
 app-text/zathura
 app-text/zathura-pdf-mupdf

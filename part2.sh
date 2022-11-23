@@ -126,7 +126,7 @@ rc-service dhcpcd start
 sed -i 's/127.0.0.1.*/127.0.0.1\temre\tlocalhost/g' /etc/hosts
 sed -i 's/::1.*/::1\t\temre\tlocalhost/g' /etc/hosts
 
-sed -i 's/enforce=everyone/enfore=none/g' /etc/security/passwdqc.conf
+sed -i 's/enforce=everyone/enforce=none/g' /etc/security/passwdqc.conf
 echo -en "051104\n051104\n" | passwd
 
 sed -i 's/#rc_parallel=\".*\"/rc_parallel=\"YES\"/g' /etc/rc.conf

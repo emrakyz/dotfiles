@@ -8,20 +8,23 @@ mount /dev/nvme0n1p3 /boot
 emerge-webrsync
 emerge --sync --quiet
 
-emerge --autounmask-continue --quiet-build dev-vcs/git
-
-emerge --autounmask-continue --quiet-build app-eselect/eselect-repository
-eselect repository enable mv
-eselect repository enable lto-overlay
-emaint sync -a
-
+sed -i "s/-O2/-march=native -O2/g" /etc/portage/make.conf
 echo ACCEPT_KEYWORDS=\"~amd64\" >> /etc/portage/make.conf
 echo ACCEPT_LICENSE=\"*\" >> /etc/portage/make.conf
 echo CPU_FLAGS_X86=\"aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse sse2 sse3 sse4_1 sse4_2 ssse3\" >> /etc/portage/make.conf
 
+echo "Europe/Istanbul" > /etc/timezone
+emerge --config sys-libs/timezone-data
+
+sed -i "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g" /etc/locale.gen
+locale-gen
+eselect locale set en_US.utf8
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
 emerge --quiet-build sys-devel/gcc
 eselect gcc set 2
 source /etc/profile
+export PS1="(chroot) ${PS1}"
 
 emerge --autounmask-continue --quiet-build --update --complete-graph --deep --newuse -e @world
 
@@ -35,34 +38,33 @@ eselect ruby set 2
 
 emerge --autounmask-continue --quiet-build dev-lang/rust
 
+emerge --autounmask-continue --quiet-build dev-vcs/git
+
 cd /etc/portage
 rm -rf package.accept_keywords package.use package.mask
-emerge --autounmask-continue net-misc/curl
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.accept_keywords
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.use
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.mask
+emerge --autounmask-continue --quiet-build app-eselect/eselect-repository
+eselect repository enable mv
+eselect repository enable lto-overlay
+emaint sync -a
+
 emerge sys-config/ltoize
+
 rm -rf make.conf
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
 cd
 
 sed -i "s/harfbuzz/-harfbuzz/g" /etc/portage/package.use
 env-update
-emerge --autounmask-continue --update --complete-graph --deep --newuse -e @world
+emerge --update --complete-graph --deep --newuse -e @world
 
 MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/gcc 
 MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/clang
 
 sed -i "s/-harfbuzz/harfbuzz/g" /etc/portage/package.use
-emerge --autounmask-continue --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc sys-devel/clang' -e @world 
-
-echo "Europe/Istanbul" > /etc/timezone
-emerge --config sys-libs/timezone-data
-
-sed -i "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g" /etc/locale.gen
-locale-gen
-eselect locale set en_US.utf8
-env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+emerge --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc sys-devel/clang' -e @world 
 
 emerge sys-kernel/linux-firmware sys-firmware/intel-microcode
 
@@ -91,7 +93,7 @@ nvidia/tu104/sec2/sig.bin
 nvidia/tu104/sec2/image.bin
 nvidia/tu10x/typec/ccg_boot.cyacd
 nvidia/tu10x/typec/ccg_primary.cyacd
-nvidia/tu10x/typec/ccg_secondary.cyacd" > /etc/portage/savedconfig/sys-kernel/linux*
+nvidia/tu10x/typec/ccg_secondary.cyacd" > /etc/portage/savedconfig/sys-kernel/linux-firmware-20221109
 
 emerge sys-kernel/linux-firmware
 
@@ -99,17 +101,18 @@ emerge sys-kernel/gentoo-sources
 
 eselect kernel set 1
 
-mkdir -p /boot/EFI/Gentoo
 cd /usr/src/linux
 make clean
 rm -rf .config
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.config
 
 emerge app-arch/lz4
-make -j8 && make modules_install
+make -j15 && make modules_install
 make install
-cp arch/x86/boot/bzImage /boot/EFI/Gentoo/bzImage-6.0.7-gentoo.efi
 cd
+
+mkdir -p /boot/EFI/BOOT
+cp /usr/src/linux/arch/x86/boot/bzImage /boot/EFI/BOOT/BOOTX64.EFI
 
 mkdir -p /mnt/harddisk
 
@@ -134,7 +137,7 @@ sed -i 's/clock=.*/clock=\"local\"/g' /etc/conf.d/hwclock
 
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
-emerge --autounmask-continue $DEPLIST
+emerge --autounmask-write --autounmask-continue $DEPLIST
 rm -rf dependencies.txt
 MAKEOPTS="-j7" emerge --jobs 1 --load-average 7 --autounmask-continue app-office/libreoffice
 
@@ -157,6 +160,7 @@ cp -r .local .config /home/emre
 cd ..
 rm -rf dotfiles
 chmod +x /home/emre/.local/bin/*
+chmod +x /home/emre/.config/lf/scope /home/emre/.config/lf/cleaner
 
 mkdir -p /home/emre/.local/src
 cd /home/emre/.local/src
@@ -194,10 +198,6 @@ rc-update add elogind boot
 
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting /home/emre/.config/zsh
 
-su - emre
-env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
-cp /home/emre/go/bin/lf /usr/bin/
-cd
-rm -rf go
+chown -R emre:emre /home/emre
 
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

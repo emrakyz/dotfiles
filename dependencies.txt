@@ -53,3 +53,4 @@ sys-apps/mlocate
 net-p2p/qbittorrent
 kde-apps/kdenlive
 app-admin/sudo
+sys-boot/efibootmgr

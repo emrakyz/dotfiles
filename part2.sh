@@ -12,6 +12,7 @@ sed -i "s/-O2/-march=native -O2/g" /etc/portage/make.conf
 echo ACCEPT_KEYWORDS=\"~amd64\" >> /etc/portage/make.conf
 echo ACCEPT_LICENSE=\"*\" >> /etc/portage/make.conf
 echo CPU_FLAGS_X86=\"aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse sse2 sse3 sse4_1 sse4_2 ssse3\" >> /etc/portage/make.conf
+echo MAKEOPTS=\"-j17\" >> /etc/portage/make.conf
 
 echo "Europe/Istanbul" > /etc/timezone
 emerge --config sys-libs/timezone-data

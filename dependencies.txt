@@ -52,3 +52,4 @@ app-shells/dash
 sys-apps/mlocate
 net-p2p/qbittorrent
 kde-apps/kdenlive
+app-admin/sudo

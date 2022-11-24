@@ -13,6 +13,7 @@ media-sound/pulseaudio
 media-libs/libpulse
 media-libs/imlib2
 media-libs/libexif
+media-libs/giflib
 media-libs/nv-codec-headers
 media-video/nvidia-video-codec
 media-video/ffmpeg

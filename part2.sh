@@ -116,8 +116,8 @@ cp /usr/src/linux/arch/x86/boot/bzImage /boot/EFI/BOOT/BOOTX64.EFI
 
 mkdir -p /mnt/harddisk
 
-echo "UUID=25ED-9D4E /boot vfat defaults,noatime 0 2
-UUID=b090e17a-ac1f-47c5-93ea-7fdf7080fca7 / ext4 defaults,noatime 0 1
+echo "UUID=8097-F609 /boot vfat defaults,noatime 0 2
+UUID=9a5bdef4-7a74-4270-b369-6808746f946b / ext4 defaults,noatime 0 1
 UUID=28F03D40F03D1612 /mnt/harddisk ntfs defaults,uid=1000,gid=1000,umask=022,noatime,nofail 0 2" > /etc/fstab
 
 sed -i "s/hostname=.*/hostname=\"emre\"/g" /etc/conf.d/hostname

@@ -26,7 +26,9 @@ eselect gcc set 2
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
-emerge --autounmask-continue --quiet-build --update --complete-graph --deep --newuse -e @world
+MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 --quiet-build sys-apps/help2man
+
+emerge --autounmask-continue --keep-going --quiet-build --update --complete-graph --deep --newuse --exclude sys-apps/help2man -e @world
 
 emerge --autounmask-continue --quiet-build app-eselect/eselect-python
 eselect python set python3.11
@@ -50,7 +52,11 @@ eselect repository enable mv
 eselect repository enable lto-overlay
 emaint sync -a
 
-emerge sys-config/ltoize
+emerge --quiet-build sys-config/ltoize
+
+echo "sys-devel/gcc lto pgo graphite jit" >> /etc/portage/package.use
+
+emerge --quiet-build sys-devel/gcc
 
 rm -rf make.conf
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
@@ -58,7 +64,7 @@ cd
 
 sed -i "s/harfbuzz/-harfbuzz/g" /etc/portage/package.use
 env-update
-emerge --update --complete-graph --deep --newuse -e @world
+emerge --update --complete-graph --deep --newuse --exclude sys-devel/gcc -e @world
 
 MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/gcc 
 MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 sys-devel/clang

@@ -200,4 +200,7 @@ git clone https://github.com/zdharma-continuum/fast-syntax-highlighting /home/em
 
 chown -R emre:emre /home/emre
 
+chsh --shell /bin/zsh emre
+ln -sfT /bin/dash /bin/sh
+
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

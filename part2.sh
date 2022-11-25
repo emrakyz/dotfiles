@@ -57,7 +57,7 @@ emerge --quiet-build sys-config/ltoize
 
 echo "sys-devel/gcc lto pgo graphite jit" >> /etc/portage/package.use
 
-emerge --quiet-build sys-devel/gcc
+MAKEOPTS="-j1" emerge --jobs 1 --load-average 1 --quiet-build sys-devel/gcc
 
 rm -rf make.conf
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf

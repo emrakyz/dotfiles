@@ -4,7 +4,7 @@ media-libs/libplacebo lcms opengl
 media-video/mpv nvenc cuda pipewire vulkan cli libplacebo lua rubberband uchardet lcms -zimg -sdl -sndio -tools -drm -libmpv -archive -mmal -bluray -cplugins -gamepad -jpeg */* PYTHON_SINGLE_TARGET: -python3_10 python3_11 */* LUA_SINGLE_TARGET: luajit -lua5-1
 dev-lang/python ensurepip tk -bluetooth
 app-editors/neovim nvimpager tui python
-media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting infinality harfbuzz fontforge -utils
+media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting infinality -harfbuzz fontforge -utils
 x11-drivers/nvidia-drivers driver tools -kernel-open -persistenced static-libs
 media-video/pipewire sound-server pipewire-alsa X -system-service
 media-sound/pulseaudio -daemon
@@ -13,7 +13,7 @@ media-sound/ncmpcpp -clock -visualizer taglib
 x11-base/xorg-server xorg elogind xvfb -xephyr -xnest -xcsecurity
 app-text/zathura -synctex
 sys-kernel/linux-firmware savedconfig
-www-client/firefox X openh264 gmp-autoupdate hwaccel pulseaudio system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-python-libs -geckodriver
+www-client/firefox X openh264 gmp-autoupdate hwaccel pulseaudio system--harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-python-libs -geckodriver -dbus
 sys-devel/clang static-analyzer extra pie python_single_target_3_11 -python_single_target_3_10 
 app-eselect/eselect-repository python_single_target_3_11 -python_single_target_3_10
 net-p2p/qbittorrent gui
@@ -31,3 +31,10 @@ dev-libs/gmime crypt
 media-libs/libsdl2 sound
 sys-libs/compiler-rt-sanitizers profile
 media-libs/libsdl sound
+sys-devel/gcc lto pgo graphite jit
+app-office/libreoffice clang base vulkan gtk dbus firebird java */* PYTHON_SINGLE_TARGET: -python3_10 python3_11
+media-libs/opencv opengl qt5 -gtk3
+media-libs/libsndfile minimal
+# required by www-client/firefox-107.0::gentoo
+# required by www-client/firefox (argument)
+>=dev-lang/python-3.10.8_p3:3.10 ncurses

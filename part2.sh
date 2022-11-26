@@ -147,6 +147,7 @@ DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
 emerge --autounmask-write --autounmask-continue $DEPLIST
 rm -rf dependencies.txt
 MAKEOPTS="-j7" emerge --jobs 1 --load-average 7 --autounmask-continue app-office/libreoffice
+MAKEOPTS="-j7" emerge --jobs 1 --load-average 7 --autounmask-continue kde-apps/kdenlive
 
 mkdir -p /etc/X11/xorg.conf.d
 cd /etc/X11/xorg.conf.d

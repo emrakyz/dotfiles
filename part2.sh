@@ -210,4 +210,6 @@ chown -R emre:emre /home/emre
 chsh --shell /bin/zsh emre
 ln -sfT /bin/dash /bin/sh
 
+efibootmgr -c -d /dev/nvme0n1 -p 3 -L "Gentoo" -l '\EFI\BOOT\BOOTX64.EFI'
+
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

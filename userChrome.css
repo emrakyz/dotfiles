@@ -1,5 +1,5 @@
 :root {
-	--uc-urlbar-bg-color: #1b1e23;
+	--uc-urlbar-bg-color: #BB255F;
 	--uc-show-new-tab-button: none;
 	--uc-show-tab-separators: none;
 	--uc-tab-separators-color: none;
@@ -12,7 +12,7 @@
 	display: none !important;
 }
 #TabsToolbar {
-	min-height: 28px !important;
+	min-height: 0px !important;
 }
 .tabbrowser-tab:not([pinned]){
 	max-width: 100vw !important;
@@ -47,13 +47,13 @@
 
 #urlbar[breakout][breakout-extend] > #urlbar-background {
     animation-name: none !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .05) !important;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, .05) !important;
 }
 #urlbar-background {
 	box-shadow: none !important;
 }
 #nav-bar, .titlebar-buttonbox-container {
-	border-bottom: 1px solid rgb(200,200,200);
+	border-bottom: 0px solid rgb(200,200,200);
 }
 #tabs-newtab-button {
 	display: var(--uc-show-new-tab-button) !important;
@@ -85,4 +85,7 @@
 }
 #PanelUI-button {
 	display: none !important;
+}
+#fullscr-toggler {
+	display:none!important;
 }

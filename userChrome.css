@@ -89,3 +89,6 @@
 #fullscr-toggler {
 	display:none!important;
 }
+body {
+   scrollbar-width: none;
+}

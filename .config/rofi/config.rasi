@@ -1,0 +1,11 @@
+//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+configuration {
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{icon} {name}";
+  font: "JetBrains Mono 10";
+  kb-row-select: "Tab";
+  kb-element-next: "Control+space";
+}
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"

@@ -1,0 +1,137 @@
+[KFileDialog Settings]
+Recent Files[$e]=AI Will Make (Has Made) the Internet Mediocre... [FWvUkxWeIyY].mp4,file:$HOME/HARD KAPİTALİZM [B54jMigt8pc].webm,file:$HOME/230302-1602-08.mkv,file:$HOME/Ümit Özdağ ｜ Sizi Uyarıyoruz - Silahlı Direniş Hakkı [-u_wlTsdvMA].webm,file:$HOME/CY - Ak İzi Ok İzine Karıştı. [lwhfWF3yfGE].webm,file:$HOME/kürdistan ？ ＂Canına okurum senin !＂ [N1k45gpwV60].webm,file:$HOME/Videos/Ümit Özdağ sinsi zebrayı avlıyor açık mikrofon %23babalatv %23ümitözdağ %23açıkmikrofon %23shorts [mmiYPJkWupg].webm,file:$HOME/My CLI Pomodoro is Better Than Yours [GfQjJBtO-8Y].webm
+Recent URLs[$e]=file:$HOME/,file:///home/,file:$HOME/.local/bin/,file:$HOME/Videos/,file:$HOME/Desktop/
+detailViewIconSize=16
+
+[KPropertiesDialog]
+DP-2 Window-Maximized 1280x720 DP-2=true
+
+[MainWindow]
+DP-2 Height 1280x720 DP-2=720
+DP-2 Width 1280x720 DP-2=1280
+DP-2 Window-Maximized 1280x720 DP-2=true
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAgAAAAEAAAGFAAABcPwCAAAAAfwAAAEwAAABcAAAAAAA////+v////8CAAAABPsAAAAKAG0AaQB4AGUAcgAAAAHwAAACCwAAAGIBAAAC+wAAABgAZQBmAGYAZQBjAHQAXwBzAHQAYQBjAGsAAAAAAP////8AAAB+AQAAAvsAAAASAHQAaQBtAGUAcgBlAG0AYQBwAAAAAAD/////AAAAWgEAAAL7AAAAEgBTAHUAYgB0AGkAdABsAGUAcwAAAAAA/////wAAATgBAAACAAAAAgAAAnQAAAF//AEAAAAM+wAAABQAcwBjAHIAZQBlAG4AZwByAGEAYgAAAAAA/////wAAAFoBAAAD+wAAABoAYQB1AGQAaQBvAHMAcABlAGMAdAByAHUAbQAAAAAA/////wAAAGUBAAAD/AAAAAAAAAC7AAAAXAD////6AAAAAAEAAAAF+wAAABYAcAByAG8AagBlAGMAdABfAGIAaQBuAQAAAAD/////AAAAXAEAAAP7AAAAHgB0AHIAYQBuAHMAaQB0AGkAbwBuAF8AbABpAHMAdAAAAAAA/////wAAAAQBAAAD+wAAABYAZQBmAGYAZQBjAHQAXwBsAGkAcwB0AAAAAAD/////AAAABAEAAAP7AAAAHgBjAGwAaQBwAF8AcAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAAFcBAAAD+wAAABgAdQBuAGQAbwBfAGgAaQBzAHQAbwByAHkAAAAAAP////8AAABbAQAAA/wAAAAAAAAE8AAAAAAA////+v////8CAAAAAvsAAAAYAGMAbABpAHAAXwBtAG8AbgBpAHQAbwByAAAAAEQAAAHNAAAAywEAAAL7AAAADgBsAGkAYgByAGEAcgB5AAAAAAD/////AAAAlAEAAAL8AAAAvAAAAbgAAAFEAP////oAAAAAAgAAAAP7AAAAHgBwAHIAbwBqAGUAYwB0AF8AbQBvAG4AaQB0AG8AcgEAAAC/AAABLAAAAMsBAAAC+wAAABAAdABlAHgAdABlAGQAaQB0AAAAAAD/////AAABYQEAAAL7AAAAGABuAG8AdABlAHMAXwB3AGkAZABnAGUAdAAAAAAA/////wAAAHwBAAAC+wAAABYAdgBlAGMAdABvAHIAcwBjAG8AcABlAAAAAAD/////AAABLQEAAAP7AAAAEAB3AGEAdgBlAGYAbwByAG0AAAAAAP////8AAACoAQAAA/sAAAAUAHIAZwBiAF8AcABhAHIAYQBkAGUAAAAAAP////8AAACiAQAAA/sAAAASAGgAaQBzAHQAbwBnAHIAYQBtAAAAAAD/////AAABTQEAAAP7AAAAEABiAGkAbgBfAGMAbABpAHAAAAAE/wAAAoEAAAI2AQAAA/sAAAAeAG8AbgBsAGkAbgBlAHIAZQBzAG8AdQByAGMAZQBzAAAAAAD/////AAABPAEAAAP7AAAADABnAHUAaQBkAGUAcwAAAAAA/////wAAAN4BAAADAAACdAAAASAAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAgAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAAAAAAD/////AAAAAAAAAAAAAAAYAGUAeAB0AHIAYQBUAG8AbwBsAEIAYQByAAAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+
+[Notification Messages]
+show-menubar-warning=false
+
+[OnlineResources]
+provider=Freesound
+zoom=7
+
+[Recent Dirs]
+KdenliveClipFolder[$e]=$HOME/,$HOME/Videos/,$HOME/.local/bin/
+
+[RenderWidget]
+showoptions=true
+
+[Scope_Histogram]
+autoRefresh=true
+bEnabled=true
+gEnabled=true
+logScale=false
+rEnabled=true
+realtime=false
+rec601=false
+sEnabled=false
+yEnabled=true
+
+[Scope_RGB Parade]
+autoRefresh=true
+axis=false
+gradref=false
+paintmode=0
+realtime=false
+
+[Scope_Vectorscope]
+75PBox=false
+autoRefresh=true
+axis=false
+backgroundmode=0
+colorspace_ypbpr=false
+gain=1
+iqlines=false
+paintmode=0
+realtime=false
+
+[Scope_Waveform]
+autoRefresh=true
+paintmode=0
+realtime=false
+rec601=false
+
+[UiSettings]
+ColorSchemePath=BreezeDark.colors
+
+[bin]
+treeviewheaders=AAAA/wAAAAAAAAABAAAAAAAAAAABAAAAAAAAAAAAAAAJ/gEAAAAIAAAACAAAAGQAAAAHAAAANAAAAAYAAAArAAAABQAAAF8AAAAEAAAAOQAAAAMAAABCAAAAAgAAAHUAAAABAAAAQAAAAXUAAAAJAQEAAQAAAAAAAAAAAAAAAGT/////AAAAgQAAAAAAAAAJAAABdQAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAD6AAAAABJ
+
+[capture]
+decklink_capturedevice=4294967295
+decklink_extension=mov
+decklink_parameters=vcodec=dnxhd vb=145000k acodec=pcm_s16le threads=%threads
+defaultaudiocapture=-1
+detectedv4ldevices=4294967295
+grab_extension=mov
+grab_parameters=-crf 25 -vcodec libx264 -preset veryfast -threads 0
+v4l_extension=mpg
+v4l_format=4294967295
+v4l_parameters=qscale=4 ab=192k vcodec=mpeg2video acodec=mp2 threads=%threads
+
+[env]
+defaultprojectfolder[$e]=$HOME/Videos
+encodethreads=16
+ffmpegpath[$e]=/usr/bin/ffmpeg
+ffplaypath[$e]=/usr/bin/ffplay
+ffprobepath[$e]=/usr/bin/ffprobe
+lastCacheCheck=2023,2,20,20,17,49.591
+mediainfopath[$e]=/usr/bin/mediainfo
+mltpath[$e]=/usr/share/mlt-7/profiles
+proxythreads=4
+rendererpath[$e]=/usr/bin/melt-7
+
+[project]
+audiotracks=1
+externalProxyProfile=./;;.LRV;./;;.MP4
+nvencEnabled=true
+videotracks=1
+
+[sdl]
+audio_driver=3
+audio_scrub=false
+audiodrivername=pipewire
+blackmagic_output_device=-1
+fullscreen_monitor=0:
+preferredcomposite=qtblend
+volume=80
+
+[settings]
+dialogSize=1024,648
+
+[shuttle]
+shuttlebuttons=button0=monitor_pause
+
+[timeline]
+headerwidth=170
+raisepropstransitions=false
+trackheight=28
+
+[unmanaged]
+consumerslist=cbrts,decklink,blipflash,qglsl,avformat,sdl2,sdl2_audio,multi,null,xml
+default_profile=atsc_1080p_25
+defaultrescaleheight=360
+defaultrescalewidth=640
+displayProjectMonitorInfo=0
+force_breeze=true
+guidesCategories=Category 1:0:#9b59b6,Category 2:1:#3daee9,Category 3:2:#1abc9c,Category 4:3:#1cdc9a,Category 5:4:#c9ce3b,Category 6:5:#fdbc4b,Category 7:6:#f39c1f,Category 8:7:#f47750,Category 9:8:#da4453
+monitor_audio=false
+monitoraudio=3
+producerslist=decklink,frei0r.ising0r,frei0r.lissajous0r,frei0r.nois0r,frei0r.onecol0r,frei0r.partik0l,frei0r.plasma,frei0r.test_pat_B,frei0r.test_pat_C,frei0r.test_pat_G,frei0r.test_pat_I,frei0r.test_pat_L,frei0r.test_pat_R,blipflash,count,pgm,qimage,qtext,kdenlivetitle,avformat,avformat-novalidate,framebuffer,vorbis,abnormal,color,colour,consumer,hold,loader,melt,melt_file,noise,timewarp,tone,xml,xml-string,xml-nogl
+showtitlebars=false
+use_dark_breeze=true
+widgetstyle=Default
+
+[version]
+version=22.12.3

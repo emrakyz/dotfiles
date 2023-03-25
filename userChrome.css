@@ -1,5 +1,6 @@
 :root {
-	--uc-urlbar-bg-color: #BB255F;
+	--uc-urlbar-bg-color: none;
+	--toolbar-field-color: #FFFFFF !important;
 	--uc-show-new-tab-button: none;
 	--uc-show-tab-separators: none;
 	--uc-tab-separators-color: none;
@@ -88,7 +89,4 @@
 }
 #fullscr-toggler {
 	display:none!important;
-}
-body {
-   scrollbar-width: none;
 }

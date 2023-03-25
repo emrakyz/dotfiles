@@ -1,40 +1,119 @@
-sys-fs/ntfs3g fuse mount-ntfs -ntfsdecrypt -ntfsprogs
-media-video/ffmpeg libdrm amr amrenc cpudetection gpl hardcoded-tables libxml2 network opencl postproc pulseaudio fdk david lcms libplacebo libsoxr rubberband mipsdspr2 mipsfpu sdl webp frei0r opengl -gsm -modplug -speex -svg -ladspa -theora -amf -kvazaar -libaom -openh264 -rav1e -snappy -svt-av1 -twolame -zeromq -zimg -vmaf -fribidi -librtmp -zvbi -appkit -bs2b -chromaprint -flite -frei0r -ssh -srt -vpx -libtesseract -lv2 -vidstab -alsa -gme -libaribb24 -jpegxl -iec61883 -libv4l -openssl -gcrypt -pic -sndio -codec2 -mmal -libilbc -alsa 
-media-libs/libplacebo lcms opengl
-media-video/mpv nvenc cuda pipewire vulkan cli libplacebo lua rubberband uchardet lcms -zimg -sdl -sndio -tools -drm -libmpv -archive -mmal -bluray -cplugins -gamepad -jpeg */* PYTHON_SINGLE_TARGET: -python3_10 python3_11 */* LUA_SINGLE_TARGET: luajit -lua5-1
-dev-lang/python ensurepip tk -bluetooth
-app-editors/neovim nvimpager tui python
-media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting infinality -harfbuzz fontforge -utils
-x11-drivers/nvidia-drivers driver tools -kernel-open -persistenced static-libs
-media-video/pipewire sound-server pipewire-alsa X -system-service
-media-sound/pulseaudio -daemon
-media-sound/mpd -soundcloud -fluidsynth -gme -sid pulseaudio ao
-media-sound/ncmpcpp -clock -visualizer taglib
-x11-base/xorg-server xorg elogind xvfb -xephyr -xnest -xcsecurity
-app-text/zathura -synctex
-sys-kernel/linux-firmware savedconfig
-www-client/firefox X openh264 gmp-autoupdate hwaccel pulseaudio system--harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-python-libs -geckodriver -dbus
-sys-devel/clang static-analyzer extra pie python_single_target_3_11 -python_single_target_3_10 
-app-eselect/eselect-repository python_single_target_3_11 -python_single_target_3_10
-net-p2p/qbittorrent gui
+# System packages. These use flags are needed for most minimal configuration. You may edit ffmpeg flags if you need it.
+dev-libs/ncurses -minimal tinfo
+app-alternatives/awk gawk
+app-alternatives/bzip2 reference
+app-alternatives/gzip reference
+app-alternatives/sh bash
+app-alternatives/tar gnu
+app-alternatives/yacc bison
+app-alternatives/lex flex
+dev-vcs/git curl
+dev-libs/glib mime
+sys-devel/binutils plugins
+net-misc/curl http2
+dev-lang/python sqlite ensurepip ssl sqlite ncurses xml
+sys-apps/portage rsync-verify
 app-crypt/gnupg ssl
-net-misc/curl ssl
-dev-libs/nettle gmp
-sys-apps/systemd-utils udev
-virtual/perl-libnet ssl
-dev-lang/ruby ssl
-dev-libs/xmlsec nss
-app-text/xmlto text
-kde-frameworks/kconfig dbus
-mail-client/neomutt notmuch sasl
+sys-firmware/intel-microcode split-ucode
+sys-kernel/linux-firmware savedconfig redistributable
+sys-kernel/gentoo-sources symlink
+media-video/pipewire pipewire-alsa sound-server
+gui-libs/wlroots hwdata tinywl
+gui-wm/hyprland -system-wlroots
+media-video/ffmpeg cpudetection libplacebo rubberband gpl encode vpx openh264 openssl gnutls network vorbis mp3 flac aac pulseaudio libass alsa X sdl opengl openh264 x264 x265
+app-alternatives/bc gnu
+app-alternatives/cpio gnu
+sys-auth/seatd server
+sys-apps/net-tools hostname
+sys-apps/systemd-utils tmpfiles udev
+net-misc/curl ssl curl_ssl_openssl
+sys-apps/util-linux su pam
+net-misc/dhcpcd embedded
+media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting harfbuzz png fontforge
+media-libs/harfbuzz glib icu truetype cairo introspection
 dev-libs/gmime crypt
+app-arch/xz-utils extra-filters
+sys-auth/polkit daemon
+sys-devel/clang-runtime compiler-rt
+sys-devel/llvm binutils-plugin libffi ncurses
+sys-libs/compiler-rt-sanitizers asan cfi clang dfsan gwp-asan hwasan libfuzzer lsan memprof msan orc profile safestack scudo tsan ubsan xray
+sys-fs/fuse suid
+x11-drivers/nvidia-drivers driver tools
+media-gfx/qrencode png
+dev-qt/qtgui egl eglfs dbus jpeg
+dev-qt/qtgui libinput
+media-libs/libglvnd X
+dev-qt/qtsingleapplication X
+media-libs/libepoxy X egl
+dev-qt/qtgui png X
+kde-frameworks/kitemmodels qml
+media-libs/mesa X proprietary-codecs
+dev-qt/qtsql sqlite
+dev-qt/qtwidgets png
+sys-fs/cryptsetup openssl
+sys-libs/libblockdev cryptsetup
+kde-frameworks/kwindowsystem X
+kde-frameworks/kglobalaccel X
+media-libs/libsdl2 gles2
+app-crypt/p11-kit trust asn1
+dev-lang/ruby ssl
+media-libs/openh264 plugin
+media-libs/libpng apng
+media-libs/libvpx postproc
+dev-libs/libxml2 ftp
+app-crypt/gpgme cxx
+x11-libs/gtk+ X
+dev-db/firebird server
+sys-apps/dbus X
+dev-libs/xmlsec nss
+app-text/libwpd tools
+media-libs/mesa gles2
+dev-libs/boost nls
+media-libs/libsdl2 X video opengl
+media-libs/mlt xml frei0r qt5 sdl ffmpeg
+app-text/xmlto text
+dev-qt/qtdeclarative widgets sql
+dev-qt/qtnetwork ssl
+x11-libs/libxkbcommon X
+kde-frameworks/kconfig dbus qml
+app-arch/libarchive bzip2
+media-libs/libass fontconfig
 media-libs/libsdl2 sound
-sys-libs/compiler-rt-sanitizers profile
-media-libs/libsdl sound
-sys-devel/gcc lto pgo graphite jit
-app-office/libreoffice clang base vulkan gtk dbus firebird java */* PYTHON_SINGLE_TARGET: -python3_10 python3_11
-media-libs/opencv opengl qt5 -gtk3
-media-libs/libsndfile minimal
-# required by www-client/firefox-107.0::gentoo
-# required by www-client/firefox (argument)
->=dev-lang/python-3.10.8_p3:3.10 ncurses
+dev-libs/boost icu zlib
+x11-libs/cairo glib X
+media-libs/libcanberra alsa
+dev-libs/libpcre2 pcre16
+app-text/poppler cxx lcms utils
+app-crypt/gcr gtk
+dev-qt/qtbase opengl egl eglfs gles2-only gui dbus libinput network widgets
+dev-qt/qtdeclarative opengl
+gui-libs/xdg-desktop-portal-hyprland select-window select-region
+sys-libs/zlib minizip
+media-libs/libtgvoip alsa
+dev-qt/qtbase sql xml ssl sqlite
+dev-qt/qttools linguist
+dev-libs/libtomcrypt gmp
+x11-libs/pango X
+
+# Other use flags for software I use.
+www-client/firefox wayland eme-free openh264 dbus -system-python-libs
+app-office/libreoffice wayland gtk base firebird java dbus
+net-p2p/qbittorrent gui
+media-video/mpv cli libplacebo lua rubberband uchardet lua_targets_luajit lua_single_target_luajit egl iconv nvenc
+media-sound/ncmpcpp taglib
+sys-fs/ntfs3g fuse mount-ntfs
+media-gfx/imv jpeg png icu gif freeimage
+media-libs/libplacebo glslang opengl
+app-editors/neovim tui lua_single_target_luajit -lua_single_target_lua5-4
+dev-lua/luv lua_single_target_luajit -lua_single_target_lua5-4
+dev-lua/mpack lua_targets_luajit lua_single_target_luajit -lua_single_target_lua5-4
+dev-lua/lpeg lua_targets_luajit lua_single_target_luajit -lua_single_target_lua5-4
+media-sound/mpd pipewire ffmpeg
+sys-config/ltoize -clang
+app-portage/portage-bashrc-mv cflags
+app-portage/eix optimization strong-optimization
+mail-client/neomutt sasl notmuch
+net-mail/isync ssl
+app-accessibility/speech-dispatcher espeak-ng pulseaudio
+gui-apps/rofi-wayland drun
+net-libs/libtorrent-rasterbar dht

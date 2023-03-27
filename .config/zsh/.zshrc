@@ -71,8 +71,8 @@ export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=Hyprland
 export XDG_SESSION_DESKTOP=Hyprland
 export MOZ_DBUS_REMOTE=1
-export KCFLAGS=' -march=native -mtune=native'
-export KCPPFLAGS=' -march=native -mtune=native'
+export KCFLAGS='-O2 -march=native -mtune=native -fomit-frame-pointer -pipe'
+export KCPPFLAGS='-O2 -march=native -mtune=native -fomit-frame-pointer -pipe'
 
 
 # THIS IS FOR POMODORO TIMER #
@@ -84,7 +84,7 @@ pomodoro() {
   val=$1
   echo $val | lolcat
   timer ${pomo_options["$val"]}m
-  spd-say "'$val' session done." -r -15 -t male3 -p -20
+  spd-say "'$val' session done. You have 17 minutes." -r -15 -t male3 -p -20
 }
 
 start_pomodoro() {

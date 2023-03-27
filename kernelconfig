@@ -39,6 +39,7 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --enable CMDLINE_BOOL # Can be disabled if not using efistub
 ./scripts/config --set-str CMDLINE root=PARTUUID=c32f45b5-177e-2344-8506-22aeebcee05b # >> CHANGE THIS WITH YOURS <<.
 ./scripts/config --disable EFI_HANDOVER_PROTOCOL # Deprecated
+./scripts/config --enable EFI_DXE_MEM_ATTRIBUTES # Enable to try not needed
 
 # USB Keyboard & External HDD (All settings needed except "persist" or "storage")
 ./scripts/config --enable HID_SUPPORT
@@ -71,11 +72,12 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --enable GCC_PLUGINS
 ./scripts/config --enable VGA_CONSOLE # Needed for booting to tty.
 ./scripts/config --enable FRAMEBUFFER_CONSOLE # Needed for booting to tty.
+./scripts/config --enable VGA_ARB
+./scripts/config --set-val VGA_ARB_MAX_GPUS 1
 
 # CPU & Performance
 ./scripts/config --enable SMP # Support multi-core processors
 ./scripts/config --disable X86_MPPARSE # This is for old systems.
-./scripts/config --enable HIGH_RES_TIMERS
 ./scripts/config --enable SCHED_OMIT_FRAME_POINTER # Use single wchan output.
 ./scripts/config --enable SCHED_MC
 ./scripts/config --enable SCHED_MC_PRIO
@@ -88,6 +90,7 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --enable SCHED_AUTOGROUP # known to increase performance
 ./scripts/config --disable DMI # Required for non-UEFI.
 ./scripts/config --set-val NR_CPUS 16 # Thread number for your CPU.
+./scripts/config --enable FORCE_NR_CPUS
 ./scripts/config --disable SCHED_CLUSTER # For multi-CPU systems.
 ./scripts/config --disable CPU_ISOLATION # Makes CPU uninterruptable for critical tasks.
 ./scripts/config --enable MICROCODE
@@ -103,7 +106,7 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --enable PCIE_BUS_PERFORMANCE
 ./scripts/config --enable SCSI_SCAN_ASYNC #faster boot
 ./scripts/config --enable UNWINDER_ORC
-./scripts/config --enable HIGH_RES_TIMERS
+./scripts/config --disable HIGH_RES_TIMERS
 ./scripts/config --disable COMPAT_BRK
 ./scripts/config --enable ZONE_DMA
 ./scripts/config --enable INIT_STACK_NONE
@@ -111,6 +114,26 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --enable CRYPTO_MANAGER_DISABLE_TESTS
 ./scripts/config --enable DEBUG_INFO_NONE
 ./scripts/config --enable IO_DELAY_NONE
+./scripts/config --enable IOMMU_SUPPORT
+./scripts/config --enable INTEL_IOMMU
+./scripts/config --enable INTEL_IOMMU_SVM
+./scripts/config --enable IRQ_REMAP
+./scripts/config --enable X86_X2APIC
+./scripts/config --enable X86_CPU_RESCTRL
+./scripts/config --enable CMA
+./scripts/config --enable TRANSPARENT_HUGEPAGE
+./scripts/config --enable ACPI_PRMT
+./scripts/config --enable ACPI_PROCESSOR_AGGREGATOR
+./scripts/config --enable INTEL_IDLE
+./scripts/config --enable PM
+./scripts/config --enable PCI_MMCONFIG
+./scripts/config --enable PCIEASPM
+./scripts/config --enable PCIEASPM_PERFORMANCE
+./scripts/config --enable PCIE_PTM
+./scripts/config --enable SCHED_CORE
+./scripts/config --enable CPU_ISOLATION
+./scripts/config --enable X86_INTEL_MEMORY_PROTECTION_KEYS
+
 
 # Minimizing Logs
 ./scripts/config --set-val CONSOLE_LOGLEVEL_DEFAULT 1
@@ -118,9 +141,9 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --set-val MESSAGE_LOGLEVEL_DEFAULT 1
 
 # Log Buffer Size for CPU (Change for your preference: 12 is the smallest)
-./scripts/config --set-val LOG_BUF_SHIFT 12
-./scripts/config --set-val LOG_CPU_MAX_BUF_SHIFT 12
-./scripts/config --set-val PRINTK_SAFE_LOG_BUF_SHIFT 12
+./scripts/config --set-val LOG_BUF_SHIFT 16
+./scripts/config --set-val LOG_CPU_MAX_BUF_SHIFT 16
+./scripts/config --set-val PRINTK_SAFE_LOG_BUF_SHIFT 13
 
 #SelectCPU
 ./scripts/config --enable PROCESSOR_SELECT
@@ -234,7 +257,7 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --disable ACPI_THERMAL
 ./scripts/config --disable ACPI_PCC
 ./scripts/config --disable ACPI_PRMT
-./scripts/config --disable PCI_MMCONFIG # not needed
+./scripts/config --enable PCI_MMCONFIG # RECENTLY ENABLED TO TRY otherwise not needed.
 ./scripts/config --disable ISA_DMA_API # not needed
 ./scripts/config --disable VMAP_STACK # increased security
 ./scripts/config --disable RANDOMIZE_KSTACK_OFFSET # increased security
@@ -248,7 +271,6 @@ make allnoconfig # To remove all settings to make the kernel minimal.
 ./scripts/config --disable PCI_QUIRKS # legacy
 ./scripts/config --disable VGA_ARB # legacy
 ./scripts/config --disable FIRMWARE_MEMMAP # debugging
-./scripts/config --disable EFI_DXE_MEM_ATTRIBUTES # not needed
 ./scripts/config --disable PNP_DEBUG_MESSAGES
 ./scripts/config --disable SCSI_PROC_FS # legacy
 ./scripts/config --disable SCSI_LOWLEVEL # not needed

@@ -30,7 +30,7 @@ net-misc/curl ssl curl_ssl_openssl
 sys-apps/util-linux su pam
 net-misc/dhcpcd embedded
 media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting harfbuzz png fontforge
-media-libs/harfbuzz glib icu truetype cairo introspection
+media-libs/harfbuzz glib icu truetype cairo introspection graphite
 dev-libs/gmime crypt
 app-arch/xz-utils extra-filters
 sys-auth/polkit daemon

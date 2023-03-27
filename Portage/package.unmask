@@ -1,0 +1,6 @@
+dev-qt/qtbase
+dev-qt/qtwayland
+dev-qt/qtdeclarative
+dev-qt/qtshadertools
+dev-qt/qtsvg
+dev-qt/qttools

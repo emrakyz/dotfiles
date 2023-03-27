@@ -2,19 +2,25 @@
 
 mkdir --parents /mnt/gentoo
 
-mount /dev/nvme0n1p4 /mnt/gentoo
+mount /dev/nvme0n1p2 /mnt/gentoo
 
 cd /mnt/gentoo
 
-wget https://ftp.linux.org.tr/gentoo/releases/amd64/autobuilds/current-stage3-amd64-nomultilib-openrc/stage3-amd64-nomultilib-openrc-20221120T170155Z.tar.xz
+wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20230319T170303Z/stage3-amd64-nomultilib-openrc-20230319T170303Z.tar.xz
 
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 
 rm -rf stage3-*.tar.xz
 
-sed -i "s/-O2/-march=native -O2/g" /mnt/gentoo/etc/portage/make.conf
-
-echo MAKEOPTS=\"-j17\" >> /mnt/gentoo/etc/portage/make.conf
+cd /mnt/gentoo/etc/portage
+rm -rf make.conf package.use package.mask package.accept_keywords
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.accept_keywords
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.use
+cd /mnt/gentoo/etc/portage/profile
+rm -rf use.mask package.unmask
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/use.mask
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.unmask
 
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
 

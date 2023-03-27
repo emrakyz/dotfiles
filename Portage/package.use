@@ -30,7 +30,7 @@ net-misc/curl ssl curl_ssl_openssl
 sys-apps/util-linux su pam
 net-misc/dhcpcd embedded
 media-libs/freetype adobe-cff brotli bzip2 cleartype-hinting harfbuzz png fontforge
-media-libs/harfbuzz glib icu truetype cairo introspection graphite
+media-libs/harfbuzz glib icu truetype cairo introspection
 dev-libs/gmime crypt
 app-arch/xz-utils extra-filters
 sys-auth/polkit daemon
@@ -39,25 +39,46 @@ sys-devel/llvm binutils-plugin libffi ncurses
 sys-libs/compiler-rt-sanitizers asan cfi clang dfsan gwp-asan hwasan libfuzzer lsan memprof msan orc profile safestack scudo tsan ubsan xray
 sys-fs/fuse suid
 x11-drivers/nvidia-drivers driver tools
+media-gfx/qrencode png
+dev-qt/qtgui egl eglfs dbus jpeg
+dev-qt/qtgui libinput
+media-libs/libglvnd X
+dev-qt/qtsingleapplication X
+media-libs/libepoxy X egl
+dev-qt/qtgui png X
+kde-frameworks/kitemmodels qml
+media-libs/mesa X proprietary-codecs gles2
+dev-qt/qtsql sqlite
+dev-qt/qtwidgets png
 sys-fs/cryptsetup openssl
 sys-libs/libblockdev cryptsetup
-media-libs/libsdl2 gles2 video opengl sound
+kde-frameworks/kwindowsystem X
+kde-frameworks/kglobalaccel X
+media-libs/libsdl2 gles2 X video opengl
+app-crypt/p11-kit trust asn1
 dev-lang/ruby ssl
 media-libs/openh264 plugin
 media-libs/libpng apng
 media-libs/libvpx postproc
 dev-libs/libxml2 ftp
 app-crypt/gpgme cxx
+x11-libs/gtk+ X
+dev-db/firebird server
+sys-apps/dbus X
 dev-libs/xmlsec nss
 app-text/libwpd tools
-media-libs/mesa gles2
 dev-libs/boost nls
 media-libs/mlt xml frei0r qt5 sdl ffmpeg
 app-text/xmlto text
+dev-qt/qtdeclarative widgets sql
+dev-qt/qtnetwork ssl
 x11-libs/libxkbcommon X
 kde-frameworks/kconfig dbus qml
+app-arch/libarchive bzip2
 media-libs/libass fontconfig
+media-libs/libsdl2 sound
 dev-libs/boost icu zlib
+x11-libs/cairo glib X
 media-libs/libcanberra alsa
 dev-libs/libpcre2 pcre16
 app-text/poppler cxx lcms utils
@@ -70,6 +91,7 @@ media-libs/libtgvoip alsa
 dev-qt/qtbase sql xml ssl sqlite
 dev-qt/qttools linguist
 dev-libs/libtomcrypt gmp
+x11-libs/pango X
 
 # Other use flags for software I use.
 www-client/firefox wayland eme-free openh264 dbus

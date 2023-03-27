@@ -75,9 +75,13 @@ nameserver 149.112.112.112" > /etc/resolv.conf
 
 echo "nohook resolv.conf" >> /etc/resolv.conf
 
+touch /etc/doas.conf
+echo "permit :wheel
+permit nopass keepenv :emre" > /etc/doas.conf
+
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
-emerge --autounmask-write --autounmask-continue $DEPLIST
+emerge $DEPLIST
 rm -rf dependencies.txt
 
 useradd -mG wheel,audio,video,portage,usb,seat emre

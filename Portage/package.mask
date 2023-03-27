@@ -1,2 +1,0 @@
-=kde-apps/kdenlive-22.08.3
-=media-libs/libsdl2-2.24.2

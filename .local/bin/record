@@ -1,0 +1,20 @@
+#!/bin/sh
+
+audiodevice="--audio=alsa_input.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo"
+#audiodevice="--audio=alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo.monitor"
+videocodec="-c libx264rgb"
+audiocodec="-C libvorbis"
+muxer="-m matroska"
+framerate="-r 60"
+bframes="-b 0"
+buffrate="-B 165"
+sampleformat="-X fltp"
+samplerate="-R 48000"
+codecparameter1="-p "crf=0""
+codecparameter2="-p "preset=ultrafast""
+codecparameter3="-p "tune=zerolatency""
+codecparameter4="-p "cpu-used=8""
+filename="-f $(date '+%y%m%d-%H%M-%S')"
+extension=".mkv"
+
+wf-recorder $audiodevice $videocodec $audiocodec $muxer $framerate $bframes $buffrate $sampleformat $samplerate $codecparameter1 $codecparameter2 $codecparameter3 $codecparameter4 $filename$extension

@@ -1,0 +1,7 @@
+[
+[ "searxng", "https://paulgo.io/search?q=" ],
+[ "cloudtube", "https://youtube.com/search?q=" ],
+[ "wikiless", "https://wikipedia.org/w/index.php?search=" ],
+[ "oxdict", "https://www.oxfordlearnersdictionaries.com/search/english/?q=" ],
+[ "libreddit", "https://libreddit.spike.codes/search?q=" ]
+]

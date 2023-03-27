@@ -1,0 +1,20 @@
+#!/bin/sh
+
+FILE="/home/emre/.local/bin/urlquery"
+
+OBJ_LENGTH=$(cat $FILE | jq length)
+OBJ_MENU=$(cat $FILE | jq -r ".[][0]" | rofi -dmenu -l 7 -p "Search")
+OBJ_SELECTED=$(echo $OBJ_MENU | cut -d' ' -f1)
+OBJ_KEYWORDS=$(echo $OBJ_MENU | cut -d' ' -f2- | tr " " "+")
+
+main() {
+    for i in $(seq 0 $((OBJ_LENGTH - 1))); do
+        if [ $OBJ_SELECTED = $(cat $FILE | jq -r --arg i $i '.[($i|tonumber)][0]') ]; then
+            URLQUERY=$(cat $FILE | jq -r --arg i $i '.[($i|tonumber)][1]')
+            KEYWORDS=$(echo $OBJ_KEYWORDS)
+	    firefox "${URLQUERY}${KEYWORDS}"
+        fi
+    done
+}
+
+main

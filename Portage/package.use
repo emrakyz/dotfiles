@@ -86,6 +86,7 @@ app-crypt/gcr gtk
 dev-qt/qtbase opengl egl eglfs gles2-only gui dbus libinput network widgets
 dev-qt/qtdeclarative opengl
 gui-libs/xdg-desktop-portal-hyprland select-window select-region
+sys-apps/xdg-desktop-portal screencast
 sys-libs/zlib minizip
 media-libs/libtgvoip alsa
 dev-qt/qtbase sql xml ssl sqlite

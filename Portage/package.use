@@ -72,7 +72,7 @@ dev-qt/qttools linguist
 dev-libs/libtomcrypt gmp
 
 # Other use flags for software I use.
-www-client/firefox wayland eme-free openh264 dbus -system-python-libs
+www-client/firefox wayland eme-free openh264 dbus
 app-office/libreoffice wayland gtk base firebird java dbus
 net-p2p/qbittorrent gui
 media-video/mpv cli libplacebo lua rubberband uchardet lua_targets_luajit lua_single_target_luajit egl iconv nvenc

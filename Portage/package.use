@@ -1,12 +1,12 @@
 # System packages. These use flags are needed for most minimal configuration. You may edit ffmpeg flags if you need it.
 dev-libs/ncurses -minimal tinfo
 app-alternatives/awk gawk
-app-alternatives/bzip2 reference
-app-alternatives/gzip reference
-app-alternatives/sh bash
+app-alternatives/bzip2 lbzip2
+app-alternatives/gzip pigz
+app-alternatives/sh dash
 app-alternatives/tar gnu
 app-alternatives/yacc bison
-app-alternatives/lex flex
+app-alternatives/lex reflex
 dev-vcs/git curl
 dev-libs/glib mime
 sys-devel/binutils plugins
@@ -20,7 +20,7 @@ sys-kernel/gentoo-sources symlink
 media-video/pipewire pipewire-alsa sound-server
 gui-libs/wlroots hwdata tinywl
 gui-wm/hyprland -system-wlroots
-media-video/ffmpeg cpudetection libplacebo rubberband gpl encode vpx openh264 openssl gnutls network vorbis mp3 flac aac pulseaudio libass alsa X sdl opengl openh264 x264 x265
+media-video/ffmpeg cpudetection libplacebo rubberband gpl encode vpx openh264 openssl network vorbis mp3 flac aac pulseaudio libass alsa X sdl opengl openh264 x264 x265
 app-alternatives/bc gnu
 app-alternatives/cpio gnu
 sys-auth/seatd server
@@ -39,48 +39,25 @@ sys-devel/llvm binutils-plugin libffi ncurses
 sys-libs/compiler-rt-sanitizers asan cfi clang dfsan gwp-asan hwasan libfuzzer lsan memprof msan orc profile safestack scudo tsan ubsan xray
 sys-fs/fuse suid
 x11-drivers/nvidia-drivers driver tools
-media-gfx/qrencode png
-dev-qt/qtgui egl eglfs dbus jpeg
-dev-qt/qtgui libinput
-media-libs/libglvnd X
-dev-qt/qtsingleapplication X
-media-libs/libepoxy X egl
-dev-qt/qtgui png X
-kde-frameworks/kitemmodels qml
-media-libs/mesa X proprietary-codecs
-dev-qt/qtsql sqlite
-dev-qt/qtwidgets png
 sys-fs/cryptsetup openssl
 sys-libs/libblockdev cryptsetup
-kde-frameworks/kwindowsystem X
-kde-frameworks/kglobalaccel X
-media-libs/libsdl2 gles2
-app-crypt/p11-kit trust asn1
+media-libs/libsdl2 gles2 video opengl sound
 dev-lang/ruby ssl
 media-libs/openh264 plugin
 media-libs/libpng apng
 media-libs/libvpx postproc
 dev-libs/libxml2 ftp
 app-crypt/gpgme cxx
-x11-libs/gtk+ X
-dev-db/firebird server
-sys-apps/dbus X
 dev-libs/xmlsec nss
 app-text/libwpd tools
 media-libs/mesa gles2
 dev-libs/boost nls
-media-libs/libsdl2 X video opengl
 media-libs/mlt xml frei0r qt5 sdl ffmpeg
 app-text/xmlto text
-dev-qt/qtdeclarative widgets sql
-dev-qt/qtnetwork ssl
 x11-libs/libxkbcommon X
 kde-frameworks/kconfig dbus qml
-app-arch/libarchive bzip2
 media-libs/libass fontconfig
-media-libs/libsdl2 sound
 dev-libs/boost icu zlib
-x11-libs/cairo glib X
 media-libs/libcanberra alsa
 dev-libs/libpcre2 pcre16
 app-text/poppler cxx lcms utils
@@ -93,7 +70,6 @@ media-libs/libtgvoip alsa
 dev-qt/qtbase sql xml ssl sqlite
 dev-qt/qttools linguist
 dev-libs/libtomcrypt gmp
-x11-libs/pango X
 
 # Other use flags for software I use.
 www-client/firefox wayland eme-free openh264 dbus -system-python-libs

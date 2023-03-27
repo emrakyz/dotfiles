@@ -1,0 +1,26 @@
+# Remove files that shall not be installed from this list.
+nvidia/tu10x/typec/ccg_primary.cyacd
+nvidia/tu10x/typec/ccg_boot.cyacd
+nvidia/tu10x/typec/ccg_secondary.cyacd
+nvidia/tu104/acr/ucode_ahesasc.bin
+nvidia/tu104/acr/unload_bl.bin
+nvidia/tu104/acr/bl.bin
+nvidia/tu104/acr/ucode_unload.bin
+nvidia/tu104/acr/ucode_asb.bin
+nvidia/tu104/nvdec/scrubber.bin
+nvidia/tu104/gr/fecs_inst.bin
+nvidia/tu104/gr/gpccs_sig.bin
+nvidia/tu104/gr/fecs_sig.bin
+nvidia/tu104/gr/sw_ctx.bin
+nvidia/tu104/gr/sw_nonctx.bin
+nvidia/tu104/gr/sw_bundle_init.bin
+nvidia/tu104/gr/sw_method_init.bin
+nvidia/tu104/gr/sw_veid_bundle_init.bin
+nvidia/tu104/gr/gpccs_data.bin
+nvidia/tu104/gr/gpccs_bl.bin
+nvidia/tu104/gr/gpccs_inst.bin
+nvidia/tu104/gr/fecs_data.bin
+nvidia/tu104/gr/fecs_bl.bin
+nvidia/tu104/sec2/image.bin
+nvidia/tu104/sec2/sig.bin
+nvidia/tu104/sec2/desc.bin

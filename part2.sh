@@ -80,11 +80,11 @@ USE="-harfbuzz" emerge media-libs/freetype
 
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
-emerge $DEPLIST
-rm -rf dependencies.txt
+emerge $DEPLIST &&
+rm -rf dependencies.txt &&
 
 useradd -mG wheel,audio,video,portage,usb,seat emre
-echo -en "051104\n051104\n051104\n" | passwd emre
+echo -en "051104\n051104\n051104\n" | passwd emre &&
 
 cd /home/emre
 git clone https://github.com/emrakyz/dotfiles.git
@@ -99,8 +99,6 @@ ln -s /home/emre/.config/shell/profile /home/emre/.zprofile
 
 rc-update add seatd default
 
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting /home/emre/.config/zsh
-
 chown -R emre:emre /home/emre
 
 chsh --shell /bin/zsh emre
@@ -112,5 +110,20 @@ efibootmgr -c -d /dev/nvme0n1 -p 1 -L "Gentoo" -l '\EFI\BOOT\BOOTX64.EFI'
 
 emerge --depclean efibootmgr
 emerge --depclean
+
+mkdir -p /home/emre/.cache/zsh
+touch /home/emre/.cache/zsh/history
+cd
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
+mv fast-syntax-highlighting /home/emre/.config/zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ./powerlevel10k
+mv powerlevel10k /home/emre/.config/zsh
+
+echo "nvidia
+nvidia_modeset
+nvidia_uvm
+nvidia_drm" > video.conf
+mkdir -p /etc/modules-load.d
+mv video.conf /etc/modules-load.d
 
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

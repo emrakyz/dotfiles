@@ -126,4 +126,15 @@ nvidia_drm" > video.conf
 mkdir -p /etc/modules-load.d
 mv video.conf /etc/modules-load.d
 
+gsettings set org.gnome.desktop.interface cursor-theme Breeze_Snow
+gsettings set org.gnome.desktop.interface cursor-size 18
+gsettings set org.gnome.desktop.interface font-antialiasing rgba
+gsettings set org.gnome.desktop.interface font-name 'Liberation Sans 11'
+gsettings set org.gnome.desktop.interface font-hinting full
+gsettings set org.gnome.desktop.interface gtk-theme Sweet-Dark
+gsettings set org.gnome.desktop.interface icon-theme breeze-dark
+gsettings set org.gnome.desktop.interface toolbar-style text
+gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+gsettings set org.gnome.desktop.interface toolbar-icons-size small
+
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

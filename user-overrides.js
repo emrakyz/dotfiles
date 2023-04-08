@@ -324,3 +324,27 @@ user_pref("media.autoplay.default", 5);
 user_pref("media.autoplay.blocking_policy", 2);
 user_pref("media.autoplay.allow-extension-background-pages", false);
 user_pref("media.autoplay.block-event.enabled", true);
+
+// https://github.com/nikitastupin/stop-firefox-automatic-connections/blob/master/user.js
+user_pref("network.prefetch-next", false);
+user_pref("network.dns.disablePrefetch", true);
+user_pref("browser.aboutHomeSnippets.updateUrl", "");
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+user_pref("app.normandy.enabled", false);
+user_pref("dom.push.connection.enabled", false);
+user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.telemetry", false);
+user_pref("browser.ping-centre.telemetry", false);
+user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("toolkit.telemetry.bhrPing.enabled", false);
+user_pref("toolkit.telemetry.enabled", false);
+user_pref("toolkit.telemetry.firstShutdownPing.enabled", false);
+user_pref("toolkit.telemetry.hybridContent.enabled", false);
+user_pref("toolkit.telemetry.newProfilePing.enabled", false);
+user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);
+user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
+user_pref("toolkit.telemetry.unified", false);
+user_pref("toolkit.telemetry.updatePing.enabled", false);
+user_pref("toolkit.telemetry.server", "");
+user_pref("extensions.update.enabled", false);
+user_pref("services.sync.prefs.sync.extensions.update.enabled", false);

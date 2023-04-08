@@ -9,3 +9,6 @@ user_pref("browser.uidensity", 1);
 user_pref("extensions.unifiedExtensions.enabled", true);
 user_pref("ui.prefersReducedMotion", 1);
 user_pref("dom.ipc.processCount", 16);
+user_pref("security.ssl.enable_ocsp_stapling", false);
+user_pref("security.OCSP.enabled", 0);
+user_pref("security.OCSP.require", false);

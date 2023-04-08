@@ -312,3 +312,6 @@ user_pref("browser.privatebrowsing.promoEnabled", false);
 
 # Third Party Images (0-1-2)#
 user_pref("network.http.referer.XOriginPolicy", 0);
+
+# Location Bar Search #
+user_pref("keyword.enabled", false);

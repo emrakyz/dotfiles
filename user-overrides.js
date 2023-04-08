@@ -253,7 +253,7 @@ user_pref("browser.apps.URL", "");
 user_pref("loop.enabled",false);
 
 // Disable home snippets
-user_pref("browser.aboutHomeSnippets.updateUrl", "data:text/html");
+user_pref("browser.aboutHomeSnippets.updateUrl", "");
 
 // In <about:user_preferences>, hide "More from Mozilla"
 // (renamed to "More from GNU" by the global renaming)
@@ -348,3 +348,7 @@ user_pref("toolkit.telemetry.updatePing.enabled", false);
 user_pref("toolkit.telemetry.server", "");
 user_pref("extensions.update.enabled", false);
 user_pref("services.sync.prefs.sync.extensions.update.enabled", false);
+user_pref("messaging-system.rsexperimentloader.enabled", false);
+user_pref("app.normandy.optoutstudies.enabled", false);
+user_pref("extensions.getAddons.cache.enabled", false);
+user_pref("messaging-system.rsexperimentloader.enabled", false);

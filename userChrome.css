@@ -90,3 +90,9 @@
 #fullscr-toggler {
 	display:none!important;
 }
+
+.tab-close-button{display: none !important}
+
+#navigator-toolbox{border:none !important;}
+
+#urlbar:not(:hover):not([breakout][breakout-extend])>#urlbar-background {box-shadow: none!important; background: #0000 !important}

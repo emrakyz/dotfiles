@@ -17,8 +17,20 @@ user_pref("security.OCSP.require", false);
 user_pref("network.http.referer.XOriginPolicy", 0);
 # Location Bar Search #
 user_pref("keyword.enabled", true);
-user_pref("browser.toolbars.bookmarks.visibility", never);
 
+# Standard Settings #
+user_pref("browser.toolbars.bookmarks.visibility", never);
+user_pref("accessibility.typeaheadfind", false);
+user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
+user_pref("network.proxy.type", 0);
+user_pref("layout.spellcheckDefault", 0);
+user_pref("browser.download.useDownloadDir", true);
+user_pref("pdfjs.enabledCache.state", false);
+user_pref("widget.gtk.overlay-scrollbars.enabled", true);
+user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+user_pref("browser.newtabpage.activity-stream.showSearch", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
+user_pref("browser.search.suggest.enabled", false);
 
 ## Later Added ##
 // Release notes and vendor URLs

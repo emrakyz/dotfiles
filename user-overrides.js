@@ -17,6 +17,7 @@ user_pref("security.OCSP.require", false);
 user_pref("network.http.referer.XOriginPolicy", 0);
 # Location Bar Search #
 user_pref("keyword.enabled", true);
+user_pref("browser.toolbars.bookmarks.visibility", never);
 
 
 ## Later Added ##

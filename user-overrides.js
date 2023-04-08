@@ -13,6 +13,11 @@ user_pref("dom.ipc.processCount", 16);
 user_pref("security.ssl.enable_ocsp_stapling", false);
 user_pref("security.OCSP.enabled", 0);
 user_pref("security.OCSP.require", false);
+# Third Party Images (0-1-2)#
+user_pref("network.http.referer.XOriginPolicy", 0);
+# Location Bar Search #
+user_pref("keyword.enabled", true);
+
 
 ## Later Added ##
 // Release notes and vendor URLs
@@ -177,7 +182,7 @@ user_pref("media.eme.apiVisible", false);
 user_pref("identity.fxaccounts.enabled", false);
 
 // WebRTC
-user_pref("media.peerconnection.enabled", true);
+user_pref("media.peerconnection.enabled", false);
 // Don't reveal your internal IP when WebRTC is enabled
 user_pref("media.peerconnection.ice.no_host", true);
 user_pref("media.peerconnection.ice.default_address_only", true);
@@ -310,8 +315,12 @@ user_pref("browser.contentblocking.report.vpn-android.url", "");
 user_pref("browser.contentblocking.report.vpn-ios.url", "");
 user_pref("browser.privatebrowsing.promoEnabled", false);
 
-# Third Party Images (0-1-2)#
-user_pref("network.http.referer.XOriginPolicy", 0);
-
-# Location Bar Search #
-user_pref("keyword.enabled", false);
+user_pref("permissions.default.geo", 2);
+user_pref("permissions.default.camera", 2);
+user_pref("permissions.default.microphone", 2);
+user_pref("permissions.default.desktop-notification", 2);
+user_pref("permissions.default.xr", 2);
+user_pref("media.autoplay.default", 5);
+user_pref("media.autoplay.blocking_policy", 2);
+user_pref("media.autoplay.allow-extension-background-pages", false);
+user_pref("media.autoplay.block-event.enabled", true);

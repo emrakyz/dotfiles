@@ -351,4 +351,5 @@ user_pref("services.sync.prefs.sync.extensions.update.enabled", false);
 user_pref("messaging-system.rsexperimentloader.enabled", false);
 user_pref("app.normandy.optoutstudies.enabled", false);
 user_pref("extensions.getAddons.cache.enabled", false);
-user_pref("messaging-system.rsexperimentloader.enabled", false);
+user_pref("privacy.userContext.enabled", false);
+user_pref("privacy.userContext.ui.enabled", false);

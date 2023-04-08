@@ -31,6 +31,18 @@ user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 user_pref("browser.newtabpage.activity-stream.showSearch", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
 user_pref("browser.search.suggest.enabled", false);
+user_pref("signon.rememberSignons", false);
+user_pref("signon.management.page.breach-alerts.enabled", false);
+user_pref("places.history.enabled", false);
+user_pref("browser.formfill.enable", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.history", false);
+user_pref("browser.urlbar.suggest.engines", false);
+user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.topsites", false);
+user_pref("browser.urlbar.suggest.weather", false);
+user_pref("browser.urlbar.suggest.calculator", false);
+user_pref("browser.urlbar.suggest.bestmatch", false);
 
 ## Later Added ##
 // Release notes and vendor URLs

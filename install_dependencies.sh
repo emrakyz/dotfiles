@@ -1,3 +1,3 @@
 #!/bin/bash
-DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
+DEPLIST="tr '\n' ' ' < dependencies.txt"
 emerge $DEPLIST

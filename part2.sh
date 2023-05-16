@@ -98,7 +98,7 @@ DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
 emerge $DEPLIST &&
 rm -rf dependencies.txt &&
 
-useradd -mG wheel,audio,video,portage,usb,seat emre
+useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat emre
 echo "$username:$password" | chpasswd &&
 
 cd /home/emre

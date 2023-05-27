@@ -28,15 +28,20 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 echo "LC_COLLATE=\"C.UTF-8\"" >> /etc/env.d/02locale
 
 emerge sys-devel/gcc
-emerge --autounmask-continue --keep-going --quiet-build --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc' -e @world
-
+emerge --autounmask-continue --keep-going --quiet-build --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc sys-libs/timezone-data' -e @world
+emerge sys-devel/clang:16/16
+emerge sys-devel/clang:15/15
 emerge --autounmask-continue --quiet-build dev-vcs/git
 emerge --autounmask-continue --quiet-build app-eselect/eselect-repository
 
+eselect repository remove gentoo
+rm -r /var/db/repos/gentoo
+eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git
 eselect repository enable wayland-desktop
 eselect repository enable guru
 eselect repository enable pf4public
 eselect repository enable thegreatmcpain
+eselect repository add librewolf git https://gitlab.com/librewolf-community/browser/gentoo.git
 emaint sync -a
 
 emerge sys-kernel/linux-firmware sys-firmware/intel-microcode app-arch/lz4

@@ -94,7 +94,8 @@ echo "nohook resolv.conf" >> /etc/dhcpcd.conf
 
 touch /etc/doas.conf
 echo "permit :wheel
-permit nopass keepenv :$username,root" > /etc/doas.conf
+permit nopass keepenv :$username
+permit nopass keepenv :root" > /etc/doas.conf
 
 USE="-harfbuzz" emerge media-libs/freetype
 

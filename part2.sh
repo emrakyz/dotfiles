@@ -196,35 +196,39 @@ tlmgr install apa7 biber biblatex geometry scalerel times
 cd
 rm -rf install-tl-unx.tar.gz install-tl-20*
 
+#!/bin/bash
+
 doas -u "$username" librewolf --headless >/dev/null 2>&1 &
 sleep 3
 killall librewolf
-cd /home/$username/.librewolf/*default*
+profile_dir=$(sed -n "/Default=.*.default-release/ s/.*=//p" /home/$username/.librewolf/profiles.ini)
+cd /home/$username/.librewolf/$profile_dir
 mkdir chrome
 curl -sLO https://raw.githubusercontent.com/arkenfox/user.js/master/user.js
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/user-overrides.js
 curl -sLO https://raw.githubusercontent.com/arkenfox/user.js/master/updater.sh
-doas -u $username ./updater.sh -s -u
+chmod +x updater.sh
+chown -R $username:$username /home/$username/.librewolf
+doas -u "$username" ./updater.sh -s -u
 cd chrome
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/userChrome.css
 cd
 
-ext_dir="/home/$username/.librewolf/*default*/extensions
-mkdir $ext_dir
+ext_dir="/home/$username/.librewolf/$profile_dir/extensions"
+mkdir -p "$ext_dir"
 addon_names=("ublock-origin" "istilldontcareaboutcookies" "libredirect" "custom-scrollbars" "vimium-ff" "chat-gpt-long-text-input" "i-auto-fullscreen")
 
 for addon_name in "${addon_names[@]}"
 do
   addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon_name}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
 
-  curl -sLO extension.xpi "$addonurl"
+  curl -sL "$addonurl" -o extension.xpi
 
-  ext_id=$(unzip -p extension.xpi manifest.json | jq -r '.applications.gecko.id')
+  ext_id=$(unzip -p extension.xpi manifest.json | grep "\"id\"")
+  ext_id="${ext_id%\"*}"
+  ext_id="${ext_id##*\"}"
 
   mv extension.xpi "$ext_dir/$ext_id.xpi"
-
-  echo "$ext_dir/$ext_id.xpi" > "$ext_dir/$ext_id"
 done
-
 
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

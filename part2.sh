@@ -187,4 +187,13 @@ eselect fontconfig enable 10-sub-pixel-rgb.conf
 eselect fontconfig enable 10-yes-antialias.conf
 eselect fontconfig enable 11-lcdfilter-default.conf
 
+curl -LO https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+tar -xzf install-tl-unx.tar.gz
+cd install-tl-20*
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/texlive.profile
+./install-tl -profile texlive.profile
+tlmgr install apa7 biber biblatex geometry scalerel times
+cd
+rm -rf install-tl-unx.tar.gz install-tl-20*
+
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 source /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -48,7 +48,7 @@ emerge sys-kernel/gentoo-sources
 
 cd /usr/src/linux
 make mrproper
-curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.config
+curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.config
 
 sed -i -e '/^# *CONFIG_CMDLINE.*/c\' -e "CONFIG_CMDLINE=\"root=PARTUUID=$PARTUUID_ROOT\"" /usr/src/linux/.config
 
@@ -64,14 +64,14 @@ echo "UUID=$UUID_BOOT /boot vfat defaults,noatime 0 2
 UUID=$UUID_ROOT / ext4 defaults,noatime 0 1
 UUID=28F03D40F03D1612 /mnt/harddisk ntfs defaults,uid=1000,gid=1000,umask=022,noatime,nofail 0 2" > /etc/fstab
 
-sed -i "s/hostname=.*/hostname=\"emre\"/g" /etc/conf.d/hostname
+sed -i "s/hostname=.*/hostname=\"$username\"/g" /etc/conf.d/hostname
 
 emerge net-misc/dhcpcd
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
-echo "127.0.0.1\temre\tlocalhost
-::1\t\temre\tlocalhost" > /etc/hosts
+echo "127.0.0.1\t$username\tlocalhost
+::1\t\t$username\tlocalhost" > /etc/hosts
 curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts | tail -n +40 >> /etc/hosts
 
 sed -i 's/enforce=everyone/enforce=none/g' /etc/security/passwdqc.conf
@@ -89,34 +89,34 @@ echo "nohook resolv.conf" >> /etc/dhcpcd.conf
 
 touch /etc/doas.conf
 echo "permit :wheel
-permit nopass keepenv :emre" > /etc/doas.conf
+permit nopass keepenv :$username,root" > /etc/doas.conf
 
 USE="-harfbuzz" emerge media-libs/freetype
 
-curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
+curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
 emerge $DEPLIST &&
 rm -rf dependencies.txt &&
 
-useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat emre
+useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat $username
 echo "$username:$password" | chpasswd &&
 
-cd /home/emre
+cd /home/$username
 git clone https://github.com/emrakyz/dotfiles.git
 cd dotfiles
 cp -r .local .config /home/$username
 cd ..
 rm -rf dotfiles
-chmod +x /home/emre/.local/bin/*
-chmod +x /home/emre/.config/hypr/start.sh
+chmod +x /home/$username/.local/bin/*
+chmod +x /home/$username/.config/hypr/start.sh
 
-ln -s /home/emre/.config/shell/profile /home/emre/.zprofile
+ln -s /home/$username/.config/shell/profile /home/$username/.zprofile
 
 rc-update add seatd default
 
-chown -R emre:emre /home/emre
+chown -R $username:$username /home/$username
 
-chsh --shell /bin/zsh emre
+chsh --shell /bin/zsh $username
 ln -sfT /bin/dash /bin/sh
 
 cd /usr/src/linux
@@ -141,7 +141,7 @@ rm -rf /var/cache/binpkgs/*
 # remove cache
 rm -rf /home/$username/.cache
 mkdir -p /home/$username/.cache/zsh
-chown $username:$username /home/emre/.cache
+chown $username:$username /home/$username/.cache
 touch /home/$username/.cache/zsh/history
 
 mkdir -p /home/$username/.cache/zsh
@@ -187,13 +187,43 @@ eselect fontconfig enable 10-sub-pixel-rgb.conf
 eselect fontconfig enable 10-yes-antialias.conf
 eselect fontconfig enable 11-lcdfilter-default.conf
 
-curl -LO https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+curl -sLO https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar -xzf install-tl-unx.tar.gz
 cd install-tl-20*
-curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/texlive.profile
+curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/texlive.profile
 ./install-tl -profile texlive.profile
 tlmgr install apa7 biber biblatex geometry scalerel times
 cd
 rm -rf install-tl-unx.tar.gz install-tl-20*
+
+doas -u "$username" librewolf --headless >/dev/null 2>&1 &
+sleep 3
+killall librewolf
+cd /home/$username/.librewolf/*default*
+mkdir chrome
+curl -sLO https://raw.githubusercontent.com/arkenfox/user.js/master/user.js
+curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/user-overrides.js
+curl -sLO https://raw.githubusercontent.com/arkenfox/user.js/master/updater.sh
+doas -u $username ./updater.sh -s -u
+cd chrome
+curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/userChrome.css
+cd
+
+ext_dir="/home/$username/.librewolf/*default*/extensions
+addon_names=("ublock-origin" "istilldontcareaboutcookies" "libredirect" "custom-scrollbars" "vimium-ff" "chat-gpt-long-text-input" "i-auto-fullscreen")
+
+for addon_name in "${addon_names[@]}"
+do
+  addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon_name}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
+
+  curl -sLO extension.xpi "$addonurl"
+
+  ext_id=$(unzip -p extension.xpi manifest.json | jq -r '.applications.gecko.id')
+
+  mv extension.xpi "$ext_dir/$ext_id.xpi"
+
+  echo "$ext_dir/$ext_id.xpi" > "$ext_dir/$ext_id"
+done
+
 
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

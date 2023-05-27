@@ -210,6 +210,7 @@ curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/userChrome.css
 cd
 
 ext_dir="/home/$username/.librewolf/*default*/extensions
+mkdir $ext_dir
 addon_names=("ublock-origin" "istilldontcareaboutcookies" "libredirect" "custom-scrollbars" "vimium-ff" "chat-gpt-long-text-input" "i-auto-fullscreen")
 
 for addon_name in "${addon_names[@]}"

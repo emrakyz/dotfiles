@@ -83,8 +83,8 @@ sed -i 's/enforce=everyone/enforce=none/g' /etc/security/passwdqc.conf
 
 echo "root:$password" | chpasswd
 
-sed -i 's/#rc_parallel=\".*\"/rc_parallel=\"YES\"/g' /etc/rc.conf
-sed -i 's/#unicode=\".*\"/unicode=\"YES\"/g' /etc/rc.conf
+# sed -i 's/#rc_parallel=\".*\"/rc_parallel=\"YES\"/g' /etc/rc.conf
+# sed -i 's/#unicode=\".*\"/unicode=\"YES\"/g' /etc/rc.conf
 sed -i 's/clock=.*/clock=\"local\"/g' /etc/conf.d/hwclock
 
 echo "nameserver 9.9.9.9

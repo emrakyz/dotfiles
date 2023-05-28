@@ -235,4 +235,10 @@ do
   mv extension.xpi "$ext_dir/$ext_id.xpi"
 done
 
+doas -u "$username" env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+cp /home/$username/go/bin/lf /usr/bin/
+rm -rf /home/$username/go
+
+git clone https://raw.githubusercontent.com/emrakyz/dotfiles/main/my-ublock-backup_2023-05-27_14.15.29.txt
+
 echo "====GENTOO INSTALLATION COMPLETED SUCCESSFULLY===="

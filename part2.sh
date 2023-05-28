@@ -202,8 +202,6 @@ tlmgr install apa7 biber biblatex geometry scalerel times
 cd
 rm -rf install-tl-unx.tar.gz install-tl-20*
 
-#!/bin/bash
-
 doas -u "$username" librewolf --headless >/dev/null 2>&1 &
 sleep 3
 killall librewolf

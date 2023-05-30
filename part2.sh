@@ -29,7 +29,15 @@ PARTUUID_ROOT=$(blkid -s PARTUUID -o value $PARTITION_ROOT)
 
 # Give default usernames and passwords that will be used in the script.
 read -p "Enter the new username: " username
-read -p "Enter the new password: " password
+
+while true; do
+    read -s -p "Enter the new password: " password
+    echo
+    read -s -p "Confirm the new password: " password2
+    echo
+    [ "$password" = "$password2" ] && break
+    echo "Passwords do not match, please try again"
+done
 
 # Sync the repositories.
 emerge-webrsync

@@ -2,10 +2,12 @@
 
 # Error handling.
 set -e
+set -o pipefail
 
-handle_error() {
-    echo "Error occurred on line $1"
-    exit 1
+handle_error () {
+    local error_status=$?
+    echo "Error on line $1 | Exit status: $error_status" >> error_log.txt
+    exit $error_status
 }
 
 trap 'handle_error $LINENO' ERR

@@ -19,7 +19,7 @@ PARTITION_BOOT=$(findmnt -n -o SOURCE /boot)
 
 UUID_ROOT=$(blkid -s UUID -o value $PARTITION_ROOT)
 UUID_BOOT=$(blkid -s UUID -o value $PARTITION_BOOT)
-PARTUUID_ROOT=$(blkid -s PARTUUID -o value $PARTITION)
+PARTUUID_ROOT=$(blkid -s PARTUUID -o value $PARTITION_ROOT)
 
 read -p "Enter the new username: " username
 read -p "Enter the new password: " password

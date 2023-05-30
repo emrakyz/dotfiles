@@ -48,11 +48,11 @@ echo "LC_COLLATE=\"C.UTF-8\"" >> /etc/env.d/02locale
 
 # Update the system.
 emerge sys-devel/gcc
-emerge --autounmask-continue --keep-going --quiet-build --update --complete-graph --deep --newuse --exclude 'sys-devel/gcc sys-libs/timezone-data' -e @world
+emerge --update --newuse --exclude 'sys-devel/gcc sys-libs/timezone-data' -e @world
 emerge sys-devel/clang:16/16
 emerge sys-devel/clang:15/15
-emerge --autounmask-continue --quiet-build dev-vcs/git
-emerge --autounmask-continue --quiet-build app-eselect/eselect-repository
+emerge dev-vcs/git
+emerge app-eselect/eselect-repository
 
 # Make Gentoo repository git based. Add other repositories and sync.
 eselect repository remove gentoo

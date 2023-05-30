@@ -33,6 +33,8 @@ UUID_ROOT=$(blkid -s UUID -o value $PARTITION_ROOT)
 UUID_BOOT=$(blkid -s UUID -o value $PARTITION_BOOT)
 PARTUUID_ROOT=$(blkid -s PARTUUID -o value $PARTITION_ROOT)
 
+read -p "Enter the timezone: " time_zone
+
 # Give default usernames and passwords that will be used in the script.
 while true; do
     read -p "Enter the new username: " username
@@ -52,7 +54,7 @@ while true; do
         if [[ "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
         break
         else
-            echo "Invalid username. Only alphanumeric characters and underscores are allowed."
+            echo "Invalid password. Only alphanumeric characters and underscores are allowed."
         fi
     else
         echo "Passwords do not match, please try again"
@@ -64,7 +66,7 @@ emerge-webrsync
 emerge --sync --quiet
 
 # Set the timezone.
-echo "Europe/Istanbul" > /etc/timezone
+echo "$time_zone" > /etc/timezone
 emerge --config sys-libs/timezone-data
 
 # Set the locales.
@@ -100,7 +102,7 @@ emerge sys-kernel/linux-firmware sys-firmware/intel-microcode app-arch/lz4
 sed -i '/^nvidia\/\(tu104\|tu10x\)/!d' /etc/portage/savedconfig/sys-kernel/linux-firmware-*
 emerge sys-kernel/linux-firmware
 
-# Install and Compile the Gentoo Kernel.
+# Install, Configure and Compile the Gentoo Kernel.
 emerge sys-kernel/gentoo-sources
 
 cd /usr/src/linux

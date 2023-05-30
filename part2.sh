@@ -1,5 +1,14 @@
 #!/bin/bash
 
+set -e
+
+handle_error() {
+    echo "Error occurred on line $1"
+    exit 1
+}
+
+trap 'handle_error $LINENO' ERR
+
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
@@ -101,11 +110,11 @@ USE="-harfbuzz" emerge media-libs/freetype
 
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
-emerge $DEPLIST &&
-rm -rf dependencies.txt &&
+emerge $DEPLIST
+rm -rf dependencies.txt
 
 useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat $username
-echo "$username:$password" | chpasswd &&
+echo "$username:$password" | chpasswd
 
 cd /home/$username
 git clone https://github.com/emrakyz/dotfiles.git

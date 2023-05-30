@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script installs and configure a Gentoo Linux system. You need to change several parts for you such as timezone and configuration files.
+# This script installs and configure a Gentoo Linux system. You need to change several parts for you such as configuration files.
 
 # See all terminal output inside a text file.
 exec > >(tee -a logfile.txt) 2>&1

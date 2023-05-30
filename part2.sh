@@ -86,7 +86,7 @@ emerge app-eselect/eselect-repository
 
 # Make Gentoo repository git based. Add other repositories and sync.
 eselect repository remove gentoo
-rm -r /var/db/repos/gentoo
+rm -rf /var/db/repos/gentoo
 eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git
 eselect repository enable wayland-desktop
 eselect repository enable guru
@@ -167,7 +167,7 @@ USE="-harfbuzz" emerge media-libs/freetype
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
 DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
 emerge $DEPLIST
-rm -rf dependencies.txt
+rm -f dependencies.txt
 
 # Add a user and give it a password.
 useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat $username

@@ -79,7 +79,7 @@ curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.confi
 
 sed -i -e '/^# *CONFIG_CMDLINE.*/c\' -e "CONFIG_CMDLINE=\"root=PARTUUID=$PARTUUID_ROOT\"" /usr/src/linux/.config
 
-LLVM=1 LLVM_IAS=1 KCFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' KCPPFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' make -j16
+LLVM=1 LLVM_IAS=1 KCFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' KCPPFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' make -j$(nproc)
 cd
 
 mkdir -p /boot/EFI/BOOT

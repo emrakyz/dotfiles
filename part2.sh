@@ -1,12 +1,18 @@
 #!/bin/bash
 
+# This script installs and configure a Gentoo Linux system. You need to change several parts for you such as timezone and configuration files.
+
+# See all terminal output inside a text file.
+exec > >(tee -a logfile.txt) 2>&1
+
 # Error handling.
 set -e
 set -o pipefail
 
 handle_error () {
     local error_status=$?
-    echo "Error on line $1 | Exit status: $error_status" >> error_log.txt
+    local command_line=${BASH_COMMAND}
+    echo "Error on line $LINENO: command '${command_line}' exited with status: $error_status" >> error_log.txt
     exit $error_status
 }
 

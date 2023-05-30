@@ -34,15 +34,29 @@ UUID_BOOT=$(blkid -s UUID -o value $PARTITION_BOOT)
 PARTUUID_ROOT=$(blkid -s PARTUUID -o value $PARTITION_ROOT)
 
 # Give default usernames and passwords that will be used in the script.
-read -p "Enter the new username: " username
+while true; do
+    read -p "Enter the new username: " username
+    if [[ "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
+        break
+    else
+        echo "Invalid username. Only alphanumeric characters and underscores are allowed."
+    fi
+done
 
 while true; do
     read -s -p "Enter the new password: " password
     echo
     read -s -p "Confirm the new password: " password2
     echo
-    [ "$password" = "$password2" ] && break
-    echo "Passwords do not match, please try again"
+    if [[ "$password" = "$password2" ]]; then
+        if [[ "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
+        break
+        else
+            echo "Invalid username. Only alphanumeric characters and underscores are allowed."
+        fi
+    else
+        echo "Passwords do not match, please try again"
+    fi
 done
 
 # Sync the repositories.

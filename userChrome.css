@@ -91,8 +91,22 @@
 	display:none!important;
 }
 
+.tabbrowser-tab .tab-close-button {
+  visibility: collapse !important;
+}
+
 .tab-close-button{display: none !important}
 
 #navigator-toolbox{border:none !important;}
 
 #urlbar:not(:hover):not([breakout][breakout-extend])>#urlbar-background {box-shadow: none!important; background: #0000 !important}
+
+/* Remove Context Menu Entries */
+#context-back, #context-forward, #context-reload, #context-stop, #context-bookmarkpage, #context-savepage, #context-pocket, #screenshots_mozilla_org_create-screenshot, #context-inspect, #context-sep-selectall, #context-selectall, #context-copylink, #context-copy, #context-viewsource, #context-viewinfo, #context-print-selection, #context-viewpartialsource-selection, #context-inspect-a11y, #context-openlinkintab, #context-openlink, #context-openlinkprivate, #context-bookmarklink, #context-savelink, #context-savelinktopocket, #context-copyimage-contents, #context-copyimage, #context-sendimage {
+    display: none !important
+}
+
+/* hide 'overlink' messages */
+#statuspanel[type="overLink"] {opacity: 0 !important;}
+/* hide all status messages */
+#statuspanel {opacity: 0 !important;}

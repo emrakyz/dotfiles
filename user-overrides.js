@@ -19,7 +19,7 @@ user_pref("network.http.referer.XOriginPolicy", 0);
 user_pref("keyword.enabled", true);
 
 # Standard Settings #
-user_pref("browser.toolbars.bookmarks.visibility", never);
+user_pref("browser.toolbars.bookmarks.visibility", false);
 user_pref("accessibility.typeaheadfind", false);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
 user_pref("network.proxy.type", 0);
@@ -122,9 +122,9 @@ user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.discovery.containers.enabled", false);
 user_pref("browser.discovery.enabled", false);
-user_pref("browser.discovery.sites", "http://127.0.0.1/")
+user_pref("browser.discovery.sites", "http://127.0.0.1/");
 user_pref("services.sync.prefs.sync.browser.startup.homepage", false);
-user_pref("browser.contentblocking.report.monitor.home_page_url", "http://127.0.0.1/")
+user_pref("browser.contentblocking.report.monitor.home_page_url", "http://127.0.0.1/");
 user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 user_pref("browser.safebrowsing.enabled", false);
 user_pref("browser.safebrowsing.downloads.remote.enabled", false);
@@ -303,9 +303,9 @@ user_pref("browser.onboarding.updatetour", "performance,library,singlesearch,cus
 user_pref("browser.onboarding.enabled", false);
 
 // New tab settings
-user_pref("browser.newtabpage.activity-stream.showTopSites",false);
-user_pref("browser.newtabpage.activity-stream.feeds.section.topstories",false);
-user_pref("browser.newtabpage.activity-stream.feeds.snippets",false);
+user_pref("browser.newtabpage.activity-stream.showTopSites", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.newtabpage.activity-stream.disableSnippets", true);
 user_user_pref("browser.newtabpage.activity-stream.tippyTop.service.endpoint", "");
 
@@ -376,3 +376,6 @@ user_pref("app.normandy.optoutstudies.enabled", false);
 user_pref("extensions.getAddons.cache.enabled", false);
 user_pref("privacy.userContext.enabled", false);
 user_pref("privacy.userContext.ui.enabled", false);
+
+
+user_pref("security.ssl.require_safe_negotiation", false);

@@ -1,0 +1,3 @@
+media-video/mpv::thegreatmcpain
+dev-lang/python:3.12
+media-video/mpv::vapoursynth

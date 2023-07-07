@@ -1,0 +1,41 @@
+#!/bin/bash
+
+create_volume_bar() {
+    max_width=20
+    filled_block="█"
+    empty_block="░"
+
+    current_width=$((vol * max_width / 100))
+    filled=$(printf "%${current_width}s")
+    empty=$(printf "%$((max_width - current_width))s")
+
+    bar="${filled// /$filled_block}${empty// /$empty_block}"
+    echo "$bar"
+}
+
+get_volume_and_mute_status() {
+    volume_output=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o "[0-9].*")
+    vol=$(echo "$volume_output" | awk '{print int($1 * 100)}')
+    mute="no"
+    if [[ $volume_output =~ "MUTED" ]]; then
+        mute="yes"
+    fi
+}
+
+send_notification() {
+    icon=""
+    case 1 in
+        $((vol >= 70)) ) icon="🔊" ;;
+        $((vol >= 30)) ) icon="🔉" ;;
+        $((vol >= 1)) ) icon="🔈" ;;
+    esac
+    if [ "$mute" = "yes" ]; then
+        icon="🔇"
+    fi
+    bar=$(create_volume_bar)
+    message="${icon} ${bar} ${vol}%"
+    dunstify --replace=5555 "$message"
+}
+
+get_volume_and_mute_status
+send_notification

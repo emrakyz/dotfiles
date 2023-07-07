@@ -1,0 +1,4 @@
+#!/bin/bash
+geometry=$(slurp)
+sleep 0.3  # adjust the delay as per your need
+grim -g "$geometry" - | swappy -f -

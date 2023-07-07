@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "Enter the base name: "
+read base_name
+
+i=1
+
+# list all files in the current directory
+for file in *
+do
+    # get the extension of the file
+    ext="${file##*.}"
+
+    # generate new name
+    new_name="${base_name}_$i.$ext"
+
+    # rename file
+    mv -- "$file" "$new_name"
+
+    # increment i for next iteration
+    i=$(expr $i + 1)
+done

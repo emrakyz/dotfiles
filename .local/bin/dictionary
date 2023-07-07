@@ -1,0 +1,5 @@
+#!/bin/sh
+
+word=$(wl-paste --primary)
+
+firefox "https://www.oxfordlearnersdictionaries.com/search/english/?q='$word'"

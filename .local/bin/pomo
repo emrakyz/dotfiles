@@ -1,0 +1,20 @@
+#!/bin/bash
+
+session_duration=(52 17 52 17 52 17 52 35)
+count=0
+
+function pomodoro() {
+  local label session next_session
+  ((count % 2 == 0)) && label="Work" || label="Break"
+  session=${session_duration[count % 8]}
+  next_session=${session_duration[(count + 1) % 8]}
+  echo -e "\e[1m$label\e[0m" | lolcat
+  timer "${session}m"
+  message="$label Session Done. You have $next_session minutes."
+  notify-send "$message"
+  ((count++))
+}
+
+while true; do
+  pomodoro
+done

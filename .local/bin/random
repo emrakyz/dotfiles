@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpv $(locate -d ~/.config/.mymlocate.db -b -r '.*\.\(mp4\|mkv\|webm\|mov\|m4v\wmv\|flv\|avi\)$' | shuf -n 1)

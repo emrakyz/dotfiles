@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd
+
+# remove old modules
+cd /lib/modules
+ls -1v | head -n -1 | xargs rm -rf
+cd
+
+# remove temporary files
+rm -rf /var/tmp/portage/*
+rm -rf /var/cache/distfiles/*
+rm -rf /var/cache/binpkgs/*
+
+# remove cache
+rm -rf /home/emre/.cache
+mkdir -p /home/emre/.cache/zsh
+touch /home/emre/.cache/zsh/history
+chown -R emre:emre /home/emre/.cache

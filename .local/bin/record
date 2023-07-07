@@ -17,4 +17,8 @@ codecparameter4="-p "cpu-used=8""
 filename="-f $(date '+%y%m%d-%H%M-%S')"
 extension=".mkv"
 
-wf-recorder $audiodevice $videocodec $audiocodec $muxer $framerate $bframes $buffrate $sampleformat $samplerate $codecparameter1 $codecparameter2 $codecparameter3 $codecparameter4 $filename$extension
+choice=$(printf "startrecording\\nstoprecording" | rofi -dmenu -l 2)
+case "$choice" in
+	startrecording) wf-recorder $audiodevice $videocodec $audiocodec $muxer $framerate $bframes $buffrate $sampleformat $samplerate $codecparameter1 $codecparameter2 $codecparameter3 $codecparameter4 $filename$extension;;
+	stoprecording) doas killall wf-recorder;;
+esac

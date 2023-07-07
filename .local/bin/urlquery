@@ -1,7 +1,67 @@
 [
-[ "searxng", "https://paulgo.io/search?q=" ],
-[ "cloudtube", "https://youtube.com/search?q=" ],
-[ "wikiless", "https://wikipedia.org/w/index.php?search=" ],
-[ "oxdict", "https://www.oxfordlearnersdictionaries.com/search/english/?q=" ],
-[ "libreddit", "https://libreddit.spike.codes/search?q=" ]
+  [
+    "SearXNG",
+    "https://searx.tiekoetter.com/search?q=",
+    20321
+  ],
+  [
+    "GPT",
+    "https://chat.openai.com",
+    15323
+  ],
+  [
+    "Wiki",
+    "https://www.wikiwand.com/en/",
+    1035
+  ],
+  [
+    "Economist",
+    "https://www.economist.com",
+    17
+  ],
+  [
+    "Reuters",
+    "https://www.reuters.com",
+    2
+  ],
+  [
+    "NYTimes",
+    "https://www.nytimes.com",
+    5
+  ],
+  [
+    "YouTube",
+    "https://www.youtube.com/search?q=",
+    219
+  ],
+  [
+    "Libreddit",
+    "https://libreddit.tiekoetter.com",
+    12
+  ],
+  [
+    "HBR",
+    "https://hbr.org",
+    2
+  ],
+  [
+    "Financial Times",
+    "https://www.ft.com/",
+    3
+  ],
+  [
+    "Wired",
+    "https://www.wired.com",
+    2
+  ],
+  [
+    "Guardian",
+    "https://www.theguardian.com",
+    1
+  ],
+  [
+    "ForeignAffairs",
+    "https://www.foreignaffairs.com/",
+    1
+  ]
 ]

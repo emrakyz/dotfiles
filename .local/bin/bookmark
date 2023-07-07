@@ -1,20 +1,96 @@
 #!/bin/sh
 
-FILE="/home/emre/.local/bin/urlquery"
+URLQUERY_FILE="/home/emre/.local/bin/urlquery"
+ACTION_MENU='@@'
 
-OBJ_LENGTH=$(cat $FILE | jq length)
-OBJ_MENU=$(cat $FILE | jq -r ".[][0]" | rofi -dmenu -l 7 -p "Search")
-OBJ_SELECTED=$(echo $OBJ_MENU | cut -d' ' -f1)
-OBJ_KEYWORDS=$(echo $OBJ_MENU | cut -d' ' -f2- | tr " " "+")
-
-main() {
-    for i in $(seq 0 $((OBJ_LENGTH - 1))); do
-        if [ $OBJ_SELECTED = $(cat $FILE | jq -r --arg i $i '.[($i|tonumber)][0]') ]; then
-            URLQUERY=$(cat $FILE | jq -r --arg i $i '.[($i|tonumber)][1]')
-            KEYWORDS=$(echo $OBJ_KEYWORDS)
-	    firefox "${URLQUERY}${KEYWORDS}"
-        fi
-    done
+read_bookmarks() {
+  if [ ! -f "$URLQUERY_FILE" ] || [ ! -s "$URLQUERY_FILE" ]; then
+    echo "[]"
+  else
+    jq '.' "$URLQUERY_FILE"
+  fi
 }
 
-main
+write_bookmarks() {
+  echo "$1" > "${URLQUERY_FILE}.tmp" && mv "${URLQUERY_FILE}.tmp" "$URLQUERY_FILE"
+}
+
+update_bookmark_popularity() {
+  jq --arg name "$1" '(.[] | select(.[0] == $name))[2] += 1'
+}
+
+contains_search() {
+  case "$1" in
+    *"search"*) return 0 ;;
+    *"wiki"*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+bookmarks=$(read_bookmarks)
+
+  while true; do
+  SELECTION=$(echo "$bookmarks" | jq -r '. | sort_by(.[2]) | reverse | .[] | .[0]' | rofi -dmenu -i -l 10 -p "Bookmarks")
+
+  if [ -z "$SELECTION" ] || [ "$SELECTION" != "$ACTION_MENU" ]; then
+    write_bookmarks "$bookmarks"
+    break
+  fi
+
+  ACTION=$(echo "Add a New Bookmark\nDelete a Bookmark\nEdit a Bookmark" | rofi -dmenu -i -l 3 -p "Action")
+
+  case "$ACTION" in
+    "Add a New Bookmark")
+      URL=$(wl-paste --primary)
+  if echo "$URL" | grep -q "^http"; then
+  if ! echo "$bookmarks" | jq -e --arg url "$URL" '.[] | select(.[1] == $url)' > /dev/null; then
+    NAME=$(rofi -dmenu -i -l 0 -p "Name")
+    bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg url "$URL" '. |= .+ [[ $name, $url, 0 ]]')
+    rofi -e "'$NAME' is bookmarked."
+  else
+    rofi -e "The URL is already in the list."
+      fi
+  else
+  rofi -e "The clipboard content is not a valid URL."
+      fi
+      ;;
+    "Delete a Bookmark")
+      NAME=$(echo "$bookmarks" | jq -r '.[] | .[0]' | rofi -dmenu -p "Delete")
+      if [ -n "$NAME" ]; then
+       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" 'del(.[] | select(.[0] == $name))')
+       rofi -e "'$NAME' is deleted."
+      fi
+      ;;
+    "Edit a Bookmark")
+      NAME=$(echo "$bookmarks" | jq -r '.[] | .[0]' | rofi -dmenu -p "Edit")
+      FIELD=$(echo "name\nURL" | rofi -dmenu -i -l 2 -p "Edit")
+
+     if [ -n "$NAME" ] && [ -n "$FIELD" ]; then
+       NEW_VALUE=$(rofi -dmenu -i -l 0 -p "New $FIELD")
+     if [ "$FIELD" = "name" ]; then
+       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_name "$NEW_VALUE" '(.[] | select(.[0] == $name))[0] = $new_name')
+     else
+       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_url "$NEW_VALUE" '(.[] | select(.[0] == $name))[1] = $new_url')
+     fi
+       rofi -e "'$NAME' is updated."
+     fi
+     ;;
+  esac
+done
+
+if [ -n "$SELECTION" ] && [ "$SELECTION" != "$ACTION_MENU" ]; then
+  URL=$(echo "$bookmarks" | jq -r --arg name "$SELECTION" '.[] | select(.[0] == $name) | .[1]')
+
+  if [ -z "$URL" ] || [ "$URL" = "null" ]; then
+    exit 0
+  fi
+
+  if contains_search "$URL"; then
+    QUERY=$(rofi -dmenu -i -l 0 -p "Search")
+    URL="${URL}${QUERY}"
+  fi
+
+  bookmarks=$(echo "$bookmarks" | update_bookmark_popularity "$SELECTION")
+  write_bookmarks "$bookmarks"
+  firefox "$URL"
+fi

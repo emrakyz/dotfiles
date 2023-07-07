@@ -23,7 +23,7 @@ rm -rf use.mask package.unmask
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/use.mask
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.unmask
 mkdir --parents /mnt/gentoo/etc/portage/env
-cd /mnt/gentoo/etc/portage/profile/env
+cd /mnt/gentoo/etc/portage/env
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/clang-firefox
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/clang-thinlto
 curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/compiler-clang-nolto

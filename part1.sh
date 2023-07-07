@@ -17,10 +17,18 @@ rm -rf make.conf package.use package.mask package.accept_keywords
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/make.conf
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.accept_keywords
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.use
+curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.env
 cd /mnt/gentoo/etc/portage/profile
 rm -rf use.mask package.unmask
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/use.mask
 curl -LO raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/package.unmask
+mkdir --parents /mnt/gentoo/etc/portage/env
+cd /mnt/gentoo/etc/portage/profile/env
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/clang-firefox
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/clang-thinlto
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/compiler-clang-nolto
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/compiler-clang-vapour
+curl -LO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/env/compiler-clang
 
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
 

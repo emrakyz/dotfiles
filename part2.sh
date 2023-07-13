@@ -104,7 +104,7 @@ cd /usr/src/linux
 make mrproper
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.config
 
-sed -i -e '/^# *CONFIG_CMDLINE.*/c\' -e "CONFIG_CMDLINE=\"root=PARTUUID=$PARTUUID_ROOT\"" /usr/src/linux/.config
+sed -i -e '/^CONFIG_CMDLINE="root=PARTUUID=.*/c\' -e "CONFIG_CMDLINE=\"root=PARTUUID=$PARTUUID_ROOT\"" /usr/src/linux/.config
 
 LLVM=1 LLVM_IAS=1 KCFLAGS='-O3 -pipe' KCPPFLAGS='-O3 -pipe' make -j$(nproc)
 cd

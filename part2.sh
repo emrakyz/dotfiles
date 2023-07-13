@@ -62,7 +62,6 @@ while true; do
 done
 
 # Sync the repositories.
-emerge-webrsync
 emerge --sync --quiet
 
 # Set the timezone.
@@ -77,10 +76,8 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 echo "LC_COLLATE=\"C.UTF-8\"" >> /etc/env.d/02locale
 
 # Update the system.
-emerge sys-devel/gcc
-emerge --update --newuse --exclude 'sys-devel/gcc sys-libs/timezone-data' -e @world
-emerge sys-devel/clang:16/16
-emerge sys-devel/clang:15/15
+emerge --update --newuse --complete-graph --deep --exclude -e @world
+emerge sys-devel/clang
 emerge dev-vcs/git
 emerge app-eselect/eselect-repository
 
@@ -91,8 +88,6 @@ eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git
 eselect repository enable wayland-desktop
 eselect repository enable guru
 eselect repository enable pf4public
-eselect repository enable thegreatmcpain
-eselect repository add librewolf git https://gitlab.com/librewolf-community/browser/gentoo.git
 emaint sync -a
 
 # Install things needed to compile the kernel and some other drivers.
@@ -111,7 +106,7 @@ curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/Portage/.confi
 
 sed -i -e '/^# *CONFIG_CMDLINE.*/c\' -e "CONFIG_CMDLINE=\"root=PARTUUID=$PARTUUID_ROOT\"" /usr/src/linux/.config
 
-LLVM=1 LLVM_IAS=1 KCFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' KCPPFLAGS='-O3 -march=native -mtune=native -fomit-frame-pointer -pipe' make -j$(nproc)
+LLVM=1 LLVM_IAS=1 KCFLAGS='-O3 -pipe' KCPPFLAGS='-O3 -pipe' make -j$(nproc)
 cd
 
 mkdir -p /boot/EFI/BOOT
@@ -134,9 +129,9 @@ rc-update add dhcpcd default
 rc-service dhcpcd start
 
 # Set up the hosts.
-echo "127.0.0.1\t$username\tlocalhost
+echo -e "127.0.0.1\t$username\tlocalhost
 ::1\t\t$username\tlocalhost" > /etc/hosts
-curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts | tail -n +40 >> /etc/hosts
+curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts | tail -n +40 >> /etc/hosts
 
 # Remove the secure password requirement.
 sed -i 's/enforce=everyone/enforce=none/g' /etc/security/passwdqc.conf

@@ -1,0 +1,8 @@
+body, html {
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none !important;
+}
+
+* {
+    scrollbar-width: none !important;
+}

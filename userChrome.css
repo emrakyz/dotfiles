@@ -110,3 +110,35 @@
 #statuspanel[type="overLink"] {opacity: 0 !important;}
 /* hide all status messages */
 #statuspanel {opacity: 0 !important;}
+
+/* Hide the entire navigator toolbox */
+#navigator-toolbox {
+  visibility: collapse !important;
+}
+
+/* Hide the tab bar, even if multiple tabs are open */
+#TabsToolbar {
+    visibility: collapse !important;
+}
+
+/* Hide sidebar */
+#sidebar-box {
+    visibility: collapse !important;
+}
+
+/* Hide bottom status/ui bar */
+#status-bar, #mainPopupSet, #contentAreaContextMenu {
+    visibility: collapse !important;
+}
+
+scrollbar {
+    -moz-appearance: none !important;
+    display: none !important;
+    width: 0px !important;
+    background-color: transparent !important;
+}
+
+scrollcorner {
+    -moz-appearance: none !important;
+    display: none !important;
+}

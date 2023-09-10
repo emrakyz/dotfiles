@@ -127,7 +127,7 @@
 }
 
 /* Hide bottom status/ui bar */
-#status-bar, #mainPopupSet, #contentAreaContextMenu {
+#status-bar {
     visibility: collapse !important;
 }
 
@@ -140,5 +140,13 @@ scrollbar {
 
 scrollcorner {
     -moz-appearance: none !important;
+    display: none !important;
+}
+
+#context-take-screenshot {
+    display: none !important;
+}
+
+*[id*="sep"], *[class*="sep"] {
     display: none !important;
 }

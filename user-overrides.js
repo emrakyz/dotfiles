@@ -38,3 +38,6 @@ user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.suggest.weather", false);
 user_pref("browser.urlbar.suggest.calculator", false);
 user_pref("browser.urlbar.suggest.bestmatch", false);
+user_pref("extensions.screenshots.disabled", true);
+user_pref("privacy.userContext.enabled", false);
+user_pref("privacy.userContext.ui.enabled", false);

@@ -1,108 +1,108 @@
-:root {
-	--uc-urlbar-bg-color: none;
-	--toolbar-field-color: #FFFFFF !important;
-	--uc-show-new-tab-button: none;
-	--uc-show-tab-separators: none;
-	--uc-tab-separators-color: none;
-	--uc-tab-separators-width: none;
-}
-#titlebar {
-	-moz-box-ordinal-group: 2 !important;
-}
-.titlebar-buttonbox-container {
-	display: none !important;
-}
-#TabsToolbar {
-	min-height: 0px !important;
-}
-.tabbrowser-tab:not([pinned]){
-	max-width: 100vw !important;
-}
-.tabbrowser-tab:not([fadein]),
-#page-action-buttons,
-.titlebar-spacer,
-.tab-line,
-#tracking-protection-icon-container {
-	display: none !important;
-	border: none !important;
-}
-#identity-box {
-	visibility: collapse !important;
-}
-#urlbar-background, .titlebar-buttonbox-container, #nav-bar, .tabbrowser-tab:not([selected]) .tab-background{
-	background: none !important;
-    background-color: var(--uc-urlbar-bg-color) !important;
-	border: none !important;
-}
-#urlbar[breakout][breakout-extend] {
-    top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
-    left: 0 !important;
-    width: 100% !important;
-}
+/* :root { */
+/* 	--uc-urlbar-bg-color: none; */
+/* 	--toolbar-field-color: #FFFFFF !important; */
+/* 	--uc-show-new-tab-button: none; */
+/* 	--uc-show-tab-separators: none; */
+/* 	--uc-tab-separators-color: none; */
+/* 	--uc-tab-separators-width: none; */
+/* } */
+/* #titlebar { */
+/* 	-moz-box-ordinal-group: 2 !important; */
+/* } */
+/* .titlebar-buttonbox-container { */
+/* 	display: none !important; */
+/* } */
+/* #TabsToolbar { */
+/* 	min-height: 0px !important; */
+/* } */
+/* .tabbrowser-tab:not([pinned]){ */
+/* 	max-width: 100vw !important; */
+/* } */
+/* .tabbrowser-tab:not([fadein]), */
+/* #page-action-buttons, */
+/* .titlebar-spacer, */
+/* .tab-line, */
+/* #tracking-protection-icon-container { */
+/* 	display: none !important; */
+/* 	border: none !important; */
+/* } */
+/* #identity-box { */
+/* 	visibility: collapse !important; */
+/* } */
+/* #urlbar-background, .titlebar-buttonbox-container, #nav-bar, .tabbrowser-tab:not([selected]) .tab-background{ */
+/* 	background: none !important; */
+/*     background-color: var(--uc-urlbar-bg-color) !important; */
+/* 	border: none !important; */
+/* } */
+/* #urlbar[breakout][breakout-extend] { */
+/*     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important; */
+/*     left: 0 !important; */
+/*     width: 100% !important; */
+/* } */
 
-#urlbar[breakout][breakout-extend] > #urlbar-input-container {
-    height: var(--urlbar-height) !important;
-    padding-block: 0 !important;
-    padding-inline: 0 !important;
-}
+/* #urlbar[breakout][breakout-extend] > #urlbar-input-container { */
+/*     height: var(--urlbar-height) !important; */
+/*     padding-block: 0 !important; */
+/*     padding-inline: 0 !important; */
+/* } */
 
-#urlbar[breakout][breakout-extend] > #urlbar-background {
-    animation-name: none !important;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, .05) !important;
-}
-#urlbar-background {
-	box-shadow: none !important;
-}
-#nav-bar, .titlebar-buttonbox-container {
-	border-bottom: 0px solid rgb(200,200,200);
-}
-#tabs-newtab-button {
-	display: var(--uc-show-new-tab-button) !important;
-}
-.tabbrowser-tab::after {
-	border-left: var(--uc-tab-separators-width) solid var(--uc-tab-separators-color) !important;
-	display: var(--uc-show-tab-separators) !important;
-}
-.tabbrowser-tab[first-visible-tab][last-visible-tab]{
-	background-color: var(--uc-bar-bg-color) !important;
-}
-.tab-close-button.close-icon {
-	display: none !important;
-}
-.tabbrowser-tab:hover .tab-close-button.close-icon {
-	display: block !important;
-}
-#urlbar-input {
-	text-align: left !important;
-}
-#urlbar-input:focus {
-	text-align: left !important;
-}
-#urlbar-container {
-	margin-left: 0vw !important;
-}
-#back-button, #forward-button {
-	display: none !important;
-}
-#PanelUI-button {
-	display: none !important;
-}
-#fullscr-toggler {
-	display:none!important;
-}
+/* #urlbar[breakout][breakout-extend] > #urlbar-background { */
+/*     animation-name: none !important; */
+/*     box-shadow: 0 0px 0px rgba(0, 0, 0, .05) !important; */
+/* } */
+/* #urlbar-background { */
+/* 	box-shadow: none !important; */
+/* } */
+/* #nav-bar, .titlebar-buttonbox-container { */
+/* 	border-bottom: 0px solid rgb(200,200,200); */
+/* } */
+/* #tabs-newtab-button { */
+/* 	display: var(--uc-show-new-tab-button) !important; */
+/* } */
+/* .tabbrowser-tab::after { */
+/* 	border-left: var(--uc-tab-separators-width) solid var(--uc-tab-separators-color) !important; */
+/* 	display: var(--uc-show-tab-separators) !important; */
+/* } */
+/* .tabbrowser-tab[first-visible-tab][last-visible-tab]{ */
+/* 	background-color: var(--uc-bar-bg-color) !important; */
+/* } */
+/* .tab-close-button.close-icon { */
+/* 	display: none !important; */
+/* } */
+/* .tabbrowser-tab:hover .tab-close-button.close-icon { */
+/* 	display: block !important; */
+/* } */
+/* #urlbar-input { */
+/* 	text-align: left !important; */
+/* } */
+/* #urlbar-input:focus { */
+/* 	text-align: left !important; */
+/* } */
+/* #urlbar-container { */
+/* 	margin-left: 0vw !important; */
+/* } */
+/* #back-button, #forward-button { */
+/* 	display: none !important; */
+/* } */
+/* #PanelUI-button { */
+/* 	display: none !important; */
+/* } */
+/* #fullscr-toggler { */
+/* 	display:none!important; */
+/* } */
 
-.tabbrowser-tab .tab-close-button {
-  visibility: collapse !important;
-}
+/* .tabbrowser-tab .tab-close-button { */
+/*   visibility: collapse !important; */
+/* } */
 
-.tab-close-button{display: none !important}
+/* .tab-close-button{display: none !important} */
 
-#navigator-toolbox{border:none !important;}
+/* #navigator-toolbox{border:none !important;} */
 
-#urlbar:not(:hover):not([breakout][breakout-extend])>#urlbar-background {box-shadow: none!important; background: #0000 !important}
+/* #urlbar:not(:hover):not([breakout][breakout-extend])>#urlbar-background {box-shadow: none!important; background: #0000 !important} */
 
 /* Remove Context Menu Entries */
-#context-back, #context-forward, #context-reload, #context-stop, #context-bookmarkpage, #context-savepage, #context-pocket, #screenshots_mozilla_org_create-screenshot, #context-inspect, #context-sep-selectall, #context-selectall, #context-copylink, #context-copy, #context-viewsource, #context-viewinfo, #context-print-selection, #context-viewpartialsource-selection, #context-inspect-a11y, #context-openlinkintab, #context-openlink, #context-openlinkprivate, #context-bookmarklink, #context-savelink, #context-savelinktopocket, #context-copyimage-contents, #context-copyimage, #context-sendimage {
+#context-back, #context-take-screenshot, #context-forward, #context-reload, #context-stop, #context-bookmarkpage, #context-savepage, #context-pocket, #screenshots_mozilla_org_create-screenshot, #context-inspect, #context-sep-selectall, #context-selectall, #context-copylink, #context-copy, #context-viewsource, #context-viewinfo, #context-print-selection, #context-viewpartialsource-selection, #context-inspect-a11y, #context-openlinkintab, #context-openlink, #context-openlinkprivate, #context-bookmarklink, #context-savelink, #context-savelinktopocket, #context-copyimage-contents, #context-copyimage, #context-sendimage {
     display: none !important
 }
 
@@ -111,9 +111,27 @@
 /* hide all status messages */
 #statuspanel {opacity: 0 !important;}
 
-/* Hide the entire navigator toolbox */
 #navigator-toolbox {
-  visibility: collapse !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    /* pointer-events: none !important; */
+}
+
+#nav-bar {
+    height: 0 !important;
+    opacity: 0 !important;
+    /* pointer-events: none !important; */
+}
+
+#PersonalToolbar {
+    opacity: 0 !important;
+    /* pointer-events: none !important; */
+}
+
+#navigator-toolbox-background {
+    height: 0 !important;
+    opacity: 0 !important;
+    /* pointer-events: none !important; */
 }
 
 /* Hide the tab bar, even if multiple tabs are open */
@@ -140,10 +158,6 @@ scrollbar {
 
 scrollcorner {
     -moz-appearance: none !important;
-    display: none !important;
-}
-
-#context-take-screenshot {
     display: none !important;
 }
 

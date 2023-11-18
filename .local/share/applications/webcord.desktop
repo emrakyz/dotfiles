@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=/home/emre/.local/bin/webcord.AppImage --enable-features=UseOzonePlatform --ozone-platform=wayland
+Name=Webcord
+Icon=/home/emre/.local/share/applications/webcord.svg

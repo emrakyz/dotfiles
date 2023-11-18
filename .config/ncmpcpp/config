@@ -30,3 +30,4 @@ progressbar_elapsed_color = blue:b
 statusbar_color = red
 statusbar_time_color = cyan:b
 lyrics_fetchers = musixmatch, sing365, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg
+execute_on_song_change = music-notify

@@ -1,39 +1,36 @@
 set shellopts '-eu'
 set ifs "\n"
+set shell dash
 set scrolloff 10
 set icons
 set period 1
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/clean
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
-set autoquit on
+set autoquit true
+set promptfmt "\033[1;37m%d\033[0m"
+
 cmd open ${{
     case $(file --mime-type "$(readlink -f $f)" -b) in
-	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
-	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        text/*|application/json|inode/x-empty) $EDITOR $fx;;
-	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
-	image/svg+xml) display -- $f ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
-		setsid -f imv -f 2>/dev/null | while read -r file; do
-			[ -z "$file" ] && continue
-			lf -remote "send select \"$file\""
-			lf -remote "send toggle"
-		done &
-		;;
-	audio/*) mpv --audio-display=no $f ;;
-	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
-	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
-	application/pgp-encrypted) $EDITOR $fx ;;
-	application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text) setsid -f lowriter $fx >/dev/null 2>&1 ;;
-	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template) setsid -f localc $fx >/dev/null 2>&1 ;;
-	application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint) setsid -f loimpress $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template) setsid -f lodraw $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.formula) setsid -f lomath $fx >/dev/null 2>&1 ;;
-	application/vnd.oasis.opendocument.database) setsid -f lobase $fx >/dev/null 2>&1 ;;
-        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+        text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx;;
+	image/gif|video/x-msvideo) mpv $fx;;
+	image/*) dash -c '
+	    dir="$0"
+	    selected_file="$1"
+	    passed=0
+	    selected_and_after=""
+	    before=""
+	    for file in "$dir"/*.jpg "$dir"/*.jpeg "$dir"/*.png "$dir"/*.webp; do
+		[ "$file" = "$selected_file" ] && passed=1
+		[ $passed -eq 1 ] && selected_and_after="$selected_and_after $file" || before="$before $file"
+	    done
+	    imv -f $selected_and_after $before' "$PWD" "$fx"
+	;;
+	*) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
 
-cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd mkdir $mkdir -p "$@"
 
 cmd extract ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
@@ -59,6 +56,35 @@ cmd extract ${{
 	}
 }}
 
+cmd bulkrename ${{
+tmpfile_old="$(mktemp)"
+tmpfile_new="$(mktemp)"
+tmpfile_ext="$(mktemp)"
+
+[ -n "$fs" ] && fs=$(basename -a $fs | sort -fV) || fs=$(find . -maxdepth 1 -type f | cut -c 3- | sort -fV)
+
+for f in $fs; do
+    echo "${f%.*}" >> "$tmpfile_old"
+    echo "${f##*.}" >> "$tmpfile_ext"
+done
+
+cp "$tmpfile_old" "$tmpfile_new"
+$EDITOR "$tmpfile_new"
+
+[ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new" "$tmpfile_ext"; exit 1; }
+
+exec 3<"$tmpfile_old"
+exec 4<"$tmpfile_ext"
+exec 5<"$tmpfile_new"
+
+while IFS= read -r old_name <&3 && IFS= read -r ext <&4 && IFS= read -r new_name <&5; do
+    [ "$old_name" = "$new_name" ] || [ -e "$new_name.$ext" ] || mv -- "$old_name.$ext" "$new_name.$ext"
+done
+
+rm -f "$tmpfile_old" "$tmpfile_new" "$tmpfile_ext"
+lf -remote "send $id unselect"
+}}
+
 cmd delete ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
@@ -69,37 +95,52 @@ cmd delete ${{
 }}
 
 cmd moveto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Move to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval mv -iv \"$x\" \"$dest\"
-	done &&
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    echo "Move to where?"
+    dest="$(cat "$XDG_CONFIG_HOME/shell/bm_dirs" | fzf | cut -f2)" &&
+    for x in $fx; do
+        eval mv -iv \"$x\" \"$dest\"
+    done
 }}
 
 cmd copyto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Copy to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval cp -ivr \"$x\" \"$dest\"
-	done &&
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    echo "Move to where?"
+    dest="$(cat "$XDG_CONFIG_HOME/shell/bm_dirs" | fzf | cut -f2)" &&
+    for x in $fx; do
+        eval cp -ivr \"$x\" \"$dest\"
+    done
 }}
 
-cmd bulkrename $vidir
+cmd upload ${{
+    uploader a $fx
+    lf -remote "send $id unselect"
+}}
+
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always --color-scale=size --color-scale-mode=fixed --no-quotes --smart-group --total-size --no-user --no-permissions "$f")\""
+}}
+
+cmd z %{{
+	result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
+
+cmd zi ${{
+	result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
 
 # Bindings
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
-map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf)"
+map J $lf -remote "send $id cd $(eval echo $(cat "$XDG_CONFIG_HOME/shell/bm_dirs" | fzf | cut -f2))"
 map gh
 map g top
 map D delete
 map E extract
 map C copyto
 map M moveto
-map <c-n> push :mkdir<space>
+map <c-n> push :mkdir<space>""<left>
 map <c-r> reload
 map <c-s> set hidden!
 map <enter> shell
@@ -107,12 +148,13 @@ map x $$f
 map X !$f
 map o &mimeopen "$f"
 map O $mimeopen --ask "$f"
+map U upload
 
-map A rename # at the very end
+map A :rename; cmd-end # at the very end
 map c push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extension
-map a push A<a-b> # after extension
+map I :rename; cmd-home # at the very beginning
+map i :rename # before extension
+map a :rename; cmd-right # after extension
 map B bulkrename
 
 map <c-e> down
@@ -121,4 +163,4 @@ map V push :!nvim<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 
-map Y $printf "%s" "$fx" | xclip -selection clipboard
+map Y $printf "%s" "$fx" | wl-copy

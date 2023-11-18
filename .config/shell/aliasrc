@@ -1,9 +1,14 @@
 #!/bin/sh
 
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+alias vim="nvim" vimdiff="nvim -d"
 
-se() { cd ~/.local/bin; $EDITOR $(fzf) ;}
+sc() {
+  myscripts=$(find $HOME/.local/bin -type f)
+  chosen=$(echo "$myscripts" | sed 's|.*/||' | fzf)
+  $EDITOR "$(echo "$myscripts" | grep "$chosen")"
+}
+
+po() { doas $EDITOR $(find /etc/portage -type f | fzf) }
 
 alias \
 	cp="cp -iv" \
@@ -11,22 +16,23 @@ alias \
 	rm="rm -vI" \
 	bc="bc -ql" \
 	mkd="mkdir -pv" \
-	yt="yt-dlp --embed-metadata -i" \
-	ffmpeg="ffmpeg -hide_banner"
+	cat="bat -P" \
+	yt="yt-dlp" \
+	ffmpeg="ffmpeg -hide_banner" \
 
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
+	ll="eza -lh --group-directories-first --color=always --color-scale=all --color-scale-mode=fixed --icons=always --no-quotes --smart-group -s size --total-size --no-user --no-permissions" \
+	ls="eza --group-directories-first --color=always --icons --no-quotes -s name" \
+	lsf="eza -f --group-directories-first --color=always --icons --no-quotes -s name" \
+	lsd="eza -D --group-directories-first --color=always --icons --no-quotes -s name" \
+	lst="eza -lh --group-directories-first --color=always --color-scale --icons --no-quotes --smart-group -s time --total-size --no-user --no-permissions" \
+	chrome="nvim .librewolf/*/chrome/userChrome.css" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
-	ip="ip -color=auto"
 
 alias \
 	ka="killall" \
-	sdn="shutdown -h now" \
+	sdn="doas maintain" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	emg="doas emerge --ask --update --newuse --deep --complete-graph @world" \
-
-alias \
-	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
+	emg="doas emerge --ask --update --newuse @world" \

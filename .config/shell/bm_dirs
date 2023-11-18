@@ -1,0 +1,9 @@
+hdd	/mnt/harddisk
+cac	$XDG_CACHE_HOME
+cf	$XDG_CONFIG_HOME
+d	$XDG_DOWNLOAD_DIR
+dt	$XDG_DATA_HOME
+h	$HOME
+sc	$HOME/.local/bin
+src	$HOME/.local/src
+vv 	$HOME/videos

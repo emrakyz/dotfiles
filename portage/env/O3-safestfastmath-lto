@@ -1,0 +1,6 @@
+COMMON_FLAGS="-O3 -march=native -pipe -flto -fno-math-errno -fno-trapping-math"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+LDFLAGS="-flto -Wl,-O3 -Wl,--as-needed"

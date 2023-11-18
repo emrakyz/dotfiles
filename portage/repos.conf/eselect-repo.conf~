@@ -1,0 +1,30 @@
+# created by eselect-repo
+
+[gentoo]
+location = /var/db/repos/gentoo
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/gentoo.git
+
+[wayland-desktop]
+location = /var/db/repos/wayland-desktop
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/wayland-desktop.git
+
+[guru]
+location = /var/db/repos/guru
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/guru.git
+
+[pf4public]
+location = /var/db/repos/pf4public
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/pf4public.git
+
+[edgets]
+location = /var/db/repos/edgets
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/edgets.git
+
+
+[local]
+location = /var/db/repos/local

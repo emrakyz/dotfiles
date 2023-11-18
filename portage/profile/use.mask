@@ -1,0 +1,3 @@
+-qt6
+-custom-cflags
+pie

@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
+# geometry=$(slurp) && sleep 0.3 && grim -g "$geometry" - | tesseract stdin stdout | wl-copy
+
 geometry=$(slurp)
-sleep 0.3  # adjust the delay as per your need
+sleep 0.3
 grim -g "$geometry" - | swappy -f -

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 song_info="$(mpc current)"
 

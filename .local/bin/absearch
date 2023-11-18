@@ -1,0 +1,9 @@
+#!/bin/dash
+
+ab-av1 crf-search -i "$1" -e svt-av1 \
+    --pix-format yuv420p10le \
+    --preset 0 \
+    --keyint 240 \
+    --scd true \
+    --svt "film-grain-denoise=0" --svt "film-grain=0" --svt "lp=16" --svt "pin=1" --svt "color-range=0" --svt "tile-columns=2" --svt "tile-rows=2" --svt "tune=0" --svt "enable-overlays=1" --svt "lookahead=120" \
+    --min-crf 32 --max-crf 34 --min-vmaf 90

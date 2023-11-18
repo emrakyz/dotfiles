@@ -2,4 +2,4 @@
 
 word=$(wl-paste --primary)
 
-firefox "https://www.oxfordlearnersdictionaries.com/search/english/?q='$word'"
+librewolf "https://www.oxfordlearnersdictionaries.com/search/english/?q='$word'"

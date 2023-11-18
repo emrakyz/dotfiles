@@ -1,20 +1,24 @@
-#!/bin/bash
+#!/bin/dash
 
-session_duration=(52 17 52 17 52 17 52 35)
-count=0
+work_duration=52m
+short_break=17m
+long_break=35m
+session_count=0
 
-function pomodoro() {
-  local label session next_session
-  ((count % 2 == 0)) && label="Work" || label="Break"
-  session=${session_duration[count % 8]}
-  next_session=${session_duration[(count + 1) % 8]}
-  echo -e "\e[1m$label\e[0m" | lolcat
-  timer "${session}m"
-  message="$label Session Done. You have $next_session minutes."
-  notify-send "$message"
-  ((count++))
+start_timer() {
+    label=$1
+    duration=$2
+    next_duration=${3%m}
+
+    echo $label
+    timer "$duration"
+    notify-send "$label session done. You have $next_duration minutes."
 }
 
 while true; do
-  pomodoro
+    session_count=$((session_count + 1))
+    [ $((session_count % 4)) -eq 0 ] && break_duration="$long_break" || break_duration="$short_break"
+
+    start_timer "Work" "$work_duration" "$break_duration"
+    start_timer "Break" "$break_duration" "$work_duration"
 done

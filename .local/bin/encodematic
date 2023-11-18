@@ -1,17 +1,17 @@
-#!/bin/bash
+#!/bin/dash
 
 find . -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.webm" -o -name "*.mov" -o -name "*.m4v" -o -name "*.wmv" -o -name "*.flv" -o -name "*.avi" -o -name "*.m2ts" \) -print0 | while IFS= read -r -d '' file; do
   echo "Processing $file"
   codec=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$file")
 
-  if [[ "$codec" != "hevc" && "$codec" != "h265" && "$codec" != "x265" ]]; then
+    [ "$codec" != "hevc" && "$codec" != "h265" && "$codec" != "x265" ] &&
     echo "Converting $file"
     bitrate=$(ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 "$file")
 
-   if [[ "$bitrate" == "N/A" ]]; then
+    [ "$bitrate" == "N/A" ] &&
       bitrate=$(mediainfo "$file" | grep "Overall bit rate" | sed -E 's/[^0-9]//g')
       bitrate=$(echo "$bitrate*1000" | bc)
-    fi
+
 
     bitrate=$(echo "$bitrate/1000" | bc)
     bv=$(echo "scale=0; $bitrate*0.40/1" | bc)
@@ -44,5 +44,4 @@ find . -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.webm" -o -name "*.m
     -b_ref_mode each \
     -f matroska "$output" < /dev/null
     wait
-  fi
 done

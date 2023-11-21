@@ -298,7 +298,7 @@ cd
 
 ext_dir="/home/$username/.librewolf/$profile_dir/extensions"
 mkdir -p "$ext_dir"
-addon_names=("ublock-origin" "istilldontcareaboutcookies" "libredirect" "custom-scrollbars" "vimium-ff" "chat-gpt-long-text-input" "i-auto-fullscreen")
+addon_names=("ublock-origin" "istilldontcareaboutcookies" "vimium-ff" "minimalist-open-in-mpv" "darkreader")
 
 for addon_name in "${addon_names[@]}"
 do

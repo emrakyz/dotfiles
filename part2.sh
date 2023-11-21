@@ -91,10 +91,12 @@ eselect repository enable pf4public
 emaint sync -a
 
 # Install things needed to compile the kernel and some other drivers.
-emerge sys-kernel/linux-firmware sys-firmware/intel-microcode app-arch/lz4
+USE="-compress-xz" emerge sys-kernel/linux-firmware sys-firmware/intel-microcode
 
 # Remove everything except needed Nvidia firmware.
-sed -i '/^nvidia\/\(tu104\|tu10x\)/!d' /etc/portage/savedconfig/sys-kernel/linux-firmware-*
+emerge --oneshot pciutils
+GPU_CODE=$(lspci | grep -i 'vga\|3d\|2d' | sed -n '/NVIDIA Corporation/{s/.*NVIDIA Corporation \([^ ]*\).*/\L\1/p}')
+sed '/^nvidia\/'"$GPU_CODE"'/!d' /etc/portage/savedconfig/sys-kernel/linux-firmware-*
 emerge sys-kernel/linux-firmware
 
 # Install, Configure and Compile the Gentoo Kernel.

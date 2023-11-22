@@ -240,14 +240,6 @@ mv video.conf /etc/modules-load.d
 # Create a local virtual Python environment
 python -m venv /home/$username/.local/pyenv
 
-# Install some python packages.
-pip3 install pywal --user --break-system-packages
-pip3 install pillow --user --break-system-packages
-pip3 install PyGObject --user --break-system-packages 
-pip3 install wpgtk --user --break-system-packages
-pip3 install gallery-dl --user --break-system-packages
-pip3 install yt-dlp --user --break-system-packages
-
 # These are needed later.
 #gsettings set org.gnome.desktop.interface cursor-theme Breeze_Snow
 #gsettings set org.gnome.desktop.interface cursor-size 18

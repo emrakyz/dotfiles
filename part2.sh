@@ -162,12 +162,12 @@ USE="-harfbuzz" emerge media-libs/freetype
 
 # Download the list of the software needed from my repository then install them.
 curl -sLO https://raw.githubusercontent.com/emrakyz/dotfiles/main/dependencies.txt
-DEPLIST="`sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' '`"
+DEPLIST=$(sed -e 's/#.*$//' -e '/^$/d' dependencies.txt | tr '\n' ' ')
 emerge $DEPLIST
 rm -f dependencies.txt
 
 # Add a user and give it a password.
-useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat $username
+useradd -mG wheel,audio,video,usb,input,portage,pipewire,seat,cron $username
 echo "$username:$password" | chpasswd
 
 # Pull my dotfiles from my repository.
@@ -307,7 +307,7 @@ done
 
 # Install LF file manager.
 doas -u "$username" env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
-cp /home/$username/go/bin/lf /usr/bin/
+mv -f /home/$username/go/bin/lf /home/$username/.local/bin/
 rm -rf /home/$username/go
 
 # This is needed later for uBlock Origin.

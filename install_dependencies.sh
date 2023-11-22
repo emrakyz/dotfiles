@@ -1,3 +1,3 @@
 #!/bin/bash
-DEPLIST="tr '\n' ' ' < dependencies.txt"
+grep -v '^#' benimpaketler.txt | tr '\n' ' ' | sed 's/\ \ //g'
 emerge $DEPLIST

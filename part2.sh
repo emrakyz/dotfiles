@@ -241,13 +241,13 @@ mv video.conf /etc/modules-load.d
 python -m venv /home/$username/.local/pyenv
 
 # These are needed later.
-#gsettings set org.gnome.desktop.interface cursor-theme Breeze_Snow
+#gsettings set org.gnome.desktop.interface cursor-theme Adwaita
 #gsettings set org.gnome.desktop.interface cursor-size 18
 #gsettings set org.gnome.desktop.interface font-antialiasing rgba
-#gsettings set org.gnome.desktop.interface font-name 'Liberation Sans 11'
+#gsettings set org.gnome.desktop.interface font-name 'Roboto Flex 11'
 #gsettings set org.gnome.desktop.interface font-hinting full
 #gsettings set org.gnome.desktop.interface gtk-theme Sweet-Dark
-#gsettings set org.gnome.desktop.interface icon-theme breeze-dark
+#gsettings set org.gnome.desktop.interface icon-theme Adwaita
 #gsettings set org.gnome.desktop.interface toolbar-style text
 #gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 #gsettings set org.gnome.desktop.interface toolbar-icons-size small

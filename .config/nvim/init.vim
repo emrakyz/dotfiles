@@ -11,30 +11,22 @@ map ,, :keepp /<++><CR>ca<
 imap ,, <esc>:keepp /<++><CR>ca<
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-commentary'
-Plug 'lalitmee/cobalt2.nvim'
-Plug 'tjdevries/colorbuddy.nvim'
+ Plug 'tpope/vim-surround'
+ Plug 'preservim/nerdtree'
+ Plug 'vimwiki/vimwiki'
+ Plug 'tpope/vim-commentary'
+ Plug 'dylanaraps/wal.vim'
 call plug#end()
 
-lua require('colorbuddy').colorscheme('cobalt2')
-
 set notitle
-set bg=dark
 set go=a
 set mouse=a
 set nohlsearch
-set clipboard+=unnamedplus
+set clipboard=
 set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
-
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
 
 " Some basics:
 	nnoremap c "_c
@@ -56,7 +48,6 @@ set termguicolors
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
-
 " Nerd tree
 	map <leader>n :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -72,7 +63,6 @@ set termguicolors
 	nm <leader>i :call ToggleIPA()<CR>
 	imap <leader>i <esc>:call ToggleIPA()<CR>a
 	nm <leader>q :call ToggleProse()<CR>
-
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
@@ -93,13 +83,15 @@ set termguicolors
 	nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler "%:p"<CR>
+	map <leader>c :w! \| !compiler.sh "%:p"<CR>
 
 " Open corresponding .pdf/.html or preview
-	map <leader>p :!opout "%:p"<CR>
+	map <leader>p :!op_out.sh "%:p"<CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+	autocmd VimLeave *.tex !tex_clear.sh %
+
+vnoremap <C-c> y:call system("wl-copy", @")<CR>
 
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
@@ -109,8 +101,8 @@ set termguicolors
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
 
-" Save file as sudo on files that require root permission
-	cabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+" Save file as doas on files that require root permission
+	cabbrev w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save. & reset cursor position
  	autocmd BufWritePre * let currPos = getpos(".")
@@ -118,12 +110,6 @@ set termguicolors
 	autocmd BufWritePre * %s/\n\+\%$//e
 	autocmd BufWritePre *.[ch] %s/\%$/\r/e
   	autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
-
-" When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost bm-files,bm-dirs !shortcuts
-" Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-	autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
 
 " Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff
@@ -136,5 +122,20 @@ set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 " Here leader is ";".
 " So ":vs ;cfz" will expand into ":vs /home/<user>/.config/zsh/.zshrc"
 " if typed fast without the timeout.
-
 set rtp+=/usr/share/vim/vimfiles
+
+" latex
+autocmd FileType tex nnoremap tb i\textbf{}<Esc>i
+autocmd FileType tex nnoremap ct i\textcite{}<Esc>i
+autocmd FileType tex nnoremap cp i\parencite{}<Esc>i
+autocmd FileType tex nnoremap cha i\chapter{}<Esc>i
+autocmd FileType tex nnoremap sec i\section{}<Esc>i
+
+colorscheme wal
+
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+highlight LineNr guibg=none guifg=#787878
+highlight IncSearch guifg=#FFFFFF guibg=#000000

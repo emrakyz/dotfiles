@@ -4,6 +4,7 @@ set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 1
 set selection-clipboard clipboard
+set selection-notification false
 map u scroll half-up
 map d scroll half-down
 map D toggle_page_mode
@@ -14,3 +15,11 @@ map J zoom out
 map i recolor
 map p print
 map g goto top
+
+set default-bg "#595959"
+set default-fg "#000000"
+
+set recolor-darkcolor "#000000"
+set recolor-lightcolor "#595959"
+
+set recolor

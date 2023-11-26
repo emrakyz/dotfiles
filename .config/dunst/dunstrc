@@ -24,7 +24,7 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = 450
+    width = (0, 600)
 
     # The maximum height of a single notification, excluding the frame.
     height = 750
@@ -92,16 +92,16 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 0
+    frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#aaaaaa"
+    frame_color = "#00BDBD"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
     # Click events on gaps do not currently propagate to applications below.
-    gap_size = 0
+    gap_size = 5
 
     # Define a color for the separator.
     # possible values are:
@@ -201,7 +201,7 @@
     enable_recursive_icon_lookup = true
 
     # Set icon theme (only used for recursive icon lookup)
-    icon_theme = Breeze
+    icon_theme = Adwaita
     # You can also set multiple icon themes, with the leftmost one being used first.
     # icon_theme = "Adwaita, breeze"
 
@@ -211,10 +211,10 @@
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
     # max_icon_size takes precedence over this.
-    min_icon_size = 24
+    min_icon_size = 32
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 24
+    max_icon_size = 32
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
@@ -240,17 +240,17 @@
     always_run_script = true
 
     # Define the title of the windows spawned by dunst
-    title = Dunst
+    title = dunst
 
     # Define the class of the windows spawned by dunst
-    class = Dunst
+    class = dunst
 
     # Define the corner radius of the notification window
     # in pixel size. If the radius is 0, you have no rounded
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 0
+    corner_radius = 5
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -342,16 +342,16 @@
     icon = /home/emre/.config/dunst/normal.png
 
 [urgency_normal]
-    background = "#2b2b2b"
-    foreground = "#ffffff"
+    background = "#00000080"
+    foreground = "#FFFFFF"
     timeout = 7
     script = /home/emre/.config/dunst/warn.sh
     # Icon for notifications with normal urgency, uncomment to enable
     icon = /home/emre/.config/dunst/normal.png
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
+    background = "#00000000"
+    foreground = "#FFFFFF"
     frame_color = "#ff0000"
     timeout = 9999
     script = /home/emre/.config/dunst/warn.sh

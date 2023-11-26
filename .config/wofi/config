@@ -1,8 +1,0 @@
-mode=drun
-insensitive=true
-allow_images=true
-term=kitty
-hide_scroll=true
-print_command=true
-image_size=24
-no_actions=true

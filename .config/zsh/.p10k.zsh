@@ -99,7 +99,7 @@
     # ram                   # free RAM
     # swap                  # used swap
     # per_directory_history   # Oh My Zsh per-directory-history local/global indicator
-    disk_usage            # disk usage
+    # disk_usage            # disk usage
     # cpu_arch              # CPU architecture
     # time                  # current time
     # =========================[ Line #2 ]=========================

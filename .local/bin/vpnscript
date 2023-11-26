@@ -1,7 +1,0 @@
-#!/bin/sh
-
-choice=$(printf "startvpn\\nstopvpn" | rofi -dmenu -l 2)
-case "$choice" in
-	startvpn) cd /etc/openvpn && doas openvpn at-vie.prod.surfshark.com_udp.ovpn;;
-	stopvpn) doas killall openvpn;;
-esac

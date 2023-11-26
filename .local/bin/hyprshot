@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# geometry=$(slurp) && sleep 0.3 && grim -g "$geometry" - | tesseract stdin stdout | wl-copy
-
-geometry=$(slurp)
-sleep 0.3
-grim -g "$geometry" - | swappy -f -

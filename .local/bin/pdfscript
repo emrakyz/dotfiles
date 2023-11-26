@@ -1,4 +1,0 @@
-#!/bin/dash
-video_files=$(locate -d ~/.config/.mymlocatepdf.db -b -r '.*\.\(png\|pdf\)$')
-chosen_file=$(echo "$video_files" | sed 's|.*/||; s/\.[^.]*$//' | rofi -dmenu -p "Select Video")
-zathura "$(echo "$video_files" | fgrep "/$chosen_file.")"

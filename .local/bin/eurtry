@@ -1,6 +1,0 @@
-#!/bin/bash
-api_key="6HqHt5OkxNpbUFY59vdJDVYZkW1ZQqD6"
-url="https://open.er-api.com/v6/latest/EUR?apikey=$api_key"
-
-rate=$(curl -s "$url" | jq '.rates.TRY')
-printf "€=%.2f\n" "$rate"

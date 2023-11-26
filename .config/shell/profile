@@ -16,4 +16,4 @@ export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 80%"
 
-[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Hyprland >/dev/null 2>&1 && exec "/home/emre/.config/hypr/start.sh"
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Hyprland >/dev/null 2>&1 && exec "$XDG_CONFIG_HOME/hypr/start.sh"

@@ -32,7 +32,7 @@ alias \
 
 alias \
 	ka="killall" \
-	sdn="doas maintain" \
+	sdn="doas maintain_gentoo.sh" \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	emg="doas emerge --ask --update --newuse @world" \

@@ -4,8 +4,8 @@ set shell dash
 set scrolloff 10
 set icons
 set period 1
-set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/clean
+set previewer ~/.config/lf/preview.sh
+set cleaner ~/.config/lf/clean.sh
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set autoquit true
 set promptfmt "\033[1;37m%d\033[0m"
@@ -105,7 +105,7 @@ cmd moveto ${{
 
 cmd copyto ${{
     clear; tput cup $(($(tput lines)/3)); tput bold
-    echo "Move to where?"
+    echo "Copy to where?"
     dest="$(cat "$XDG_CONFIG_HOME/shell/bm_dirs" | fzf | cut -f2)" &&
     for x in $fx; do
         eval cp -ivr \"$x\" \"$dest\"
@@ -113,7 +113,7 @@ cmd copyto ${{
 }}
 
 cmd upload ${{
-    uploader a $fx
+    uploader.sh a $fx
     lf -remote "send $id unselect"
 }}
 
@@ -131,6 +131,14 @@ cmd zi ${{
 	lf -remote "send $id cd \"$result\""
 }}
 
+cmd mimecopy ${{
+    MIME_TYPE=$(file --mime-type -b "$f")
+    echo $MIME_TYPE
+    wl-copy --type "$MIME_TYPE" < "$f"
+    echo $f
+    lf -remote "send $id unselect"
+}}
+
 # Bindings
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
 map J $lf -remote "send $id cd $(eval echo $(cat "$XDG_CONFIG_HOME/shell/bm_dirs" | fzf | cut -f2))"
@@ -140,6 +148,7 @@ map D delete
 map E extract
 map C copyto
 map M moveto
+map <c-c> mimecopy
 map <c-n> push :mkdir<space>""<left>
 map <c-r> reload
 map <c-s> set hidden!

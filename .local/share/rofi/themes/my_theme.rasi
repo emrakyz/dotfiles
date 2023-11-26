@@ -12,9 +12,9 @@ configuration {
     /* Base */
     default-background: rgba(0, 0, 0, 0.5);
     default-foreground: rgb(225, 225, 225);
-    default-border: rgb(37, 195, 87);
+    default-border: rgb(0, 189, 189);
     alternative-background: rgba(0, 0, 0, 0);
-    invisible: rgb(0, 0, 0, 0%);
+    invisible: rgba(0, 0, 0, 0);
 
     /* Colors light-blue is not blue for now */
     hard-blue: rgb(154, 237, 254);
@@ -30,7 +30,7 @@ configuration {
 
     /* Universal */
     background-color: @invisible;
-    border-color: @default-border;
+    border-color: rgb(240, 134, 134);
     text-color: @default-foreground;
 }
 
@@ -87,7 +87,7 @@ configuration {
 
 #element.selected.normal {
     background-color: @light-blue;
-    border-color:     @default-border;
+    border-color:     rgb(37, 195, 87);
     color:            @alternative-background;
 }
 
@@ -134,7 +134,7 @@ configuration {
     padding: 3px;
     border: 1 0 1 1;
     border-radius: 2 0 0 2;
-    text-color: rgb(0, 189, 189);
+    text-color: rgb(0, 181, 252);
 }
 
 #prompt {

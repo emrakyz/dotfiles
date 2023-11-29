@@ -4,7 +4,7 @@ dev-lang/perl -minimal # you can't use perl installation scripts with minimal
 sys-devel/gcc nptl cxx # these are defaults for gcc
 sys-libs/glibc multiarch # this increases performance
 dev-libs/ncurses tinfo # needed to recognize terminal
-net-misc/dhcpcd embedded udev # for minimal dhcpcd
+net-misc/dhcpcd embedded # for minimal dhcpcd
 app-arch/xz-utils extra-filters	# needed for kernel
 sys-firmware/intel-microcode split-ucode # needed for microcode
 sys-kernel/gentoo-sources symlink experimental # needed to optimize for our cpu
@@ -21,9 +21,14 @@ dev-libs/glib mime # not recommended to disable by package
 dev-lang/python ensurepip ssl sqlite ncurses readline # needed as dependency
 net-vpn/wireguard-tools wg-quick
 app-shells/bash plugins
-sys-apps/openrc sysvinit
 sys-process/procps ncurses
 sys-apps/grep egrep-fgrep pcre
+sys-apps/busybox savedconfig
+sys-kernel/linux-firmware savedconfig redistributable compress-xz
+sys-apps/net-tools hostname
+sys-fs/e2fsprogs tools
+dev-cpp/sdbus-c++ elogind
+gui-libs/xdg-desktop-portal-hyprland elogind
 
 # DEFAULT APPS (these are default apps for Gentoo)#
 app-alternatives/awk gawk
@@ -40,6 +45,8 @@ app-alternatives/cpio gnu
 media-libs/freetype harfbuzz png adobe-cff brotli bzip2 cleartype-hinting
 media-libs/harfbuzz experimental truetype glib introspection icu graphite cairo
 x11-libs/cairo X glib
+x11-libs/pango X
+dev-libs/libpcre2 pcre16 unicode
 
 # CLANG ENVIRONMENT (needed for compiling firefox or other PGO programs) #
 sys-devel/clang-runtime compiler-rt sanitize
@@ -57,16 +64,15 @@ dev-lua/lpeg lua_targets_luajit lua_single_target_luajit
 dev-lua/lua-cjson internal-fpconv
 
 # packages we install #
-sys-apps/xdg-desktop-portal screencast
+sys-apps/xdg-desktop-portal screencast geolocation
 media-gfx/imv freeimage jpeg png
 media-libs/freeimage webp
 media-sound/mpd opus
-media-video/ffmpeg dav1d vpx opus encode libass sdl x264 gpl X pulseaudio openssl network nvenc vorbis -vulkan alsa cuda x265 libplacebo rubberband svt-av1 vmaf
-media-libs/libvmaf embed-models
+media-video/ffmpeg svt-av1 dav1d vpx opus encode libass sdl x264 gpl X pulseaudio openssl network nvenc vorbis -vulkan alsa cuda x265 libplacebo rubberband vulkan
 media-libs/libvpx postproc highbitdepth
 media-libs/dav1d 10bit 8bit
-media-video/mpv cli libplacebo lua nvenc rubberband uchardet iconv lua_single_target_luajit
-media-libs/libplacebo lcms shaderc
+media-video/mpv cli libplacebo lua nvenc rubberband uchardet iconv vulkan lua_single_target_luajit libmpv
+media-libs/libplacebo lcms shaderc vulkan
 net-p2p/qbittorrent qt6 gui
 net-libs/libtorrent-rasterbar dht
 media-gfx/imagemagick jpeg png webp
@@ -76,16 +82,12 @@ media-sound/ncmpcpp taglib
 x11-misc/rofi-wayland drun windowmode
 mail-client/neomutt notmuch sasl
 
-# Av1An #
-media-libs/vapoursynth vspipe shared
-
 # Dependencies #
 app-alternatives/ninja samurai
 net-libs/nodejs icu ssl
 dev-libs/libtomcrypt tomsfastmath
-dev-cpp/sdbus-c++ elogind
 dev-lang/ruby ssl
-dev-qt/qtgui egl libinput udev
+dev-qt/qtgui egl libinput udev dbus
 app-text/qpdf ssl
 x11-libs/libxkbcommon X
 gui-libs/wlroots tinywl
@@ -99,10 +101,17 @@ dev-libs/boost zlib nls icu
 app-crypt/gpgme cxx
 app-text/poppler utils lcms cxx jpeg
 media-libs/libsdl2 video sound gles2
-dev-qt/qtbase widgets gui sqlite xml ssl network sql opengl -vulkan -icu
-dev-qt/qttools -vulkan linguist
-dev-qt/qtwayland -vulkan
+dev-qt/qtbase widgets gui sqlite xml ssl network sql opengl
+dev-qt/qttools linguist
 media-video/ffmpegthumbnailer jpeg png
+dev-libs/nettle gmp # brave gnutls dependency
+dev-lang/rust nightly # eww dependency
+
+x11-libs/libdrm udev
+media-libs/libva-compat drm egl opengl X
+media-libs/gst-plugins-base egl gbm gles2 opengl
+media-libs/gst-plugins-bad egl opengl gles2 vaapi
+app-crypt/libsecret crypt
 
 # Python Compat #
 media-libs/vapoursynth python_single_target_python3_11
@@ -146,25 +155,50 @@ dev-python/pygments python_targets_python3_11
 dev-python/jinja python_targets_python3_11
 dev-python/markupsafe python_targets_python3_11
 dev-python/trove-classifiers python_targets_python3_11
->=dev-python/urllib3-2.1.0 python_targets_python3_11
->=dev-python/PySocks-1.7.1-r2 python_targets_python3_11
->=dev-python/trove-classifiers-2023.11.13 python_targets_python3_11
->=dev-python/numpy-1.26.2 python_targets_python3_11
->=dev-python/meson-python-0.15.0 python_targets_python3_11
->=dev-python/pyproject-metadata-0.7.1 python_targets_python3_11
+dev-python/auditok python_targets_python3_11
+dev-python/faust-cchardet python_targets_python3_11
+dev-python/ffmpeg-python python_targets_python3_11
+dev-python/future python_targets_python3_11
+dev-python/pysubs2 python_targets_python3_11
+dev-python/srt python_targets_python3_11
+dev-python/tqdm python_targets_python3_11
+dev-python/appdirs python_targets_python3_11
+dev-python/babelfish python_targets_python3_11
+dev-python/chardet python_targets_python3_11
+dev-python/click python_targets_python3_11
+dev-python/urllib3 python_targets_python3_11
+dev-python/PySocks python_targets_python3_11
+dev-python/trove-classifiers python_targets_python3_11
+dev-python/numpy python_targets_python3_11
+dev-python/meson-python python_targets_python3_11
+dev-python/pyproject-metadata python_targets_python3_11
 dev-util/meson python_targets_python3_11
 dev-python/fastjsonschema python_targets_python3_11
-
->=dev-python/rich-13.7.0 python_targets_python3_11
->=dev-python/colorama-0.4.6 python_targets_python3_11
->=dev-python/markdown-it-py-3.0.0 python_targets_python3_11
->=dev-python/poetry-core-1.8.1 python_targets_python3_11
->=dev-python/lark-1.1.8 python_targets_python3_11
->=dev-python/linkify-it-py-2.0.2 python_targets_python3_11
->=dev-python/mdurl-0.1.2 python_targets_python3_11
->=dev-python/uc-micro-py-1.0.2 python_targets_python3_11
->=dev-python/mako-1.3.0 python_targets_python3_11
->=dev-python/webrtcvad-2.0.10-r1 python_targets_python3_11
+dev-python/rich python_targets_python3_11
+dev-python/colorama python_targets_python3_11
+dev-python/markdown-it-py python_targets_python3_11
+dev-python/poetry-core python_targets_python3_11
+dev-python/lark python_targets_python3_11
+dev-python/linkify-it-py python_targets_python3_11
+dev-python/mdurl python_targets_python3_11
+dev-python/uc-micro-py python_targets_python3_11
+dev-python/mako python_targets_python3_11
+dev-python/webrtcvad python_targets_python3_11
+dev-python/requests python_targets_python3_11
+dev-python/charset-normalizer python_targets_python3_11
+dev-python/idna python_targets_python3_11
+dev-python/decorator python_targets_python3_11
+dev-python/dogpile-cache python_targets_python3_11
+dev-python/enzyme python_targets_python3_11
+dev-python/guessit python_targets_python3_11
+dev-python/pysrt python_targets_python3_11
+dev-python/pytz python_targets_python3_11
+dev-python/rarfile python_targets_python3_11
+dev-python/stevedore python_targets_python3_11
+dev-python/pbr python_targets_python3_11
+dev-python/rebulk python_targets_python3_11
+dev-python/python-dateutil python_targets_python3_11
+dev-python/pyyaml python_targets_python3_11
 
 # Ruby Compat #
 dev-ruby/io-console ruby_targets_ruby31
@@ -190,8 +224,19 @@ dev-ruby/rubygems ruby_targets_ruby31
 virtual/ruby-ssl ruby_targets_ruby31
 dev-ruby/rdoc ruby_targets_ruby31
 
+# NEW FLAGS #
+net-mail/isync ssl
+dev-libs/gmime crypt
+media-gfx/qrencode png
+app-text/libwpd tools
+dev-libs/xmlsec nss
+media-libs/openh264 plugin
+media-libs/libass fontconfig
+media-fonts/fontawesome otf
+dev-python/rarfile compressed
 
-dev-libs/nettle gmp #brave gnutls
+# Fix compilation error #
+app-crypt/gpgme -qt6
 
-# fonts
-dev-libs/libpcre2 pcre16
+# AV1-Encoding #
+media-libs/vapoursynth vspipe shared

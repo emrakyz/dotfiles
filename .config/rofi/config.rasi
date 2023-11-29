@@ -6,4 +6,4 @@ configuration {
   kb-row-select: "Tab";
   kb-element-next: "Control+space";
 }
-@theme "/home/emre/.local/share/rofi/themes/my_theme.rasi"
+@theme ".local/share/rofi/themes/my_theme.rasi"

@@ -12,6 +12,6 @@ for i in $(seq 1 $((20 - filled_blocks))); do bar="${bar}░"; done
 [ $volume -le 35 ] && icon=🔈 || {
 	[ $volume -le 70 ] && icon=🔉 || icon=🔊
 }
-echo $get_volume | grep -q MUTED && icon=🔇
+{ echo $get_volume | grep -q MUTED || [ "$volume" -eq 0 ]; } && icon=🔇
 
 dunstify --replace=5555 "${icon} ${bar} ${volume}%"

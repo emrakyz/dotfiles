@@ -1,1 +1,2 @@
 media-video/mpv::vapoursynth
+=app-text/liblangtag-0.6.5 # delete later

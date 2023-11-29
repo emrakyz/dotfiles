@@ -10,7 +10,7 @@ What is the Percentage Increase/Decrease from A to B?
 What If the Number A is Increased/Decreased by B%?" | dmenu 4 "Calculation Method:")
 
 calculate_and_fix() {
-    bc -ql | sed 's/0*$//;s/\.$//'
+    bc -ql | sed 's/\.0*$//;s/\.$//'
 }
 
 case "$mode" in
@@ -42,13 +42,14 @@ case "$mode" in
         rofi -e "$result"
         ;;
 
-    *[0-9]*[\+\-\*/]*|*[\+\-\*/]*[0-9]*)
-	kitty --title "Calc-kitty" sh -c '
-	colorize_output() {
-	    while IFS= read -r line; do
-		echo "\033[1;35m$line\033[0m"
-	    done
-	}
-	echo '\'$mode\'' | bc -ql | colorize_output; bc -ql | colorize_output'
-	;;
+*[0-9]*[\+\-\*/]*|*[\+\-\*/]*[0-9]*)
+    kitty --title "Calc-kitty" sh -c '
+    colorize_output() {
+        while IFS= read -r line; do
+            processed_line=$(echo "$line" | sed "s/\.0*$//;s/\.$//")
+            echo "\033[1;35m$processed_line\033[0m"
+        done
+    }
+    echo '\'$mode\'' | bc -ql | colorize_output; bc -ql | colorize_output'
+    ;;
 esac

@@ -1,10 +1,16 @@
-app-admin/doas
+# COMPRESSION #
 app-arch/p7zip
 app-arch/unrar
+
+# SOME PROGRAMS #
 app-editors/neovim
-app-eselect/eselect-repository
-app-misc/jq
 app-office/libreoffice
+net-news/newsboat
+mail-client/mutt-wizard
+www-client/lynx
+
+# SHELL & LF #
+app-misc/jq
 app-shells/fzf
 app-shells/gentoo-zsh-completions
 app-shells/zoxide
@@ -12,55 +18,74 @@ app-shells/zsh
 app-shells/zsh-completions
 app-text/zathura
 app-text/zathura-pdf-mupdf
-dev-python/beautifulsoup4
 dev-python/pip
-dev-vcs/git
-gui-apps/grim
-gui-apps/hyprpaper
-gui-apps/slurp
-gui-apps/swappy
-gui-apps/wf-recorder
 gui-apps/wl-clipboard
-gui-libs/xdg-desktop-portal-hyprland
-gui-wm/hyprland::local
-mail-client/mutt-wizard
 media-fonts/noto-emoji
-media-gfx/imagemagick
-media-gfx/imv
-media-libs/ffmpegsource
-media-libs/svt-av1
-media-libs/vapoursynth
-media-plugins/vapoursynth-l-smash-works
-media-sound/mpc
-media-sound/mpd
-media-sound/ncmpcpp
+sys-apps/bat
+sys-apps/eza
+sys-apps/mlocate
+app-text/wgetpaste
+x11-misc/ydotool
+sys-process/dcron
+
+# SYSTEM - SOUND #
+media-video/pipewire
+media-video/wireplumber
+
+# NTFS & APPIMAGES #
+sys-fs/fuse:0
+sys-fs/ntfs3g
+net-print/cups
+
+# MONITORING #
+sys-process/btop
+
+# Network Connection #
+net-vpn/wireguard-tools
+
+# WAYLAND AND NVIDIA RELATED #
+x11-libs/libdrm
+x11-misc/qt6ct
+gnome-base/gsettings-desktop-schemas
+dev-qt/qtwayland:5
+dev-qt/qtwayland:6
+media-libs/libva
+media-libs/libva-compat
+media-libs/nvidia-vaapi-driver
+
+# HYPRLAND #
+gui-wm/hyprland::local
+gui-libs/xdg-desktop-portal-hyprland::local
+x11-misc/dunst
+x11-misc/rofi-wayland::local
+x11-terms/kitty
+gui-apps/mpvpaper::local
+x11-themes/sweet-dark-gtk-theme::local
+gui-apps/eww
+
+# BROWSERS #
+www-client/brave-bin
+www-client/librewolf
+
+# MULTIMEDIA #
 media-video/ffmpeg
 media-video/ffmpegthumbnailer
 media-video/ffsubsync
 media-video/mediainfo
 media-video/mpv
-media-video/pipewire
+media-gfx/imagemagick
+media-gfx/imv
+media-sound/mpc
+media-sound/mpd
+media-sound/ncmpcpp
 media-video/subliminal
-media-video/wireplumber
-net-misc/curl
-net-misc/dhcpcd
+gui-apps/wf-recorder
+gui-apps/grim
+gui-apps/hyprpaper
+gui-apps/slurp
+gui-apps/swappy
+
+# DATA HOARDING #
 net-misc/gallery-dl
 net-misc/yt-dlp
-net-news/newsboat
 net-p2p/qbittorrent
-net-print/cups
-net-vpn/wireguard-tools
-sys-apps/bat
-sys-apps/eza
-sys-apps/mlocate
-sys-firmware/intel-microcode
-sys-fs/fuse:0
-sys-fs/ntfs3g
-sys-kernel/gentoo-sources
-sys-process/dcron
-www-client/brave-bin
-www-client/librewolf
-x11-drivers/nvidia-drivers
-x11-misc/dunst
-x11-misc/rofi-wayland
-x11-terms/kitty

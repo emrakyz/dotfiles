@@ -28,10 +28,6 @@ app-text/wgetpaste
 x11-misc/ydotool
 sys-process/dcron
 
-# SYSTEM - SOUND #
-media-video/pipewire
-media-video/wireplumber
-
 # NTFS & APPIMAGES #
 sys-fs/fuse:0
 sys-fs/ntfs3g
@@ -45,7 +41,7 @@ net-vpn/wireguard-tools
 
 # WAYLAND AND NVIDIA RELATED #
 x11-libs/libdrm
-x11-misc/qt6ct
+gui-apps/qt6ct
 gnome-base/gsettings-desktop-schemas
 dev-qt/qtwayland:5
 dev-qt/qtwayland:6

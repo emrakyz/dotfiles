@@ -1,4 +1,4 @@
-# texlive.profile written on Wed May 17 14:49:57 2023 UTC
+# texlive.profile written on Fri Dec  1 19:02:34 2023 UTC
 # It will NOT be updated and reflects only the
 # installation profile at installation time.
 selected_scheme scheme-custom
@@ -11,13 +11,11 @@ TEXMFSYSVAR /usr/local/texlive/2023/texmf-var
 TEXMFVAR ~/.texlive2023/texmf-var
 binary_x86_64-linux 1
 collection-basic 1
-collection-bibtexextra 1
-collection-xetex 1
-instopt_adjustpath 1
+instopt_adjustpath 0
 instopt_adjustrepo 1
-instopt_letter 1
+instopt_letter 0
 instopt_portable 0
-instopt_write18_restricted 1
+instopt_write18_restricted 0
 tlpdbopt_autobackup 1
 tlpdbopt_backupdir tlpkg/backups
 tlpdbopt_create_formats 1
@@ -28,6 +26,6 @@ tlpdbopt_install_docfiles 0
 tlpdbopt_install_srcfiles 0
 tlpdbopt_post_code 1
 tlpdbopt_sys_bin /usr/local/bin
-tlpdbopt_sys_info /usr/local/info
-tlpdbopt_sys_man /usr/local/man
+tlpdbopt_sys_info /usr/local/share/info
+tlpdbopt_sys_man /usr/local/share/man
 tlpdbopt_w32_multi_user 1

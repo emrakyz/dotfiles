@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+
+active_interface=$(ip link | awk '/link\/ether/ {print substr(prev, 1, length(prev)-1)} {prev=$2}')
+command_background="yes"
+command="/bin/busybox udhcpc"
+command_args="-i ${active_interface} -s /etc/udhcpc/default.script"
+pidfile="/run/udhcpc.pid"
+name="udhcpc"
+
+depend() {
+    need localmount
+    provide net
+    after modules
+}

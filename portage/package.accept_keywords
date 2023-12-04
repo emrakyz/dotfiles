@@ -61,3 +61,7 @@ app-shells/zsh-completions **
 
 gui-apps/mpvpaper **
 gui-apps/eww **
+
+sys-apps/busybox **
+sys-kernel/linux-firmware **
+

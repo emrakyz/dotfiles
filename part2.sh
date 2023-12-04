@@ -53,11 +53,11 @@ URL_UDHCPC_INIT="https://raw.githubusercontent.com/emrakyz/dotfiles/main/udhcpc"
 URL_LOCAL="https://github.com/emrakyz/local.git"
 
 # DEFINE DIRS HERE #
-FILES_DIR="./files"
+FILES_DIR="/root/files"
 PORTAGE_DIR="/etc/portage"
 PORTAGE_PROFILE_DIR="/etc/portage/profile"
 PORTAGE_ENV_DIR="/etc/portage/env"
-LIBREW_PROF_DIR=""
+LIBREW_PROF_DIR="" # This will be defined later.
 LIBREW_CHROME_DIR="$LIBREW_PROF_DIR/chrome"
 LINUX_DIR="/usr/src/linux"
 NEW_KERNEL="$LINUX_DIR/arch/x86/boot/bzImage"

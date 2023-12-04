@@ -68,10 +68,10 @@ sys-apps/xdg-desktop-portal screencast geolocation
 media-gfx/imv freeimage jpeg png
 media-libs/freeimage webp
 media-sound/mpd opus
-media-video/ffmpeg svt-av1 dav1d vpx opus encode libass sdl x264 gpl X pulseaudio openssl network nvenc vorbis -vulkan alsa cuda x265 libplacebo rubberband vulkan
+media-video/ffmpeg svt-av1 dav1d vpx opus encode libass sdl x264 gpl X pulseaudio openssl network nvenc vorbis -vulkan alsa cuda x265 libplacebo vulkan
 media-libs/libvpx postproc highbitdepth
 media-libs/dav1d 10bit 8bit
-media-video/mpv cli libplacebo lua nvenc rubberband uchardet iconv vulkan lua_single_target_luajit libmpv
+media-video/mpv cli libplacebo lua nvenc uchardet iconv vulkan lua_single_target_luajit libmpv
 media-libs/libplacebo lcms shaderc vulkan
 net-p2p/qbittorrent qt6 gui
 net-libs/libtorrent-rasterbar dht
@@ -234,9 +234,6 @@ media-libs/openh264 plugin
 media-libs/libass fontconfig
 media-fonts/fontawesome otf
 dev-python/rarfile compressed
-
-# Fix compilation error #
-app-crypt/gpgme -qt6
 
 # AV1-Encoding #
 media-libs/vapoursynth vspipe shared

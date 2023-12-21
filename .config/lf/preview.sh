@@ -25,14 +25,14 @@ case "$filetype" in
         bat --style=plain --color=always --line-range :35 "$file"
         ;;
     image/*)
-	display $file
+	display "$file"
 	;;
     video/*)
         [ -f "$CACHE_FILE" ] || { thumbnail="$(thumbnail_creator.sh "$file")" && cp "$thumbnail" "$CACHE_FILE"; }
         display "$CACHE_FILE"
         ;;
     audio/*)
-	mediainfo $file
+	mediainfo "$file"
 	;;
     application/pdf)
         CACHE_FILE="${CACHE_FILE}.jpg"
@@ -40,13 +40,13 @@ case "$filetype" in
         display "$CACHE_FILE"
         ;;
     application/gzip|application/x-xz|application/x-bzip2)
-	tar -tf $file
+	tar -tf "$file"
 	;;
     application/zip)
-	unzip -l $file | awk '{print $4}'
+	unzip -l "$file" | awk '{print $4}'
 	;;
     application/7z)
-	7z -l $file | awk '{print $4}'
+	7z -l "$file" | awk '{print $4}'
 	;;
 esac
 

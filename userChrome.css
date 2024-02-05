@@ -8,34 +8,32 @@
 #statuspanel {display:none!important}
 #statuspanel-label { display: none !important; }
 
-#navigator-toolbox {
+/* #navigator-toolbox {
     position: fixed;
     width: 1px;
     height: 1px;
     opacity: 0;
     overflow: hidden;
-}
+} */
 
-#nav-bar {
+/* #nav-bar {
     height: 0 !important;
     opacity: 0 !important;
-}
+} */
 
-#PersonalToolbar {
+/* #PersonalToolbar {
     opacity: 0 !important;
-    /* pointer-events: none !important; */
-}
+} */
 
-#navigator-toolbox-background {
+/*#navigator-toolbox-background {
     height: 0 !important;
     opacity: 0 !important;
-    /* pointer-events: none !important; */
-}
+} */
 
 /* Hide the tab bar, even if multiple tabs are open */
-#TabsToolbar {
+/*#TabsToolbar {
     visibility: collapse !important;
-}
+}*/
 
 /* Hide sidebar */
 #sidebar-box {

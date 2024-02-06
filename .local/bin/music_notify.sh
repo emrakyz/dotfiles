@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/dash
 
-song_info="$(mpc current)"
+song_info="$(mpc "current")"
 
-notify-send "Playing:" "$song_info"
+notify-send "Playing:" "${song_info}"

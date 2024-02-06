@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/dash
 
-word=$(wl-paste --primary)
+word="$(wl-paste --primary)"
 
-librewolf "https://www.oxfordlearnersdictionaries.com/search/english/?q='$word'"
+"${BROWSER}" "https://www.oxfordlearnersdictionaries.com/search/english/?q=${word}"

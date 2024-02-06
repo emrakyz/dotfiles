@@ -1,18 +1,37 @@
-#!/bin/dash
+[ -z "${1}" ] && printf "%s\n" "Specify a video file to re-encode." && exit "1"
 
-[ -z "$1" ] && exit 1
-
-av1an -i "$1" \
-      -e svt-av1 \
-      -o av1_opus_${1%.*}.mkv \
-      -w 2 \
-      -m lsmash \
-      --pix-format yuv420p10le \
-      --video-params "--preset 0 --crf 42 --tune 0 --input-depth 10 --enable-overlays 1 --scd 1 --lookahead 120 --keyint 240 --tile-columns 2 --tile-rows 2 --film-grain 30 --film-grain-denoise 0 --lp 16 --pin 1 --color-range 0"
-
-
-
-      #--video-params "--enable-hdr 1 --input-depth 10 --preset 0 --crf 29 --tune 0 --enable-overlays 1 --scd 1 --lookahead 120 --color-primaries 9 --transfer-characteristics 16 --matrix-coefficients 9 --chroma-sample-position 2 --content-light 1000,63 --film-grain 30 --film-grain-denoise 0 --lp 16 --pin 1 --color-range 0 --mastering-display G(0.265,0.690)B(0.150,0.060)R(0.680,0.320)WP(0.3127,0.3290)L(1000,0.0050) --tile-columns 2 --tile-rows 2 --keyint 240"
-
-
-    # -a "-c:a libopus -b:a 160k"
+av1an -i "${1}" \
+        -o "av1_opus_${1%.*}.mkv" \
+	--encoder "svt-av1" \
+	--split-method "av-scenechange" \
+        --workers "1" \
+        --chunk-method "lsmash" \
+	--sc-method "standard" \
+	--resume \
+        --pix-format "yuv420p10le" \
+        --video-params "--preset -1 \
+	                --crf 15 \
+			--tune 2 \
+			--enable-qm 1 \
+			--qm-min 0 \
+			--qm-max 10 \
+			--input-depth 10 \
+			--lookahead 120 \
+			--enable-overlays 1 \
+			--scd 1 \
+			--keyint 48 \
+			--lp 0 \
+			--pin 0 \
+			--enable-dlf 1 \
+			--fast-decode 0 \
+			--irefresh-type 2 \
+			--enable-restoration 1 \
+			--scm 2 \
+			--enable-tf 1 \
+			--progress 0 \
+			--aq-mode 2 \
+			--enable-cdef 1 \
+			--enable-tpl-la 1 \
+			--color-range 0 \
+			--film-grain 0 \
+			--film-grain-denoise 0"

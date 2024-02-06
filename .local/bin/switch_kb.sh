@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/dash
 
-hyprctl switchxkblayout razer-razer-huntsman-elite next
+hyprctl switchxkblayout "razer-razer-huntsman-elite" next

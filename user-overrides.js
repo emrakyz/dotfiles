@@ -6,6 +6,7 @@ user_pref("browser.uidensity", 1);
 user_pref("extensions.unifiedExtensions.enabled", true);
 user_pref("ui.prefersReducedMotion", 1);
 user_pref("dom.ipc.processCount", 16);
+user_pref("privacy.resistFingerprinting.letterboxing", false);
 
 // Standard Settings
 user_pref("browser.toolbars.bookmarks.visibility", false);

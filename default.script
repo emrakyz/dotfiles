@@ -1,26 +1,29 @@
 #!/bin/sh
 
-[ -n "$1" ] || { echo "Error: should be called from udhcpc"; exit 1; }
+[ "${1}" ] || {
+	echo "Error: should be called from udhcpc"
+	exit "1"
+}
 
-case "$1" in
-    deconfig)
-        echo "Clearing IP addresses on $interface, upping it"
-        ip -4 addr flush dev $interface
-        ip link set dev $interface up
-        ;;
+case "${1}" in
+	deconfig)
+		echo "Clearing IP addresses on ${interface}, upping it"
+		ip -4 addr flush dev "${interface}"
+		ip link set dev "${interface}" up
+		;;
 
-    renew|bound)
-        echo "Setting IP address $ip on $interface"
-        ip addr add $ip/${subnet:-24} broadcast + dev $interface
+	renew|bound)
+		echo "Setting IP address ${ip} on ${interface}"
+		ip addr add "${ip}/${subnet:-24}" broadcast + dev "${interface}"
 
-        if [ -n "$router" ] ; then
-            echo "Deleting default route"
-            ip route del default dev $interface 2>/dev/null
-            for i in $router ; do
-                echo "Adding router $i"
-                ip route add default via $i dev $interface
-            done
-        fi
+		[ "${router}" ] && {
+			echo "Deleting default route"
+			ip route del default dev "${interface}" 2> "/dev/null"
+			for i in ${router} ; do
+				echo "Adding router ${i}"
+				ip route add default via "${i}" dev "${interface}"
+			done
+		}
 esac
 
-exit 0
+exit "0"

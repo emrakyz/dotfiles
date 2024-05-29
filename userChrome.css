@@ -8,31 +8,104 @@
 #statuspanel {display:none!important}
 #statuspanel-label { display: none !important; }
 
-#navigator-toolbox {
-    position: fixed;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    overflow: hidden;
-}
-
+#TabsToolbar,
 #nav-bar {
-    height: 0 !important;
-    opacity: 0 !important;
+  visibility: collapse;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
-#PersonalToolbar {
-    opacity: 0 !important;
+#navigator-toolbox:hover #TabsToolbar,
+#navigator-toolbox:hover #nav-bar,
+#navigator-toolbox.show-nav-bar #TabsToolbar,
+#navigator-toolbox.show-nav-bar #nav-bar {
+  visibility: visible;
+  opacity: 1;
 }
 
-#navigator-toolbox-background {
-    height: 0 !important;
-    opacity: 0 !important;
+/* Burger Menu */
+#PanelUI-button {
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  top: 2px !important;
+  right: 2px !important;
 }
 
-/* Hide the tab bar, even if multiple tabs are open */
-#TabsToolbar {
-    visibility: collapse !important;
+#PanelUI-popup {
+  visibility: collapse !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+#PanelUI-button:hover + #PanelUI-popup,
+#PanelUI-popup:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Extensions Button */
+#unified-extensions-button {
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  top: 2px !important;
+  right: 42px !important;
+}
+
+#unified-extensions-view {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+#unified-extensions-button:hover #unified-extensions-view,
+#unified-extensions-view:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Additional hover state for the extension pop-up */
+#unified-extensions-area:hover,
+#unified-extensions-area #unified-extensions-view:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Hide URL suggestions and other elements */
+#urlbar-results,
+#urlbar-go-button,
+#page-action-buttons,
+#identity-box,
+#tracking-protection-icon-container,
+#reader-mode-button-container {
+  display: none !important;
+}
+
+/* Hide "This time search with" suggestion */
+#urlbar-one-offs-header-label {
+  display: none !important;
+}
+
+/* Hide search engine symbols */
+#urlbar-engine-one-off-item,
+#urlbar-one-off-search-buttons {
+  display: none !important;
+}
+
+/* Disable one-off search */
+#urlbar[oneoffsearchfieldshidden] {
+  pointer-events: none !important;
+}
+
+/* Remove placeholder space for icons */
+#urlbar-input-container {
+  padding-inline-start: 0 !important;
+}
+
+/* Keep address bar visible when typing */
+#urlbar[focused] {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Hide sidebar */

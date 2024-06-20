@@ -1,47 +1,47 @@
 #!/bin/bash
+set -Eeuo pipefail
 
-[ "$(id -u)" -eq "0" ] || {
-        echo "This script must be run as root" >&2
-        exit "1"
+[ "${UID}" = "0" ] || {
+        echo "This script must be run as root"
+        exit "0"
 }
 
-set -Eeo pipefail
+G='\e[1;92m' R='\e[1;91m' B='\e[1;94m'
+P='\e[1;95m' Y='\e[1;93m' N='\033[0m'
+C='\e[1;96m' W='\e[1;97m'
 
-GREEN='\e[1;92m' RED='\e[1;91m' BLUE='\e[1;94m'
-PURPLE='\e[1;95m' YELLOW='\e[1;93m' NC='\033[0m'
-CYAN='\e[1;96m' WHITE='\e[1;97m'
-
-handle_error() {
-        error_status="${?}"
-        command_line="${BASH_COMMAND}"
-        error_line="${BASH_LINENO[0]}"
-        log_info r "Error on line ${BLUE}${error_line}${RED}: command ${BLUE}'${command_line}'${RED} exited with status: ${BLUE}${error_status}"
+handle_err() {
+        stat="${?}"
+        cmd="${BASH_COMMAND}"
+        line="${LINENO}"
+        loginf r "Line ${B}${line}${R}: cmd ${B}'${cmd}'${R} exited with ${B}\"${stat}\""
 }
 
-trap 'handle_error' ERR
-trap 'handle_error' RETURN
+kill_bglog() {
+        [ "${pidlog}" ] && kill "${pidlog}" > "/dev/null"
+}
 
-log_info() {
+loginf() {
         sleep "0.3"
 
         case "${1}" in
-                g) COLOR="${GREEN}" MESSAGE="DONE!" ;;
-                r) COLOR="${RED}" MESSAGE="WARNING!" ;;
-                b) COLOR="${BLUE}" MESSAGE="STARTING." ;;
-                c) COLOR="${BLUE}" MESSAGE="RUNNING." ;;
+                g) COL="${G}" MSG="DONE!" ;;
+                r) COL="${R}" MSG="WARNING!" ;;
+                b) COL="${B}" MSG="STARTING." ;;
+                c) COL="${B}" MSG="RUNNING." ;;
         esac
 
-        COLORED_TASK_INFO="${WHITE}(${CYAN}${TASK_NUMBER}${PURPLE}/${CYAN}${TOTAL_TASKS}${WHITE})"
-        MESSAGE_WITHOUT_TASK_NUMBER="${2}"
+        TSK="${W}(${C}${TSKNO}${P}/${C}${ALLTSK}${W})"
+        RAWMSG="${2}"
 
-        DATE="$(date "+%Y-%m-%d ${CYAN}/${PURPLE} %H:%M:%S")"
+        DATE="$(date "+%Y-%m-%d ${C}/${P} %H:%M:%S")"
 
-        FULL_LOG="${CYAN}[${PURPLE}${DATE}${CYAN}] ${YELLOW}>>>${COLOR}${MESSAGE}${YELLOW}<<< ${COLORED_TASK_INFO} - ${COLOR}${MESSAGE_WITHOUT_TASK_NUMBER}${NC}"
+        LOG="${C}[${P}${DATE}${C}] ${Y}>>>${COL}${MSG}${Y}<<< ${TSK} - ${COL}${RAWMSG}${N}"
 
-        { [[ ${1} == "c" ]] && echo -e "\n\n${FULL_LOG}"; } || echo -e "${FULL_LOG}"
+        { [[ ${1} == "c" ]] && echo -e "\n\n${LOG}"; } || echo -e "${LOG}"
 }
 
-USER="$(getent passwd | awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' | head -n "1")"
+USER="$(id -nu "1000")"
 
 KERNEL_PATH="/boot/EFI/BOOT/BOOTX64.EFI"
 NEW_KERNEL="/usr/src/linux/arch/x86/boot/bzImage"
@@ -52,9 +52,6 @@ USER_CACHE_DIR="/home/${USER}/.cache"
 LOG_DIR="/var/log"
 VAR_TMP_DIR="/var/tmp"
 
-FAILED_LOG_DIR="${USER_CACHE_DIR}/failed_builds"
-FAILED_PACKAGES="${USER_CACHE_DIR}/failed_packages.txt"
-
 renew_env() {
         env-update && source "/etc/profile"
 }
@@ -64,7 +61,7 @@ sync_repos() {
 }
 
 update_world() {
-        emerge --update "@world" --exclude "librewolf" 2>&1 || true
+        emerge --update "@world" 2>&1 || true
 }
 
 update_live() {
@@ -72,37 +69,26 @@ update_live() {
 }
 
 remove_unneeded() {
-        emerge --depclean > "/dev/null" 2>&1 || true
-}
-
-create_logs() {
-        rm -rf "${FAILED_LOG_DIR}"
-        mkdir -p "${FAILED_LOG_DIR}"
-        # The log file will be created by script -c -q command.
-        [ -f "output.log" ] && {
-                grep -oP 'Failed to emerge \K[[:alnum:]_-]+/[[:alnum:]._-]+' "output.log" > "${FAILED_PACKAGES}"
-                rm -rf "output.log"
-        } || true
+        CLEAN_DELAY="0" emerge --depclean -q --verbose=n > "/dev/null" 2>&1 || true
 }
 
 update_kernel() {
-        DIR_COUNT="$(find /usr/src/ -maxdepth "1" -type d -name 'linux-*' | wc -l)"
+        DIR_COUNT="$(fd -d "1" -t "d" 'linux-.*' "/usr/src" | wc -l)"
 
-	[ "${DIR_COUNT}" -gt "1" ] || {
-                echo -e "${BLUE}There is only one linux directory. The function stops...${NC}"
-                KERNEL_IS_UPDATED="0"
+        [ "${DIR_COUNT}" -gt "1" ] || {
+                echo -e "${B}There is only one linux directory. The funct stops...${N}"
                 return
         }
 
-        KERNEL_DIR="$(find /usr/src/ -maxdepth "1" -type d -name 'linux-*' | sort -rV | head -n "1")"
+        KERNEL_DIR="$(fd -d "1" -t "d" 'linux-.*' "/usr/src" | sort -rV | head -n "1")"
 
-        echo -e "${GREEN}Your new kernel directory:${CYAN} ${KERNEL_DIR} ${NC}"
+        echo -e "${G}New kernel directory:${C} ${KERNEL_DIR} ${N}"
 
-        OLD_KERNEL_DIR="$(find /usr/src/ -maxdepth "1" -type d -name 'linux-*' | sort -rV | head -n "2" | tail -n "1")"
+        OLD_KERNEL_DIR="$(fd -d "1" -t "d" 'linux-.*' "/usr/src" | sort -rV | head -n "2" | tail -n "1")"
 
-        echo -e "${GREEN}Your old kernel directory:${CYAN} ${OLD_KERNEL_DIR} ${NC}"
+        echo -e "${G}Old kernel directory:${C} ${OLD_KERNEL_DIR} ${N}"
 
-        export LLVM="1" LLVM_IAS="1" CFLAGS="-O3 -march=native -pipe"
+        export LLVM="1" LLVM_IAS="1" CFLAGS="-O3 -march=native -pipe" KCFLAGS="-O3 -march=native -pipe"
 
         cp -fv "${OLD_KERNEL_DIR}/.config" "${KERNEL_DIR}"
 
@@ -112,33 +98,19 @@ update_kernel() {
 
         cp -fv "${NEW_KERNEL}" "${KERNEL_PATH}"
 
-        echo -e "${GREEN}Your new kernel${CYAN} ${NEW_KERNEL} ${GREEN}has been copied to${CYAN} ${KERNEL_PATH}.${NC}"
+        echo -e "${G}New kernel${C} ${NEW_KERNEL} ${G}has been copied to${C} ${KERNEL_PATH}.${N}"
 
         rm -rf "${OLD_KERNEL_DIR}"
 
-        echo -e "${GREEN}Your old kernel directory${CYAN} ${OLD_KERNEL_DIR} ${GREEN}has been deleted.${NC}"
+        echo -e "${G}Old kernel directory${C} ${OLD_KERNEL_DIR} ${G}has been deleted.${N}"
 }
 
-update_nvidia() {
-        [[ "${KERNEL_IS_UPDATED}" == "0" ]] && {
-                echo -e "${BLUE}The kernel has not been updated. Skipping Nvidia drivers...${NC}"
-                return
-        }
-        emerge "x11-drivers/nvidia-drivers" > "/dev/null" 2>&1
-}
-
-copy_failed_logs() {
-        while IFS= read -r pkg; do
-                log_path="/var/tmp/portage/${pkg}/temp/build.log"
-                safe_pkg_name="$(echo "${pkg}" | tr '/' '_')"
-                [ -f "${log_path}" ] && cp "${log_path}" "${FAILED_LOG_DIR}/${safe_pkg_name}.log"
-        done < "${FAILED_PACKAGES}"
-
-        chown -vR "${USER}":"${USER}" "${FAILED_LOG_DIR}"
+preserve_rebuild() {
+        emerge @preserved-rebuild
 }
 
 clean_old_modules() {
-        find "${MODULES_DIR}" -mindepth "1" -maxdepth "1" -type "d" | sort -V | head -n "-1" | xargs rm -rf
+        fd -t "d" -d "1" . "${MODULES_DIR}" | head -n "-1" | xargs -P "0" rm -rf
 }
 
 clean_temp_files() {
@@ -146,38 +118,42 @@ clean_temp_files() {
 }
 
 clean_user_cache() {
-        find "${USER_CACHE_DIR}" -mindepth "1" -maxdepth "1" \( -name 'wal' -o -name 'youtube_channels' -o -name 'failed_builds' -o -name "failed_packages.txt" -o -name 'vidthumb' \) -prune -o -print0 | xargs -0 rm -rf
+        fd -d "1" . "${USER_CACHE_DIR}" -E "youtube_channels" | xargs -P "0" rm -rf
 }
 
 run_fstrim() {
         fstrim -Av
 }
 
+own_home() {
+        chown -R 1000:1000 "/home/${USER}"
+}
+
 handle_shutdown() {
-        echo -e "${GREEN}The system will shutdown soon."
+        echo -e "${G}The system will shutdown."
 
-        delay_shutdown="$(echo -e "No\nYes" | rofi -dmenu -l "2" -p "Do you want to delay shutdown?")"
+        delay_shutdown="$(echo -e "No\nYes" | rofi -dmenu -l "2" -p "Want to delay shutdown?")"
 
-        [[ "${delay_shutdown}" == "Yes" ]] && {
+        [ "${delay_shutdown}" = "Yes" ] && {
                 while true; do
-                        delay_amount="$(echo "" | rofi -dmenu -l "0" -p "Enter delay amount in minutes:")"
+                        delay_amount="$(echo "" | rofi -dmenu -l "0" -p "Amount in minutes:")"
 
-                        [[ -z "${delay_amount}" ]] && {
+                        [ "${delay_amount}" ] || {
                                 echo -e "Shutdown not delayed. Shutting down now."
                                 openrc-shutdown -p "now"
                                 break
                         }
 
                         [[ "${delay_amount}" =~ ^[0-9]+$ ]] || {
-                                rofi -e "Invalid input. Please enter a number."
+                                notify-send "Invalid input. Please enter a number."
                                 continue
                         }
 
                         notify-send "Shutdown delayed by ${delay_amount} minutes."
                         sleep "$((delay_amount * 60))"
 
-                        delay_shutdown="$(echo -e "No\nYes" | rofi -dmenu -l "2" -p "Do you want to delay shutdown again?")"
-                        [[ "${delay_shutdown}" == "No" ]] && {
+                        delay_shutdown="$(echo -e "No\nYes" | rofi -dmenu -l "2" -p "Want to delay shutdown?")"
+                        [ "${delay_shutdown}" = "No" ] && {
                                 openrc-shutdown -p "now"
                                 break
                         }
@@ -186,85 +162,86 @@ handle_shutdown() {
 }
 
 main() {
-        declare -A "tasks"
+        declare -A "tsks"
 
-        tasks["renew_env"]="Renew the environment.
+        tsks["renew_env"]="Renew the environment.
 		       Environment renewed."
 
-        tasks["sync_repos"]="Sync the Gentoo repositories.
+        tsks["sync_repos"]="Sync the Gentoo repositories.
 		       Gentoo repositories synced."
 
-        tasks["update_world"]="Update the world.
+        tsks["update_world"]="Update the world.
 		         The world updated."
 
-        tasks["update_live"]="Update live packages.
+        tsks["update_live"]="Update live packages.
                         Live packages updated."
 
-        tasks["remove_unneeded"]="Remove unneeded packages.
+        tsks["remove_unneeded"]="Remove unneeded packages.
                             Unneeded packages removed."
 
-        tasks["create_logs"]="Create logs for failed packages.
-                        Logs for failed packages created."
-
-        tasks["update_kernel"]="Update the kernel.
+        tsks["update_kernel"]="Update the kernel.
 		          The kernel is ready."
 
-        tasks["update_nvidia"]="Recompile Nvidia drivers.
-		          Nvidia drivers ready."
+        tsks["preserve_rebuild"]="Rebuild preserved libraries.
+		          Preserved libraries rebuilt."
 
-        tasks["copy_failed_logs"]="Copy failed build logs.
-		             Failed build logs copied."
-
-        tasks["clean_old_modules"]="Clean old kernel modules.
+        tsks["clean_old_modules"]="Clean old kernel modules.
 			      Old kernel modules cleaned."
 
-        tasks["clean_temp_files"]="Clean temporary files.
+        tsks["clean_temp_files"]="Clean temporary files.
                              Temporary files cleaned."
 
-        tasks["clean_user_cache"]="Clean the user cache.
+        tsks["clean_user_cache"]="Clean the user cache.
                              The user cache cleaned."
 
-        tasks["run_fstrim"]="Trim the filesystem.
+        tsks["run_fstrim"]="Own home directory.
+                       Home directory owned."
+
+        tsks["run_fstrim"]="Trim the filesystem.
                        Filesystem trimmed."
 
-        tasks["handle_shutdown"]="Shutdown the system.
-                            The system shutdown."
+        tsk_ord=("renew_env" "sync_repos" "update_world" "update_live" "remove_unneeded"
+                "update_kernel" "preserve_rebuild" "clean_old_modules" "clean_temp_files"
+                "clean_user_cache" "run_fstrim" "own_home")
 
-        task_order=("renew_env" "sync_repos" "update_world" "update_live" "remove_unneeded"
-                "create_logs" "update_kernel" "update_nvidia" "copy_failed_logs"
-                "clean_old_modules" "clean_temp_files" "clean_user_cache"
-                "run_fstrim" "handle_shutdown")
+        ALLTSK="${#tsks[@]}"
+        TSKNO="1"
 
-        TOTAL_TASKS="${#tasks[@]}"
-        TASK_NUMBER="1"
+        trap 'handle_err; kill_bglog' ERR RETURN
+        trap 'kill_bglog' EXIT INT QUIT TERM
 
-        trap '[[ -n "${log_pid}" ]] && kill "${log_pid}" 2> "/dev/null"' EXIT SIGINT
+        for funct in "${tsk_ord[@]}"; do
+                descript="${tsks[${funct}]}"
+                descript="${descript%%$'\n'*}"
 
-        for function in "${task_order[@]}"; do
-                description="${tasks[${function}]}"
-                description="${description%%$'\n'*}"
+                msgdone="$(echo "${tsks[${funct}]}" | tail -n "1" | sed 's/^[[:space:]]*//g')"
 
-                done_message="$(echo "${tasks[${function}]}" | tail -n "1" | sed 's/^[[:space:]]*//g')"
-
-                log_info b "${description}"
+                loginf b "${descript}"
 
                 (
                         sleep "120"
                         while true; do
-                                log_info c "${description}"
+                                loginf c "${descript}"
                                 sleep "120"
                         done || true
                 ) &
-                log_pid="${!}"
+                pidlog="${!}"
 
-                "${function}"
+                "${funct}"
+                loginf g "${msgdone}"
 
-                kill "${log_pid}" 2> "/dev/null" || true
+                [ "${TSKNO}" = "${ALLTSK}" ] && {
+                        loginf g "All tsks completed."
+                        kill "${pidlog}" 2> "/dev/null" || true
+                        break
+                }
 
-                log_info g "${done_message}"
+                kill "${pidlog}" 2> "/dev/null" || true
 
-                [ "${TASK_NUMBER}" -lt "${#task_order[@]}" ] && ((TASK_NUMBER++)) || break
+                ((TSKNO++))
         done
+
+        [ "${1}" = "-f" ] && openrc-shutdown -p "now" || "handle_shutdown"
 }
 
-main
+main "${@}"

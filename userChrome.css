@@ -1,5 +1,5 @@
 /* Remove Context Menu Entries */
-#context-back, #context-take-screenshot, #context-forward, #context-reload, #context-stop, #context-bookmarkpage, #context-savepage, #context-pocket, #screenshots_mozilla_org_create-screenshot, #context-inspect, #context-sep-selectall, #context-selectall, #context-copylink, #context-copy, #context-viewsource, #context-viewinfo, #context-print-selection, #context-viewpartialsource-selection, #context-inspect-a11y, #context-openlinkintab, #context-openlink, #context-openlinkprivate, #context-bookmarklink, #context-savelink, #context-savelinktopocket, #context-copyimage-contents, #context-copyimage, #context-sendimage {
+#context-back, #context-take-screenshot, #context-forward, #context-reload, #context-stop, #context-bookmarkpage, #context-savepage, #context-pocket, #screenshots_mozilla_org_create-screenshot, #context-inspect, #context-sep-selectall, #context-selectall, #context-copylink, #context-copy, #context-viewsource, #context-viewinfo, #context-print-selection, #context-viewpartialsource-selection, #context-inspect-a11y, #context-openlinkintab, #context-openlink, #context-openlinkprivate, #context-bookmarklink, #context-savelink, #context-savelinktopocket, #context-copyimage-contents, #context-copyimage, #context-sendimage, #context-searchselect-private {
     display: none !important
 }
 
@@ -8,65 +8,8 @@
 #statuspanel {display:none!important}
 #statuspanel-label { display: none !important; }
 
-#TabsToolbar,
-#nav-bar {
-  visibility: collapse;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-#navigator-toolbox:hover #TabsToolbar,
-#navigator-toolbox:hover #nav-bar,
-#navigator-toolbox.show-nav-bar #TabsToolbar,
-#navigator-toolbox.show-nav-bar #nav-bar {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Burger Menu */
-#PanelUI-button {
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: fixed !important;
-  top: 2px !important;
-  right: 2px !important;
-}
-
-#PanelUI-popup {
-  visibility: collapse !important;
-  opacity: 0 !important;
-  transition: opacity 0.3s ease-in-out !important;
-}
-
-#PanelUI-button:hover + #PanelUI-popup,
-#PanelUI-popup:hover {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Extensions Button */
-#unified-extensions-button {
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: fixed !important;
-  top: 2px !important;
-  right: 42px !important;
-}
-
-#unified-extensions-view {
-  opacity: 0 !important;
-  transition: opacity 0.3s ease-in-out !important;
-}
-
 #unified-extensions-button:hover #unified-extensions-view,
 #unified-extensions-view:hover {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Additional hover state for the extension pop-up */
-#unified-extensions-area:hover,
-#unified-extensions-area #unified-extensions-view:hover {
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -97,17 +40,6 @@
   pointer-events: none !important;
 }
 
-/* Remove placeholder space for icons */
-#urlbar-input-container {
-  padding-inline-start: 0 !important;
-}
-
-/* Keep address bar visible when typing */
-#urlbar[focused] {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
 /* Hide sidebar */
 #sidebar-box {
     visibility: collapse !important;
@@ -132,3 +64,40 @@ scrollcorner {
 
 *[id*="sep"], *[class*="sep"] {
     display: none !important;
+}
+
+/* Remove back, forward, and refresh buttons */
+#back-button,
+#forward-button,
+#reload-button {
+  display: none !important;
+}
+
+/* Remove tab close button */
+.tab-close-button {
+  display: none !important;
+}
+
+/* Remove new tab button */
+#tabs-newtab-button {
+  display: none !important;
+}
+
+.titlebar-buttonbox-container {
+  display: none !important;
+}
+
+#stop-button {
+  display: none !important;
+}
+
+#customizableui-special-spring1,
+#customizableui-special-spring2 {
+  display: none !important;
+}
+
+.search-one-offs {
+  display: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}

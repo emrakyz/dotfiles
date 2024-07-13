@@ -5,7 +5,7 @@ user_pref("browser.tabs.tabmanager.enabled", false);
 user_pref("browser.uidensity", 1);
 user_pref("extensions.unifiedExtensions.enabled", true);
 user_pref("ui.prefersReducedMotion", 1);
-user_pref("dom.ipc.processCount", 16);
+user_pref("dom.ipc.processCount", 8);
 user_pref("privacy.resistFingerprinting.letterboxing", false);
 
 // Standard Settings
@@ -109,7 +109,7 @@ user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 user_pref("extensions.pocket.enabled", false);
 user_pref("browser.download.useDownloadDir", true);
-user_pref("browser.download.dir", "${HOME}/downloads");
+user_pref("browser.download.dir", "/home/example/downloads");
 user_pref("browser.helperApps.showOpenOptionForPdfJS", false);
 user_pref("browser.vpn_promo.enabled", false);
 user_pref("browser.tabs.warnOnClose", false);

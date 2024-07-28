@@ -11,7 +11,9 @@ s="${b}
 ${c}/dunst"
 
 e="${b}/webcord
-${b}/bins"
+${b}/bins
+${b}/Telegram
+${b}/Updater"
 
 p() { printf "%s\n" "${@}"; }
 g() { git -C "${r}" "${@}"; }

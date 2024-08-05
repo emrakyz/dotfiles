@@ -12,8 +12,10 @@ ${c}/dunst"
 
 e="${b}/webcord
 ${b}/bins
+${b}/piperr
 ${b}/Telegram
-${b}/Updater"
+${b}/Updater
+${b}/vtt.sh"
 
 p() { printf "%s\n" "${@}"; }
 g() { git -C "${r}" "${@}"; }
@@ -40,7 +42,7 @@ mrg() {
 }
 
 drun() {
-        [ "${1}" = mrg ] && { g fetch origin && gd ..origin/main; } || { cd "${HOME}" && syn && gd main; }
+        [ "${1}" = mrg ] && { g fetch origin && gd ..origin/main; } || cd "${HOME}" && syn && gd main
         g ls-files --others --exclude-standard | xargs -r bat
 }
 
